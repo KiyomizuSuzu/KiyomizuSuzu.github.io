@@ -1,5 +1,5 @@
 # KiyomizuSuzu.github.io
-This is my personal website, built with [GitHub Pages](https://pages.github.com) using HTML, CSS and some javascript.
+This is my personal website, built with [GitHub Pages](https://pages.github.com) using HTML, CSS and some Javascript.
 
 ## AGPL-3.0 License
 Source: https://www.gnu.org/licenses/agpl-3.0.en.html
