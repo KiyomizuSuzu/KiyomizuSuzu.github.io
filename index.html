@@ -45,11 +45,14 @@
       color: #ffffff !important;
     }
 
-    .tech-box {
+    .icon-box {
       background: #ffffff;
-      padding: 12px 18px;
+      padding: 10px 14px;
       border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .dark-mode .icon-box {
+      background: #ffffff; /* stays white as you requested */
     }
   </style>
 </head>
@@ -80,25 +83,25 @@
               I mainly do Windows automation in PowerShell 7 but sometimes I use C# due to .NET limitations.
             </p>
 
-            <!-- TECH ICONS -->
-            <div class="mt-3 d-flex justify-content-center gap-4 tech-box">
+<div class="mt-3 d-flex justify-content-center gap-4">
 
-              <div class="text-center tech-icon">
-                <i class="devicon-csharp-plain colored"></i>
-                <div style="font-size: 12px;">C#</div>
-              </div>
+  <div class="text-center tech-icon icon-box">
+    <i class="devicon-csharp-plain colored"></i>
+    <div style="font-size: 12px;">C#</div>
+  </div>
 
-              <div class="text-center tech-icon">
-                <i class="devicon-powershell-plain colored"></i>
-                <div style="font-size: 12px;">PowerShell</div>
-              </div>
+  <div class="text-center tech-icon icon-box">
+    <i class="devicon-powershell-plain colored"></i>
+    <div style="font-size: 12px;">PowerShell</div>
+    <div style="font-size: 12px;">7</div>
+  </div>
 
-              <div class="text-center tech-icon">
-                <i class="devicon-github-original github-icon colored"></i>
-                <div style="font-size: 12px;">GitHub</div>
-              </div>
+  <div class="text-center tech-icon">
+    <i class="devicon-github-original github-icon colored"></i>
+    <div style="font-size: 12px;">GitHub</div>
+  </div>
 
-            </div>
+</div>
 
           </div>
         </div>
