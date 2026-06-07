@@ -5,7 +5,7 @@ This is my personal website, built with [GitHub Pages](https://pages.github.com)
 1. Create a repository named `(username).github.io`.
 2. Add an `index.html` file to the root of the repository.
 3. Write your website using HTML, CSS, and JavaScript.
-4. Push your changes to GitHub and wait for GitHub Pages to build and publish the site.
+4. Push your changes to GitHub and wait for GitHub Pages to automatically build and publish the site.
 5. Open `https://(username).github.io` in your browser to view it.
 
 ## AGPL-3.0 License
