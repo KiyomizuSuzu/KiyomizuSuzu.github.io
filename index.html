@@ -280,10 +280,18 @@
 function toggleTheme() {
   document.body.classList.toggle("dark-mode");
 }
-window.addEventListener("load", async () => {
-  if (document.fonts?.ready) await document.fonts.ready;
+const sessionKey = "loaderShownThisSession";
+const alreadyShownThisSession = sessionStorage.getItem(sessionKey);
+if (!alreadyShownThisSession) {
+  sessionStorage.setItem(sessionKey, "1");
+  window.addEventListener("load", async () => {
+    if (document.fonts?.ready) await document.fonts.ready;
+    document.body.classList.remove("loading");
+    document.getElementById("loading")?.remove();
+  });
+} else {
   document.body.classList.remove("loading");
   document.getElementById("loading")?.remove();
-});
+}
 </script>
 </html>
