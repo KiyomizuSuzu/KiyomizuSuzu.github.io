@@ -280,17 +280,17 @@
 function toggleTheme() {
   document.body.classList.toggle("dark-mode");
 }
-window.addEventListener("load", async () => {
-  if (document.fonts?.ready) await document.fonts.ready;
-
+const alreadyLoaded = localStorage.getItem("fontsLoadedOnce");
+if (alreadyLoaded) {
   document.body.classList.remove("loading");
   document.getElementById("loading")?.remove();
-
-  localStorage.setItem("fontsLoadedOnce", "1");
-});
-if (localStorage.getItem("fontsLoadedOnce")) {
-  document.body.classList.remove("loading");
-  document.getElementById("loading")?.remove();
+} else {
+  window.addEventListener("load", async () => {
+    if (document.fonts?.ready) await document.fonts.ready;
+    document.body.classList.remove("loading");
+    document.getElementById("loading")?.remove();
+    localStorage.setItem("fontsLoadedOnce", "1");
+  });
 }
 </script>
 </html>
