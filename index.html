@@ -254,30 +254,30 @@ if (!alreadyShownThisSession) {
   document.body.classList.remove("loadingBarrier");
   document.getElementById("loadingFont")?.remove();
 }
-  const supabaseUrl = "https://iardacsuwzgfjsdefqdj.supabase.co";
-  const supabaseKey = "sb_publishable_aqniMrzHTzhEWxbSpBopeA_4SyoQ8mJ";
-  const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
-  async function loadRepositories() {
-    const { data, error } = await supabaseClient
-      .from("Repositories")
-      .select("*")
-      .order("ID");
-    if (error) {
-      console.error(error);
-      return;
-    }
-    const repoList = document.getElementById("repoList");
-    repoList.innerHTML = data.map(repo => `
-      <div>
-        <h3 class="repo-name">
-          <a href="${repo.Link}" target="_blank">
-            ${repo.Name}
-          </a>
-        </h3>
-        <p class="repo-desc">${repo.Details ?? ""}</p>
-      </div>
-    `).join("");
+const supabaseUrl = "https://iardacsuwzgfjsdefqdj.supabase.co";
+const supabaseKey = "sb_publishable_aqniMrzHTzhEWxbSpBopeA_4SyoQ8mJ";
+const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+async function loadRepositories() {
+  const { data, error } = await supabaseClient
+    .from("Repositories")
+    .select("*")
+    .order("ID");
+  if (error) {
+    console.error(error);
+    return;
   }
-  loadRepositories();
+  const repoList = document.getElementById("repoList");
+  repoList.innerHTML = data.map(repo => `
+    <div>
+      <h3 class="repo-name">
+        <a href="${repo.Link}" target="_blank">
+          ${repo.Name}
+        </a>
+      </h3>
+      <p class="repo-desc">${repo.Details ?? ""}</p>
+    </div>
+  `).join("");
+}
+loadRepositories();
 </script>
 </html>
