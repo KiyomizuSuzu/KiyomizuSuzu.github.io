@@ -232,32 +232,7 @@
     </div>
     <div class="bottom">
       <h2 class="repo-title">Repositories</h2>
-      <div class="repo-list">
-        <div>
-          <h3 class="repo-name">
-            <a href="https://github.com/KiyomizuSuzu/KiyomizuOS" target="_blank">
-              KiyomizuOS
-            </a>
-          </h3>
-          <p class="repo-desc">Playbook made using mostly Powershell 7 scripts to debloat Windows 11.</p>
-        </div>
-        <div>
-          <h3 class="repo-name">
-            <a href="https://github.com/KiyomizuSuzu/Bluetooth" target="_blank">
-              Bluetooth
-            </a>
-          </h3>
-          <p class="repo-desc">Toggle Bluetooth in CLI made in C#.</p>
-        </div>
-        <div>
-          <h3 class="repo-name">
-            <a href="https://github.com/KiyomizuSuzu/KiyomizuSuzu.github.io" target="_blank">
-              KiyomizuSuzu.github.io
-            </a>
-          </h3>
-          <p class="repo-desc">Personal website hosted on GitHub Pages.</p>
-        </div>
-      </div>
+      <div class="repo-list" id="repoList"></div>
     </div>
   </div>
 </body>
@@ -282,5 +257,27 @@ if (!alreadyShownThisSession) {
   const supabaseUrl = "https://ngzbszvqlcxldmfmnzwm.supabase.co";
   const supabaseKey = "sb_publishable_mgz_fxPfHxdgkaMrI-dfCg_RhdX7FfS";
   const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+  async function loadRepositories() {
+    const { data, error } = await supabaseClient
+      .from("repositories")
+      .select("*")
+      .order("id");
+    if (error) {
+      console.error(error);
+      return;
+    }
+    const repoList = document.getElementById("repoList");
+    repoList.innerHTML = data.map(repo => `
+      <div>
+        <h3 class="repo-name">
+          <a href="${repo.link}" target="_blank">
+            ${repo.name}
+          </a>
+        </h3>
+        <p class="repo-desc">${repo.description ?? ""}</p>
+      </div>
+    `).join("");
+  }
+  loadRepositories();
 </script>
 </html>
