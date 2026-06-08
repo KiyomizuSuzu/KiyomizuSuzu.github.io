@@ -261,6 +261,7 @@
     </div>
   </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 function toggleTheme() {
   document.body.classList.toggle("dark-theme");
@@ -278,5 +279,8 @@ if (!alreadyShownThisSession) {
   document.body.classList.remove("loadingBarrier");
   document.getElementById("loadingFont")?.remove();
 }
+  const supabaseUrl = "https://ngzbszvqlcxldmfmnzwm.supabase.co";
+  const supabaseKey = "sb_publishable_mgz_fxPfHxdgkaMrI-dfCg_RhdX7FfS";
+  const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 </script>
 </html>
