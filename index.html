@@ -243,14 +243,24 @@ function toggleTheme() {
 }
 const sessionKey = "loaderShownThisSession";
 const alreadyShownThisSession = sessionStorage.getItem(sessionKey);
+
 if (!alreadyShownThisSession) {
   sessionStorage.setItem(sessionKey, "1");
+
   window.addEventListener("load", async () => {
-    if (document.fonts?.ready) await document.fonts.ready;
+    document.getElementById("loadingFont").textContent =
+      "Loading repositories...";
+
+    await Promise.all([
+      document.fonts?.ready,
+      loadRepositories()
+    ]);
+
     document.body.classList.remove("loadingBarrier");
     document.getElementById("loadingFont")?.remove();
   });
 } else {
+  loadRepositories();
   document.body.classList.remove("loadingBarrier");
   document.getElementById("loadingFont")?.remove();
 }
