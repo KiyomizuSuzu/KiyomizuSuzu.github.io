@@ -254,14 +254,14 @@ if (!alreadyShownThisSession) {
   document.body.classList.remove("loadingBarrier");
   document.getElementById("loadingFont")?.remove();
 }
-  const supabaseUrl = "https://ngzbszvqlcxldmfmnzwm.supabase.co";
-  const supabaseKey = "sb_publishable_mgz_fxPfHxdgkaMrI-dfCg_RhdX7FfS";
+  const supabaseUrl = "https://iardacsuwzgfjsdefqdj.supabase.co";
+  const supabaseKey = "sb_publishable_aqniMrzHTzhEWxbSpBopeA_4SyoQ8mJ";
   const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
   async function loadRepositories() {
     const { data, error } = await supabaseClient
-      .from("repositories")
+      .from("Repositories")
       .select("*")
-      .order("id");
+      .order("ID");
     if (error) {
       console.error(error);
       return;
