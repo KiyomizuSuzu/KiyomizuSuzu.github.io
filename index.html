@@ -260,9 +260,10 @@ if (!alreadyShownThisSession) {
     document.getElementById("loadingFont")?.remove();
   });
 } else {
-  loadRepositories();
-  document.body.classList.remove("loadingBarrier");
-  document.getElementById("loadingFont")?.remove();
+  loadRepositories().finally(() => {
+    document.body.classList.remove("loadingBarrier");
+    document.getElementById("loadingFont")?.remove();
+  });
 }
 const supabaseUrl = "https://iardacsuwzgfjsdefqdj.supabase.co";
 const supabaseKey = "sb_publishable_aqniMrzHTzhEWxbSpBopeA_4SyoQ8mJ";
@@ -288,6 +289,5 @@ async function loadRepositories() {
     </div>
   `).join("");
 }
-loadRepositories();
 </script>
 </html>
