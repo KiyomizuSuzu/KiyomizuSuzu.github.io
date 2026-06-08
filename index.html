@@ -280,5 +280,13 @@
 function toggleTheme() {
   document.body.classList.toggle("dark-mode");
 }
+window.addEventListener("load", async () => {
+  if (document.fonts && document.fonts.ready) {
+    await document.fonts.ready;
+  }
+  document.body.classList.remove("loading");
+  const el = document.getElementById("loading");
+  if (el) el.remove();
+});
 </script>
 </html>
