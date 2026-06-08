@@ -280,17 +280,10 @@
 function toggleTheme() {
   document.body.classList.toggle("dark-mode");
 }
-const alreadyLoaded = sessionStorage.getItem("fontsLoadedOnce");
-if (alreadyLoaded) {
+window.addEventListener("load", async () => {
+  if (document.fonts?.ready) await document.fonts.ready;
   document.body.classList.remove("loading");
   document.getElementById("loading")?.remove();
-} else {
-  window.addEventListener("load", async () => {
-    if (document.fonts?.ready) await document.fonts.ready;
-    document.body.classList.remove("loading");
-    document.getElementById("loading")?.remove();
-    sessionStorage.setItem("fontsLoadedOnce", "1");
-  });
-}
+});
 </script>
 </html>
