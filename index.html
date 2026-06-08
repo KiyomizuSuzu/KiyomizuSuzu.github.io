@@ -245,11 +245,14 @@ const sessionKey = "loaderShownThisSession";
 const alreadyShownThisSession = sessionStorage.getItem(sessionKey);
 if (!alreadyShownThisSession) {
   sessionStorage.setItem(sessionKey, "1");
-  window.addEventListener("load", async () => {
-    if (document.fonts?.ready) await document.fonts.ready;
-    document.body.classList.remove("loadingBarrier");
-    document.getElementById("loadingFont")?.remove();
-  });
+window.addEventListener("load", async () => {
+  document.getElementById("loadingFont").textContent =
+    "Loading repositories...";
+  if (document.fonts?.ready) await document.fonts.ready;
+  await loadRepositories();
+  document.body.classList.remove("loadingBarrier");
+  document.getElementById("loadingFont")?.remove();
+});
 } else {
   document.body.classList.remove("loadingBarrier");
   document.getElementById("loadingFont")?.remove();
@@ -278,6 +281,5 @@ async function loadRepositories() {
     </div>
   `).join("");
 }
-loadRepositories();
 </script>
 </html>
