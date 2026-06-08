@@ -4,24 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KiyomizuSuzu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=block" rel="stylesheet">
   <style>
  /* ================================
     DEFAULT
     ================================ */
-    @font-face {
-      font-family: "Inter";
-      src: url("Inter-VariableFont_opsz,wght.woff2") format("truetype");
-      font-weight: 100 900;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: "Inter";
-      src: url("Inter-Italic-VariableFont_opsz,wght.woff2") format("truetype");
-      font-weight: 100 900;
-      font-style: italic;
-      font-display: swap;
-    }
     :root {
       --bg: #ffffff;
       --text: #111111;
@@ -30,6 +17,12 @@
       --border: #ccc;
       --link: #0366d6;
     }
+    body {
+      font-family: "Inter", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+    }
     .dark-mode {
       --bg: #0f0f0f;
       --text: #eaeaea;
@@ -37,12 +30,6 @@
       --card: #1a1a1a;
       --border: #333;
       --link: #4ea1ff;
-    }
-    body {
-      font-family: "Inter", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      margin: 0;
     }
     * {
       transition: background 0.05s ease, color 0.05s ease, border-color 0.05s ease;
