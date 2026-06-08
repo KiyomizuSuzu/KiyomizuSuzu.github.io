@@ -33,6 +33,7 @@
       background: var(--bg);
       color: var(--text);
       margin: 0;
+      overflow: hidden;
     }
     * {
       transition: background 0.05s ease, color 0.05s ease, border-color 0.05s ease;
@@ -43,12 +44,19 @@
       left: 50%;
       transform: translate(-50%, -50%);
       padding: 16px 24px;
-      background: var(--card);
-      color: var(--text);
-      border: 1px solid var(--border);
+      background: rgba(40, 55, 95, 0.60);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 10px;
-      font-family: system-ui, sans-serif;
+      font-size: 16px;
+      font-family: sans-serif;
+      font-weight: 600;
       z-index: 9999;
+    }
+    body.loading > *:not(#loading) {
+      filter: blur(6px);
+      pointer-events: none;
+      user-select: none;
     }
  /* ================================
     Container for Top and Bottom
@@ -200,8 +208,8 @@
     }
   </style>
 </head>
-<div id="loading">Loading...</div>
-<body class="dark-mode">
+<body class="dark-mode loading">
+  <div id="loading">Preloading Fonts...</div>
   <div class="container">
     <div class="top">
         <button class="theme-button" onclick="toggleTheme()" aria-label="Toggle theme">
@@ -272,13 +280,5 @@
 function toggleTheme() {
   document.body.classList.toggle("dark-mode");
 }
-  window.addEventListener("load", async () => {
-    if (document.fonts && document.fonts.ready) {
-      await document.fonts.ready;
-    }
-
-    const el = document.getElementById("loading");
-    if (el) el.style.display = "none";
-  });
 </script>
 </html>
