@@ -193,7 +193,7 @@
   </style>
 </head>
 <body class="dark-theme loadingBarrier">
-  <div id="loadingAssets">Loading assets...</div>
+  <div id="loadingAssets">Loading Font from Google...</div>
   <div class="container">
     <div class="top">
       <button class="theme-button" onclick="toggleTheme()" aria-label="Toggle theme">
@@ -254,6 +254,7 @@
     document.getElementById("loadingAssets")?.remove();
   });
   } else {
+    loadRepositories();
     document.body.classList.remove("loadingBarrier");
     document.getElementById("loadingAssets")?.remove();
   }
