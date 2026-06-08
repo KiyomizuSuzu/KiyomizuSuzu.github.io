@@ -193,7 +193,7 @@
   </style>
 </head>
 <body class="dark-theme loadingBarrier">
-  <div id="loadingAssets">Loading Font from Google...</div>
+  <div id="loadingAssets">Loading Font...</div>
   <div class="container">
     <div class="top">
       <button class="theme-button" onclick="toggleTheme()" aria-label="Toggle theme">
@@ -247,7 +247,7 @@
     sessionStorage.setItem(sessionKey, "1");
   window.addEventListener("load", async () => {
     document.getElementById("loadingAssets").textContent =
-      "Loading repositories...";
+      "Fetching repositories...";
     if (document.fonts?.ready) await document.fonts.ready;
     await loadRepositories();
     document.body.classList.remove("loadingBarrier");
