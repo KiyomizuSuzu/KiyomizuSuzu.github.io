@@ -280,20 +280,23 @@
 function toggleTheme() {
   document.body.classList.toggle("dark-mode");
 }
-const KEY = "loaderSession";
-const now = Date.now();
-const expiry = 30 * 60 * 1000;
-const data = JSON.parse(localStorage.getItem(KEY) || "null");
-const valid = data && now - data.time < expiry;
-if (valid) {
+const KEY = "loaderShown";
+
+function hide() {
   document.body.classList.remove("loading");
   document.getElementById("loading")?.remove();
+}
+
+const already = localStorage.getItem(KEY);
+
+if (already) {
+  hide();
 } else {
-  localStorage.setItem(KEY, JSON.stringify({ time: now }));
+  localStorage.setItem(KEY, "1");
+
   window.addEventListener("load", async () => {
     if (document.fonts?.ready) await document.fonts.ready;
-    document.body.classList.remove("loading");
-    document.getElementById("loading")?.remove();
+    hide();
   });
 }
 </script>
