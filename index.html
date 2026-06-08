@@ -38,7 +38,17 @@
       transition: background 0.05s ease, color 0.05s ease, border-color 0.05s ease;
     }
     #loading {
-      transition: opacity 0.3s ease;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 16px 24px;
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-family: system-ui, sans-serif;
+      z-index: 9999;
     }
  /* ================================
     Container for Top and Bottom
@@ -262,16 +272,13 @@
 function toggleTheme() {
   document.body.classList.toggle("dark-mode");
 }
-</script>
-<script>
   window.addEventListener("load", async () => {
-    const el = document.getElementById("loading");
     if (document.fonts && document.fonts.ready) {
       await document.fonts.ready;
     }
-    if (!el) return;
-    el.style.opacity = "0";
-    setTimeout(() => el.remove(), 300);
+
+    const el = document.getElementById("loading");
+    if (el) el.style.display = "none";
   });
 </script>
 </html>
