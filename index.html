@@ -280,24 +280,18 @@
 function toggleTheme() {
   document.body.classList.toggle("dark-mode");
 }
-const KEY = "loaderShown";
-
-function hide() {
-  document.body.classList.remove("loading");
-  document.getElementById("loading")?.remove();
-}
-
-const already = localStorage.getItem(KEY);
-
-if (already) {
-  hide();
-} else {
-  localStorage.setItem(KEY, "1");
-
+const sessionKey = "loaderShownThisSession";
+const alreadyShownThisSession = sessionStorage.getItem(sessionKey);
+if (!alreadyShownThisSession) {
+  sessionStorage.setItem(sessionKey, "1");
   window.addEventListener("load", async () => {
     if (document.fonts?.ready) await document.fonts.ready;
-    hide();
+    document.body.classList.remove("loading");
+    document.getElementById("loading")?.remove();
   });
+} else {
+  document.body.classList.remove("loading");
+  document.getElementById("loading")?.remove();
 }
 </script>
 </html>
