@@ -24,6 +24,9 @@
       background: var(--bg);
       color: var(--text);
       margin: 0;
+      text-size-adjust: 100%;
+      -webkit-text-size-adjust: 100%;
+      text-rendering: geometricPrecision;
     }
     .dark-mode {
       --bg: #0f0f0f;
@@ -36,10 +39,6 @@
     * {
       transition: background 0.05s ease, color 0.05s ease, border-color 0.05s ease;
     }
-    html {
-      -webkit-text-size-adjust: 100%;
-      text-size-adjust: 100%;
-    }
  /* ================================
     Container for Top and Bottom
     ================================ */
@@ -47,8 +46,7 @@
       display: flex;
       flex-direction: column;
       height: 100vh;
-      width: 100%;
-      max-width: 510px;
+      width: 510px;
       margin: 0 auto;
       max-width: 100%;
     }
