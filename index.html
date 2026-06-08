@@ -270,11 +270,11 @@ if (!alreadyShownThisSession) {
     repoList.innerHTML = data.map(repo => `
       <div>
         <h3 class="repo-name">
-          <a href="${repo.link}" target="_blank">
-            ${repo.name}
+          <a href="${repo.Link}" target="_blank">
+            ${repo.Name}
           </a>
         </h3>
-        <p class="repo-desc">${repo.details ?? ""}</p>
+        <p class="repo-desc">${repo.Details ?? ""}</p>
       </div>
     `).join("");
   }
