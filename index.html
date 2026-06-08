@@ -245,7 +245,7 @@
   const alreadyShownThisSession = sessionStorage.getItem(sessionKey);
   if (!alreadyShownThisSession) {
     sessionStorage.setItem(sessionKey, "1");
-  window.addEventListener("load", async () => {
+    window.addEventListener("load", async () => {
     document.getElementById("loadingAssets").textContent =
       "Fetching repositories...";
     if (document.fonts?.ready) await document.fonts.ready;
@@ -254,9 +254,10 @@
     document.getElementById("loadingAssets")?.remove();
   });
   } else {
-    loadRepositories();
-    document.body.classList.remove("loadingBarrier");
-    document.getElementById("loadingAssets")?.remove();
+    loadRepositories().then(() => {
+      document.body.classList.remove("loadingBarrier");
+      document.getElementById("loadingAssets")?.remove();
+    });
   }
   const supabaseUrl = "https://iardacsuwzgfjsdefqdj.supabase.co";
   const supabaseKey = "sb_publishable_aqniMrzHTzhEWxbSpBopeA_4SyoQ8mJ";
