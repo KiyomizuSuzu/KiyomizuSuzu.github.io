@@ -243,27 +243,16 @@ function toggleTheme() {
 }
 const sessionKey = "loaderShownThisSession";
 const alreadyShownThisSession = sessionStorage.getItem(sessionKey);
-
 if (!alreadyShownThisSession) {
   sessionStorage.setItem(sessionKey, "1");
-
   window.addEventListener("load", async () => {
-    document.getElementById("loadingFont").textContent =
-      "Loading repositories...";
-
-    await Promise.all([
-      document.fonts?.ready,
-      loadRepositories()
-    ]);
-
+    if (document.fonts?.ready) await document.fonts.ready;
     document.body.classList.remove("loadingBarrier");
     document.getElementById("loadingFont")?.remove();
   });
 } else {
-  loadRepositories().finally(() => {
-    document.body.classList.remove("loadingBarrier");
-    document.getElementById("loadingFont")?.remove();
-  });
+  document.body.classList.remove("loadingBarrier");
+  document.getElementById("loadingFont")?.remove();
 }
 const supabaseUrl = "https://iardacsuwzgfjsdefqdj.supabase.co";
 const supabaseKey = "sb_publishable_aqniMrzHTzhEWxbSpBopeA_4SyoQ8mJ";
@@ -289,5 +278,6 @@ async function loadRepositories() {
     </div>
   `).join("");
 }
+loadRepositories();
 </script>
 </html>
