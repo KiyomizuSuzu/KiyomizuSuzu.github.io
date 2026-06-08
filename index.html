@@ -20,14 +20,16 @@
       --box: #f2f2f2;
       --highlight: #ccc;
       --link: #0366d6;
+      --error: #d32f2f;
     }
     body.dark-theme {
       --background: #0f0f0f;
       --title: #eaeaea;
       --description: #b5b5b5;
       --box: #1a1a1a;
-      --highlight: #333;
       --link: #4ea1ff;
+      --highlight: #333;
+      --error: #ff6b6b;
     }
     body {
       display: flex;
@@ -205,14 +207,16 @@
       border: 1px solid var(--highlight);
       background: var(--box);
       text-align: center;
+      color: var(--error);
     }
     .notice-message {
-      margin: 0 0 8px;
+      margin-block: 0;
+      margin-bottom: 8px;
       font-weight: 700;
     }
     .notice-details {
-      margin: 0;
-      color: var(--description);
+      margin-block: 0;
+      color: var(--error);
     }
   </style>
 </head>
