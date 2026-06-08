@@ -1,5 +1,5 @@
 # KiyomizuSuzu.github.io
-This is my personal website, built with [GitHub Pages](https://pages.github.com) using HTML, CSS and some Javascript.
+This is a personal website built with GitHub Pages using HTML, CSS, and JavaScript, and a [Supabase](https://supabase.com) backend powered by PostgreSQL.
 
 ### How to use
 1. Create a repository named `(username).github.io`.
