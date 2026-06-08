@@ -63,8 +63,16 @@
       font-weight: 600;
       font-size: 16px;
       white-space: nowrap;
+      opacity: 1;
+      transition: opacity 0.5s ease;
     }
-    body.loadingBarrier > *:not(#loadingAssets) {
+    body:not(.loadingBarrier) #loadingAssets {
+      opacity: 0;
+    }
+    body > *:not(#loadingAssets) {
+      transition: filter 0.5s ease;
+    }
+     body.loadingBarrier > *:not(#loadingAssets) {
       filter: blur(6px);
       pointer-events: none;
       user-select: none;
@@ -191,6 +199,21 @@
       font-size: 13px;
       color: var(--description);
     }
+    .notice {
+      padding: 16px;
+      border-radius: 6px;
+      border: 1px solid var(--highlight);
+      background: var(--box);
+      text-align: center;
+    }
+    .notice-message {
+      margin: 0 0 8px;
+      font-weight: 700;
+    }
+    .notice-details {
+      margin: 0;
+      color: var(--description);
+    }
   </style>
 </head>
 <body class="dark-theme loadingBarrier">
@@ -233,7 +256,14 @@
     </div>
     <div class="bottom">
       <h2 class="repo-title">Repositories</h2>
-      <div class="repo-list" id="repoList"></div>
+      <div class="repo-list" id="repoList">
+        <div class="notice">
+          <h3 class="notice-message">Unable to Load Repositories</h3>
+          <p class="notice-details">
+            Database might be offline, this isn't an issue on your side.
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </body>
@@ -249,8 +279,11 @@
       await document.fonts.ready;
     }
     await loadRepositories();
-    document.body.classList.remove("loadingBarrier");
-    loading?.remove();
+    loading.style.opacity = "0";
+    setTimeout(() => {
+      document.body.classList.remove("loadingBarrier");
+      loading.remove();
+    }, 500);
   });
   const supabaseUrl = "https://iardacsuwzgfjsdefqdj.supabase.co";
   const supabaseKey = "sb_publishable_aqniMrzHTzhEWxbSpBopeA_4SyoQ8mJ";
