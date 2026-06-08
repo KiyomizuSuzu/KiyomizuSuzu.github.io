@@ -243,17 +243,6 @@ function toggleTheme() {
 }
 const sessionKey = "loaderShownThisSession";
 const alreadyShownThisSession = sessionStorage.getItem(sessionKey);
-if (!alreadyShownThisSession) {
-  sessionStorage.setItem(sessionKey, "1");
-  window.addEventListener("load", async () => {
-    if (document.fonts?.ready) await document.fonts.ready;
-    document.body.classList.remove("loadingBarrier");
-    document.getElementById("loadingFont")?.remove();
-  });
-} else {
-  document.body.classList.remove("loadingBarrier");
-  document.getElementById("loadingFont")?.remove();
-}
 const supabaseUrl = "https://iardacsuwzgfjsdefqdj.supabase.co";
 const supabaseKey = "sb_publishable_aqniMrzHTzhEWxbSpBopeA_4SyoQ8mJ";
 const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
@@ -278,6 +267,20 @@ async function loadRepositories() {
     </div>
   `).join("");
 }
-loadRepositories();
+if (!alreadyShownThisSession) {
+  sessionStorage.setItem(sessionKey, "1");
+  window.addEventListener("load", async () => {
+    await Promise.all([
+      document.fonts?.ready,
+      loadRepositories()
+    ]);
+    document.body.classList.remove("loadingBarrier");
+    document.getElementById("loadingFont")?.remove();
+  });
+} else {
+  loadRepositories();
+  document.body.classList.remove("loadingBarrier");
+  document.getElementById("loadingFont")?.remove();
+}
 </script>
 </html>
