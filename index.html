@@ -261,7 +261,7 @@ async function loadRepositories() {
   const { data, error } = await supabaseClient
     .from("Repositories")
     .select("*")
-    .order("ID");
+    .order("DisplayOrder");
   if (error) {
     console.error(error);
     return;
@@ -279,7 +279,5 @@ async function loadRepositories() {
   `).join("");
 }
 loadRepositories();
-console.log(data);
-console.log(error);
 </script>
 </html>
