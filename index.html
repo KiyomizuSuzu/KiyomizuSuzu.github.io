@@ -381,7 +381,7 @@ async function syncGitHubToSupabase() {
 
   const { error } = await supabaseClient
     .from("Repositories")
-    .upsert(formatted, { onConflict: "github_id" });
+    .upsert(formatted, { onConflict: "ID" });
 
   if (error) {
     console.error("Sync failed:", error);
