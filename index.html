@@ -362,5 +362,34 @@
       </div>
     `).join("");
   }
+async function syncGitHubToSupabase() {
+  const supabaseUrl = "https://iardacsuwzgfjsdefqdj.supabase.co";
+  const supabaseKey = "sb_publishable_aqniMrzHTzhEWxbSpBopeA_4SyoQ8mJ";
+
+  const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+  const res = await fetch("https://api.github.com/users/KiyomizuSuzu/repos");
+  const repos = await res.json();
+
+  const formatted = repos.map(r => ({
+    github_id: r.id,
+    Name: r.name,
+    Link: r.html_url,
+    Details: r.description,
+    DisplayOrder: r.stargazers_count
+  }));
+
+  const { error } = await supabaseClient
+    .from("Repositories")
+    .upsert(formatted, { onConflict: "github_id" });
+
+  if (error) {
+    console.error("Sync failed:", error);
+  } else {
+    console.log("Sync complete:", formatted.length);
+  }
+}
+
+syncGitHubToSupabase();
 </script>
 </html>
