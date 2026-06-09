@@ -22,6 +22,7 @@
       --highlight: #ccc;
       --link: #0366d6;
       --error: #d32f2f;
+      --avatar-border: rgba(0, 0, 0, 0.35);
     }
     body.dark-theme {
       --background: #0f0f0f;
@@ -31,6 +32,7 @@
       --highlight: #333;
       --link: #4ea1ff;
       --error: #ff6b6b;
+      --avatar-border: rgba(255, 255, 255, 0.14);
     }
     body {
       display: flex;
@@ -128,10 +130,12 @@
       flex-direction: column;
     }
     .profile-img {
+      margin-top: 10px;
       width: 120px;
       height: 120px;
       border-radius: 50%;
       object-fit: cover;
+      border: 3px solid var(--avatar-border);
     }
     .name {
       margin-block: 10px 5px;
