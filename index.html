@@ -372,7 +372,7 @@ async function syncGitHubToSupabase() {
   const repos = await res.json();
 
   const formatted = repos.map(r => ({
-    github_id: r.id,
+    ID: r.id,
     Name: r.name,
     Link: r.html_url,
     Details: r.description,
