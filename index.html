@@ -362,48 +362,5 @@
       </div>
     `).join("");
   }
-  async function syncGitHubToSupabase() {
-    const res = await fetch(
-      "https://api.github.com/users/KiyomizuSuzu/repos"
-    );
-    const repos = await res.json();
-    const githubIds = repos.map(r => r.id);
-    const formatted = repos.map(r => ({
-      ID: r.id,
-      Name: r.name,
-      Link: r.html_url,
-      Details: r.description,
-      DisplayOrder: r.created_at
-    }));
-    const { error: upsertError } = await supabaseClient
-      .from("Repositories")
-      .upsert(formatted, { onConflict: "ID" });
-    if (upsertError) {
-      console.error("Upsert failed:", upsertError);
-      return;
-    }
-    const { data: existingRepos, error: selectError } = await supabaseClient
-      .from("Repositories")
-      .select("ID");
-    if (selectError) {
-      console.error("Fetch existing repos failed:", selectError);
-      return;
-    }
-    const idsToDelete = existingRepos
-      .map(repo => repo.ID)
-      .filter(id => !githubIds.includes(id));
-    if (idsToDelete.length > 0) {
-      const { error: deleteError } = await supabaseClient
-        .from("Repositories")
-        .delete()
-        .in("ID", idsToDelete);
-      if (deleteError) {
-        console.error("Delete failed:", deleteError);
-        return;
-      }
-      console.log(`Deleted ${idsToDelete.length} removed repositories`);
-    }
-    console.log(`Sync complete: ${formatted.length} repositories`);
-  }
 </script>
 </html>
