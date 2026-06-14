@@ -321,27 +321,11 @@
     </div>
   </div>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-  function toggleTheme() {
-    document.body.classList.toggle("dark-theme");
-  }
-  window.addEventListener("load", async () => {
-    const loading = document.getElementById("loadingAssets");
-    loading.textContent = "Fetching repositories...";
-    if (document.fonts?.ready) {
-      await document.fonts.ready;
-    }
-    await loadRepositories();
-    loading.style.opacity = "0";
-    setTimeout(() => {
-      document.body.classList.remove("loadingBarrier");
-      loading.remove();
-    }, 500);
-  });
+<script type="module">
+  import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
   const supabaseUrl = "https://iardacsuwzgfjsdefqdj.supabase.co";
   const supabaseKey = "sb_publishable_aqniMrzHTzhEWxbSpBopeA_4SyoQ8mJ";
-  const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+  const supabaseClient = createClient(supabaseUrl, supabaseKey);
   async function loadRepositories() {
     const { data, error } = await supabaseClient
       .from("Repositories")
@@ -370,5 +354,21 @@
       </div>
     `).join("");
   }
+  window.toggleTheme = () => {
+    document.body.classList.toggle("dark-theme");
+  };
+  window.addEventListener("load", async () => {
+    const loading = document.getElementById("loadingAssets");
+    loading.textContent = "Fetching repositories...";
+    if (document.fonts?.ready) {
+      await document.fonts.ready;
+    }
+    await loadRepositories();
+    loading.style.opacity = "0";
+    setTimeout(() => {
+      document.body.classList.remove("loadingBarrier");
+      loading.remove();
+    }, 500);
+  });
 </script>
 </html>
