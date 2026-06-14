@@ -351,8 +351,15 @@
       console.error(error);
       return;
     }
+    /** @type {{
+    *   Link: string;
+    *   Name: string;
+    *   Details: string | null;
+    * }[]}
+    */
+    const repos = data ?? [];
     const repoList = document.getElementById("repoList");
-    repoList.innerHTML = data.map((/** @type {{ Link: String; Name: String; Details: String; }} */repo) => `
+    repoList.innerHTML = repos.map(repo => `
       <div>
         <h3 class="repo-name">
           <a href="${repo.Link}" target="_blank">
