@@ -352,7 +352,7 @@
       return;
     }
     const repoList = document.getElementById("repoList");
-    repoList.innerHTML = data.map(repo => `
+    repoList.innerHTML = data.map((/** @type {{ Link: String; Name: String; Details: String; }} */repo) => `
       <div>
         <h3 class="repo-name">
           <a href="${repo.Link}" target="_blank">
