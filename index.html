@@ -204,8 +204,20 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
     }
     .repo-name {
+      display: flex;
+      align-items: center;
+      gap: 6px;
       margin-block: 0;
       font-size: 16px;
+    }
+    .repo-time {
+      display: flex;
+      gap: 4px;
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 50rem;
+      background: var(--highlight);
+      color: var(--description);
     }
     .repo-name a {
       text-decoration: none;
@@ -328,10 +340,7 @@
   const supabaseKey = "sb_publishable_aqniMrzHTzhEWxbSpBopeA_4SyoQ8mJ";
   const supabaseClient = createClient(supabaseUrl, supabaseKey);
   async function loadRepositories() {
-    const { data, error } = await supabaseClient
-      .from("Repositories")
-      .select("*")
-      .order("DisplayOrder");
+    const {data, error} = await supabaseClient.from("Repositories").select("*").order("DisplayOrder");
     if (error) {
       console.error(error);
       return;
@@ -340,6 +349,7 @@
     *   Link: string;
     *   Name: string;
     *   Details: string | null;
+    *   EstimatedTime: number | null;
     * }[]}
     */
     const repos = data ?? [];
@@ -347,9 +357,13 @@
     repoList.innerHTML = repos.map(repo => `
       <div>
         <h3 class="repo-name">
-          <a href="${repo.Link}" target="_blank">
-            ${repo.Name}
-          </a>
+          <a href="${repo.Link}" target="_blank">${repo.Name}</a>
+          <span class="repo-time">
+            <svg class="repo-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M12 6v6l4 2"></path>
+            </svg>${repo.EstimatedTime} ${repo.EstimatedTime === 1 ? "Hour" : "Hours"}
+          </span>
         </h3>
         <p class="repo-desc">${repo.Details ?? ""}</p>
       </div>
