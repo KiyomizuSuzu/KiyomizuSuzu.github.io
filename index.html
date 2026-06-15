@@ -46,13 +46,29 @@
       font-style: normal;
       color: var(--title);
     }
-    * {
+/*    * {
       transition: background 0.15s ease, 
                   color 0.15s ease, 
                   border-color 0.15s ease, 
                   transform 0.15s ease,
                   box-shadow 0.15s ease;
-    }
+    } */
+.repo-list div,
+.repo-time,
+.theme-button,
+.notice {
+  transition: background-color 0.15s ease,
+              color 0.15s ease,
+              border-color 0.15s ease,
+              box-shadow 0.15s ease;
+}
+
+.theme-button,
+.repo-list div,
+.icons a,
+.repo-header a {
+  transition: transform 0.15s ease;
+}
     body.loadingBarrier {
       display: flex;
       align-items: center;
