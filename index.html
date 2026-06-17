@@ -99,9 +99,6 @@
       pointer-events: none;
       user-select: none;
     }
-a:focus-visible {
-  outline: none;
-}
  /* ================================
     Container for Top and Bottom
     ================================ */
@@ -179,12 +176,13 @@ a:focus-visible {
       margin-top: 0.75rem;
       flex-wrap: wrap;
     }
-    .icons svg, .icons img {
+    .icons svg {
       width: 4rem;
       height: 4rem;
     }
     .icons a:hover {
       transform: translateY(-0.1875rem);
+      outline: none;
     }
     .icons a:hover svg{
       transform: scale(1.1);
