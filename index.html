@@ -32,8 +32,9 @@
         font-size: 50px;
       }
     }
-    html[data-theme="light"], body.dark-theme {
+    html, body {
       min-height: 100dvh;
+      overflow: hidden;
     }
     html[data-theme="light"] {
       --background: #ffffff;
@@ -109,7 +110,6 @@
       display: flex;
       flex-direction: column;
       max-width: 32.5rem;
-      overflow: hidden;
     }
  /* ================================
     Top container
