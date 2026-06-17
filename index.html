@@ -14,33 +14,9 @@
     :root {
       --aboveALL: 1;
     }
-html {
-  font-size: 13px; /* small phones */
-}
-
-@media (min-width: 375px) {
-  html {
-    font-size: 13.5px; /* large phones */
-  }
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 14.5px; /* tablets */
-  }
-}
-
-@media (min-width: 1024px) {
-  html {
-    font-size: 15.5px; /* laptops */
-  }
-}
-
-@media (min-width: 1440px) {
-  html {
-    font-size: 17px; /* desktop */
-  }
-}
+    html {
+      font-size: clamp(13px, 0.25vw + 12px, 17px);
+    }
     html[data-theme="light"] {
       --background: #ffffff;
       --title: #111111;
