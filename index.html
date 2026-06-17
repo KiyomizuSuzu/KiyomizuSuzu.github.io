@@ -132,6 +132,10 @@
       border-color: var(--title);
       transform: scale(1.05);
     }
+    .theme-button svg {
+      width: 1.375rem;
+      height: 1.375rem;
+    }
     [data-theme="light"] .icon-moon {
       display: none;
     }
@@ -228,6 +232,13 @@
       margin-block: 0;
       font-size: 1rem;
     }
+    .repo-name a {
+      text-decoration: none;
+      color: var(--link);
+    }
+    .repo-name a:hover {
+      text-decoration: underline;
+    }
     .repo-time {
       display: flex;
       gap: 0.25rem;
@@ -237,12 +248,9 @@
       background: var(--highlight);
       color: var(--description);
     }
-    .repo-name a {
-      text-decoration: none;
-      color: var(--link);
-    }
-    .repo-name a:hover {
-      text-decoration: underline;
+    .repo-icon svg {
+      width: 0.875rem;
+      height: 0.875rem;
     }
     .repo-desc {
       margin-block: 0;
@@ -378,7 +386,7 @@
         <h3 class="repo-name">
           <a href="${repo.Link}" target="_blank">${repo.Name}</a>
           <span class="repo-time">
-            <svg class="repo-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="12" cy="12" r="10"></circle>
               <path d="M12 6v6l4 2"></path>
             </svg>${repo.EstimatedTime} ${repo.EstimatedTime === 1 ? "Hour" : "Hours"}
