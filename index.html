@@ -372,40 +372,41 @@
       console.error(error);
       return;
     }
-    /** @type {{
-    *   Link: string;
-    *   Name: string;
-    *   Details: string | null;
-    *   EstimatedTime: number | null;
-    * }[]}
-    */
-    const repos = data ?? [];
-    const repoList = document.getElementById("repoList");
-    repoList.innerHTML = repos.map(repo => `
-      <div>
-        <h3 class="repo-name">
-          <a href="${repo.Link}" target="_blank">${repo.Name}</a>
-          <span class="repo-time">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"></circle>
-              <path d="M12 6v6l4 2"></path>
-            </svg>${repo.EstimatedTime} ${repo.EstimatedTime === 1 ? "Hour" : "Hours"}
-          </span>
-        </h3>
-        <p class="repo-desc">${repo.Details ?? ""}</p>
-      </div>
-    `).join("");
+    else {
+      /** @type {{
+      *   Link: string;
+      *   Name: string;
+      *   Details: string | null;
+      *   EstimatedTime: number | null;
+      * }[]}
+      */
+      const repos = data ?? [];
+      const repoList = document.getElementById("repoList");
+      repoList.innerHTML = repos.map(repo => `
+        <div>
+          <h3 class="repo-name">
+            <a href="${repo.Link}" target="_blank">${repo.Name}</a>
+            <span class="repo-time">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 6v6l4 2"></path>
+              </svg>${repo.EstimatedTime} ${repo.EstimatedTime === 1 ? "Hour" : "Hours"}
+            </span>
+          </h3>
+          <p class="repo-desc">${repo.Details ?? ""}</p>
+        </div>
+      `).join("");
+    }
   }
-  function toggleTheme() {
+  document.querySelector(".theme-button")?.addEventListener("click", () => {
     document.body.classList.toggle("dark-theme");
-  }
-  document.querySelector(".theme-button")?.addEventListener("click", toggleTheme);
+  });
   window.addEventListener("load", async () => {
     const loading = document.getElementById("loadingAssets");
-    loading.textContent = "Fetching repositories...";
     if (document.fonts?.ready) {
       await document.fonts.ready;
     }
+    loading.textContent = "Fetching repositories...";
     await loadRepositories();
     loading.style.opacity = "0";
     setTimeout(() => {
