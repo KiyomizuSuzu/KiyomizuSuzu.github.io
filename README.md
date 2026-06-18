@@ -17,7 +17,7 @@ This is a personal website deployed on both [GitHub Pages](https://docs.github.c
 2. Head to Build section, expand Compute category and go to Workers & Pages.
 3. Create an application and select method Pages, not worker.
 4. Connect your GitHub repository containing your website files.
-5. Select the repository and configure if needed.
+5. Select the repository and configure it accordingly to your needs.
 6. Deploy the project and wait for Cloudflare to automatically build it.
 8. Access it via the provided `https://(project-name).pages.dev` URL.
 
