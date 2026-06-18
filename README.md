@@ -1,5 +1,5 @@
 # KiyomizuSuzu.github.io
-This is a personal website built with [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages) and [Cloudflare Pages](https://pages.cloudflare.com/) using HTML, CSS, and JavaScript, and a [Supabase](https://supabase.com) backend powered by PostgreSQL.
+This is a personal website deployed on both [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages) and [Cloudflare Pages](https://pages.cloudflare.com/) using HTML, CSS, and JavaScript, and a [Supabase](https://supabase.com) backend powered by PostgreSQL.
 
 ## Live sites
 - GitHub Pages: https://kiyomizusuzu.github.io/
