@@ -1,14 +1,14 @@
 // @ts-ignore
 import {createClient} from "jsr:@supabase/supabase-js@2";
 /**
- * @param {{
- *   commit: {
- *     author: {
- *       date: string
- *     }
- *   }
- * }[]} commits
- */
+* @param {{
+*    commit: {
+*     author: {
+*       date: string
+*     }
+*   }
+* }[]} commits
+*/
 function calculateGitHours(commits) {
   if (!commits.length) {
     return 0;
@@ -52,13 +52,13 @@ export default {
     }
     else {
       /** @type {{
-       *   id: number,
-       *   name: string,
-       *   html_url: string,
-       *   description: string | null,
-       *   created_at: string
-       * }[]}
-       */
+      *   id: number,
+      *   name: string,
+      *   html_url: string,
+      *   description: string | null,
+      *   created_at: string
+      * }[]}
+      */
       const repos = await res.json();
       const githubIds = repos.map(repo => repo.id);
       const formatted = await Promise.all(
