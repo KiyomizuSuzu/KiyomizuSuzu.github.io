@@ -15,7 +15,7 @@ This is a personal website deployed on both [GitHub Pages](https://docs.github.c
 ### How to use Cloudflare Pages
 1. Open dashboard from https://dash.cloudflare.com.
 2. Head to Build section, expand Compute category and go to Workers & Pages.
-3. Create an application and select method Pages, not worker.
+3. Create an application and select method Pages to deploy, not by creating a Worker.
 4. Connect your GitHub repository containing your website files.
 5. Select the repository and set a project name for your domain URL.
 6. Deploy the project and wait for Cloudflare to automatically build it.
