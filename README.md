@@ -1,16 +1,25 @@
 # KiyomizuSuzu.github.io
-This is a personal website built with [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages) and [Cloudflare Pages](https://pages.cloudflare.com/) using HTML, CSS, and JavaScript, and a [Supabase](https://supabase.com) backend powered by PostgreSQL.
+This is a personal website deployed on both [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages) and [Cloudflare Pages](https://pages.cloudflare.com/) using HTML, CSS, and JavaScript, and a [Supabase](https://supabase.com) backend powered by PostgreSQL.
 
 ## Live sites
 - GitHub Pages: https://kiyomizusuzu.github.io/
 - Cloudflare Pages: https://kiyomizusuzu.pages.dev/
 
-### How to use
+### How to use Github Pages
 1. Create a repository named `(username).github.io`.
 2. Add an `index.html` file to the root of the repository.
 3. Write your website using HTML, CSS, and JavaScript.
 4. Push your changes to GitHub and wait for GitHub Pages to automatically build and publish the site.
 5. Open `https://(username).github.io` in your browser to view it.
+
+### How to use Cloudflare Pages
+1. Open dashboard from https://dash.cloudflare.com.
+2. Head to Build section, expand Compute category and go to Workers & Pages.
+3. Create an application and select method Pages to deploy, not by creating a Worker.
+4. Connect your GitHub repository containing your website files.
+5. Select the repository and set a project name for your domain (cannot be changed later).
+6. Deploy the project and wait for Cloudflare to automatically build it.
+8. Access it via the provided `https://(project-name).pages.dev` URL.
 
 ## AGPL-3.0 License
 Source: https://www.gnu.org/licenses/agpl-3.0.en.html
