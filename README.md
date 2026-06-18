@@ -5,7 +5,7 @@ This is a personal website deployed on both [GitHub Pages](https://docs.github.c
 - GitHub Pages: https://kiyomizusuzu.github.io/
 - Cloudflare Pages: https://kiyomizusuzu.pages.dev/
 
-### How to use
+### How to use Github Pages
 1. Create a repository named `(username).github.io`.
 2. Add an `index.html` file to the root of the repository.
 3. Write your website using HTML, CSS, and JavaScript.
