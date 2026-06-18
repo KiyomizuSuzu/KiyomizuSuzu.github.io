@@ -13,7 +13,7 @@ This is a personal website deployed on both [GitHub Pages](https://docs.github.c
 5. Open `https://(username).github.io` in your browser to view it.
 
 ### How to use Cloudflare Pages
-1. Open dashboard.
+1. Open dashboard from https://dash.cloudflare.com.
 2. Head to Build section, expand Compute category and go to Workers & Pages.
 3. Create an application and select method Pages, not worker.
 4. Connect your GitHub repository containing your website files.
