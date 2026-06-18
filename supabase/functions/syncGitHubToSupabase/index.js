@@ -119,7 +119,7 @@ export default {
                                 );
             }
           }
-          throw new Error("Successfully syncGithubToSupabase");
+          throw new Error();
         }
         catch {
           return Response.json({synced: formatted.length,
