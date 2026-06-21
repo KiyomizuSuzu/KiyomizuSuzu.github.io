@@ -14,7 +14,7 @@ function calculateGitHours(commits) {
     return 0;
   }
   else {
-    const times = commits.map(c => new Date(c.commit.author.date).getTime()).sort((a, b) => a - b);
+    const times = commits.map(github => new Date(github.commit.author.date).getTime()).sort((a, b) => a - b);
     const SESSION_GAP = 60 * 60 * 1000;
     const MIN_SESSION = 30 * 60 * 1000;
     let total = 0;
