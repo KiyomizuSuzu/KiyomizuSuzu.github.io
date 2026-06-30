@@ -490,8 +490,8 @@ document.querySelector(".theme-button")?.addEventListener("click", () => {
   document.body.classList.toggle("dark-theme");
 });
 document.querySelectorAll('[data-en][data-ja]').forEach(translatable => {
-  const el = /** @type {HTMLElement} */ (translatable);
-  el.textContent = el.dataset.en;
+  const English = /** @type {HTMLElement} */ (translatable);
+  English.textContent = English.dataset.en;
 });
 window.addEventListener("load", async () => {
   const loading = document.getElementById("loadingAssets");
@@ -537,8 +537,8 @@ document.addEventListener('DOMContentLoaded', () => {
       button.toggleAttribute('data-active', button.dataset.lang === lang);
     });
     document.querySelectorAll('[data-en][data-ja]').forEach(translatable => {
-      const domElement = /** @type {HTMLElement} */ (translatable);
-      domElement.textContent = domElement.dataset[lang];
+      const Selected = /** @type {HTMLElement} */ (translatable);
+      Selected.textContent = Selected.dataset[lang];
     });
     renderRepositories(cachedRepos);
   }
