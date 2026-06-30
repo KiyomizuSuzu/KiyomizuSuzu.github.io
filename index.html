@@ -434,114 +434,114 @@
   </div>
 </body>
 <script type="module">
-// @ts-ignore
-import {createClient} from "https://esm.sh/@supabase/supabase-js@2";
-const supabaseUrl = "https://iardacsuwzgfjsdefqdj.supabase.co";
-const supabaseKey = "sb_publishable_aqniMrzHTzhEWxbSpBopeA_4SyoQ8mJ";
-const supabaseClient = createClient(supabaseUrl, supabaseKey);
-/**
- * @typedef {{
- *   Link: string;
- *   Name: string;
- *   Details: string | null;
- *   Details_ja: string | null;
- *   EstimatedTime: number | null;
- * }} Repo
- *
- * @typedef {HTMLElement} DropdownElement
- * @typedef {HTMLButtonElement} DropdownButton
- * @typedef {NodeListOf<HTMLButtonElement>} DropdownButtons
- */
-/** @type {Repo[]} */
-let cachedRepos = [];
-/** @param {Repo[]} repos */
-function renderRepositories(repos) {
-  const lang = document.documentElement.lang;
-  const repoList = document.getElementById("repoList");
-  repoList.innerHTML = repos.map(repo => {
-    const details = (lang === 'ja' && repo.Details_ja) ? repo.Details_ja : repo.Details;
-    const unit = lang === 'ja' ? '時間' : (repo.EstimatedTime === 1 ? 'Hour' : 'Hours');
-    return `
-      <div>
-        <h3 class="repo-name">
-          <a href="${repo.Link}" target="_blank">${repo.Name}</a>
-          <span class="repo-time">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"></circle>
-              <path d="M12 6v6l4 2"></path>
-            </svg>${repo.EstimatedTime} ${unit}
-          </span>
-        </h3>
-        <p class="repo-desc">${details ?? ""}</p>
-      </div>
-    `;
-  }).join("");
-}
-async function loadRepositories() {
-  const {data, error} = await supabaseClient.from("Repositories").select("*").order("DisplayOrder");
-  if (error) {
-    console.error(error);
-    return;
+  // @ts-ignore
+  import {createClient} from "https://esm.sh/@supabase/supabase-js@2";
+  const supabaseUrl = "https://iardacsuwzgfjsdefqdj.supabase.co";
+  const supabaseKey = "sb_publishable_aqniMrzHTzhEWxbSpBopeA_4SyoQ8mJ";
+  const supabaseClient = createClient(supabaseUrl, supabaseKey);
+  /**
+   * @typedef {{
+   *   Link: string;
+   *   Name: string;
+   *   Details: string | null;
+   *   Details_ja: string | null;
+   *   EstimatedTime: number | null;
+   * }} Repo
+   *
+   * @typedef {HTMLElement} DropdownElement
+   * @typedef {HTMLButtonElement} DropdownButton
+   * @typedef {NodeListOf<HTMLButtonElement>} DropdownButtons
+   */
+  /** @type {Repo[]} */
+  let cachedRepos = [];
+  /** @param {Repo[]} repos */
+  function renderRepositories(repos) {
+    const lang = document.documentElement.lang;
+    const repoList = document.getElementById("repoList");
+    repoList.innerHTML = repos.map(repo => {
+      const details = (lang === 'ja' && repo.Details_ja) ? repo.Details_ja : repo.Details;
+      const unit = lang === 'ja' ? '時間' : (repo.EstimatedTime === 1 ? 'Hour' : 'Hours');
+      return `
+        <div>
+          <h3 class="repo-name">
+            <a href="${repo.Link}" target="_blank">${repo.Name}</a>
+            <span class="repo-time">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 6v6l4 2"></path>
+              </svg>${repo.EstimatedTime} ${unit}
+            </span>
+          </h3>
+          <p class="repo-desc">${details ?? ""}</p>
+        </div>
+      `;
+    }).join("");
   }
-  cachedRepos = data ?? [];
-  renderRepositories(cachedRepos);
-}
-document.querySelector(".theme-button")?.addEventListener("click", () => {
-  document.body.classList.toggle("dark-theme");
-});
-window.addEventListener("load", async () => {
-  const loading = document.getElementById("loadingAssets");
-  if (document.fonts?.ready) {
-    await document.fonts.ready;
+  async function loadRepositories() {
+    const {data, error} = await supabaseClient.from("Repositories").select("*").order("DisplayOrder");
+    if (error) {
+      console.error(error);
+      return;
+    }
+    cachedRepos = data ?? [];
+    renderRepositories(cachedRepos);
   }
-  document.querySelectorAll('[data-en][data-ja]').forEach(translatable => {
-    const English = /** @type {HTMLElement} */ (translatable);
-    English.textContent = English.dataset.en;
+  document.querySelector(".theme-button")?.addEventListener("click", () => {
+    document.body.classList.toggle("dark-theme");
   });
-  loading.textContent = "Fetching repositories...";
-  await loadRepositories();
-  loading.style.opacity = "0";
-  setTimeout(() => {
-    document.body.classList.remove("loadingBarrier");
-    loading.remove();
-  }, 500);
-});
-document.addEventListener('DOMContentLoaded', () => {
-  /** @type {DropdownElement} */
-  const dropdown = (document.querySelector('.translate-dropdown'));
-  /** @type {DropdownButton} */
-  const toggleBtn = (dropdown.querySelector('.translate-button'));
-  /** @type {DropdownButtons} */
-  const menuButtons = (dropdown.querySelectorAll('.translate-menu button'));
-  toggleBtn.addEventListener('click', (mouseClicked) => {
-    mouseClicked.stopPropagation();
-    const isOpen = dropdown.classList.toggle('open');
-    toggleBtn.setAttribute('aria-expanded', String(isOpen));
+  window.addEventListener("load", async () => {
+    const loading = document.getElementById("loadingAssets");
+    if (document.fonts?.ready) {
+      await document.fonts.ready;
+    }
+    document.querySelectorAll('[data-en][data-ja]').forEach(translatable => {
+      const English = /** @type {HTMLElement} */ (translatable);
+      English.textContent = English.dataset.en;
+    });
+    loading.textContent = "Fetching repositories...";
+    await loadRepositories();
+    loading.style.opacity = "0";
+    setTimeout(() => {
+      document.body.classList.remove("loadingBarrier");
+      loading.remove();
+    }, 500);
   });
-  document.addEventListener('click', () => {
-    dropdown.classList.remove('open');
-    toggleBtn.setAttribute('aria-expanded', 'false');
-  });
-  menuButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-      const lang = button.dataset.lang;
-      setLanguage(lang);
+  document.addEventListener('DOMContentLoaded', () => {
+    /** @type {DropdownElement} */
+    const dropdown = (document.querySelector('.translate-dropdown'));
+    /** @type {DropdownButton} */
+    const toggleBtn = (dropdown.querySelector('.translate-button'));
+    /** @type {DropdownButtons} */
+    const menuButtons = (dropdown.querySelectorAll('.translate-menu button'));
+    toggleBtn.addEventListener('click', (mouseClicked) => {
+      mouseClicked.stopPropagation();
+      const isOpen = dropdown.classList.toggle('open');
+      toggleBtn.setAttribute('aria-expanded', String(isOpen));
+    });
+    document.addEventListener('click', () => {
       dropdown.classList.remove('open');
       toggleBtn.setAttribute('aria-expanded', 'false');
     });
+    menuButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const lang = button.dataset.lang;
+        setLanguage(lang);
+        dropdown.classList.remove('open');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+    /** @param {string} lang */
+    function setLanguage(lang) {
+      document.documentElement.lang = lang;
+      menuButtons.forEach(button => {
+        button.toggleAttribute('data-active', button.dataset.lang === lang);
+      });
+      document.querySelectorAll('[data-en][data-ja]').forEach(translatable => {
+        const Selected = /** @type {HTMLElement} */ (translatable);
+        Selected.textContent = Selected.dataset[lang];
+      });
+      renderRepositories(cachedRepos);
+    }
   });
-  /** @param {string} lang */
-  function setLanguage(lang) {
-    document.documentElement.lang = lang;
-    menuButtons.forEach(button => {
-      button.toggleAttribute('data-active', button.dataset.lang === lang);
-    });
-    document.querySelectorAll('[data-en][data-ja]').forEach(translatable => {
-      const Selected = /** @type {HTMLElement} */ (translatable);
-      Selected.textContent = Selected.dataset[lang];
-    });
-    renderRepositories(cachedRepos);
-  }
-});
 </script>
 </html>
