@@ -535,8 +535,8 @@ document.addEventListener('DOMContentLoaded', () => {
       button.toggleAttribute('data-active', button.dataset.lang === lang);
     });
     document.querySelectorAll('[data-en][data-ja]').forEach(translatable => {
-      const el = /** @type {HTMLElement} */ (translatable);
-      el.textContent = el.dataset[lang];
+      const domElement = /** @type {HTMLElement} */ (translatable);
+      domElement.textContent = domElement.dataset[lang];
     });
     renderRepositories(cachedRepos);
   }
