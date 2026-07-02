@@ -630,6 +630,8 @@
   const avatar = document.querySelector(".profile img");
   const modal = document.getElementById("imagePreview");
   avatar.addEventListener("click", () => {
+    modal.classList.remove("show");
+    void modal.offsetWidth;
     modal.classList.add("show");
     avatar.classList.add("open");
     document.body.style.overflow = "hidden";
