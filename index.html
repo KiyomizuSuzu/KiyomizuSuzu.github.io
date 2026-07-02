@@ -142,7 +142,7 @@
     .container {
       display: flex;
       flex-direction: column;
-      max-width: 34.5rem;
+      max-width: 34.4rem;
       min-height: 100dvh;
       transition: filter .5s;
     }
@@ -436,7 +436,7 @@
         ></h1>
         <p class="description"
           data-en="I make Windows automation stuff. Why? Because it gives me something to do... and I enjoy it. Probably."
-          data-ja="Windowsの自動化ツール作ってる。なんでって？やることができるから。<br>しかも楽しい……たぶん。"
+          data-ja="Windowsの自動化ツール作ってる。なんでって？やることができるから。しかも楽しい……たぶん。"
         ></p>
         <div class="icons">
             <div>
@@ -622,7 +622,7 @@
       });
       document.querySelectorAll('[data-en][data-ja]').forEach(translatable => {
         const Selected = /** @type {HTMLElement} */ (translatable);
-        Selected.innerHTML = Selected.dataset[lang];
+        Selected.textContent = Selected.dataset[lang];
       });
       renderRepositories(cachedRepos);
     }
