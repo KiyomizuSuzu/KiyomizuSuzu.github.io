@@ -253,10 +253,11 @@
       transition: transform .15s, box-shadow .15s, border-color .15s;
       animation: rainbowGlow 5s linear infinite;
     }
+    .profile img:not(.open):hover {
+      transform: scale(1.06);
+    }
     .profile img.open {
       cursor: default;
-    }
-    .profile img:hover {
       transform: scale(1.06);
     }
     .name {
