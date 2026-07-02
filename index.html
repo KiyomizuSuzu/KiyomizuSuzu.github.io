@@ -101,6 +101,33 @@
       pointer-events: none;
       user-select: none;
     }
+    .image-preview {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.85);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .15s, visibility .15s;
+        z-index: var(--aboveALL);
+    }
+    .image-preview img {
+        width: min(80vw, 35rem);
+        aspect-ratio: 1;
+        object-fit: cover;
+        border-radius: 50%;
+        transform: scale(.4);
+        transition: transform .15s;
+    }
+    .image-preview.show {
+        opacity: 1;
+        visibility: visible;
+    }
+    .image-preview.show img {
+        transform: scale(1);
+    }
  /* ================================
     Container for Top and Bottom
     ================================ */
@@ -214,6 +241,15 @@
       border-radius: 50%;
       object-fit: cover;
       border: 0.25rem solid var(--avatar-border);
+      cursor: zoom-in;
+      transition: transform .15s, box-shadow .15s, border-color .15s;
+    }
+    .profile img.open {
+      cursor: default;
+    }
+    .profile img:hover {
+      transform: scale(1.06);
+      box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,.25);
     }
     .name {
       margin-block: 0.625rem 0.3125rem;
@@ -451,6 +487,9 @@
       </div>
     </div>
   </div>
+  <div class="image-preview" id="imagePreview">
+      <img src="Profile.avif" alt="">
+  </div>
 </body>
 <script type="module">
   // @ts-ignore
@@ -566,6 +605,25 @@
       });
       renderRepositories(cachedRepos);
     }
+  });
+  const avatar = document.querySelector(".profile img");
+  const modal = document.getElementById("imagePreview");
+  avatar.addEventListener("click", () => {
+      modal.classList.add("show");
+      avatar.classList.add("open");
+      document.body.style.overflow = "hidden";
+  });
+  modal.addEventListener("click", () => {
+      modal.classList.remove("show");
+      avatar.classList.remove("open");
+      document.body.style.overflow = "";
+  });
+  document.addEventListener("keydown", pressed => {
+      if (pressed.key === "Escape") {
+          modal.classList.remove("show");
+          avatar.classList.remove("open");
+          document.body.style.overflow = "";
+      }
   });
 </script>
 </html>
