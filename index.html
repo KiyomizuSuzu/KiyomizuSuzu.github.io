@@ -651,9 +651,11 @@
   const avatar = document.querySelector(".profile img");
   const modal = document.getElementById("imagePreview");
   function openPreview() {
-    modal.classList.add("show");
-    avatar.classList.add("open");
-    document.body.style.overflow = "hidden";
+    requestAnimationFrame(() => {
+      modal.classList.add("show");
+      avatar.classList.add("open");
+      document.body.style.overflow = "hidden";
+    });
   }
   function closePreview() {
     modal.classList.remove("show");
