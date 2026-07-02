@@ -629,23 +629,21 @@
   });
   const avatar = document.querySelector(".profile img");
   const modal = document.getElementById("imagePreview");
-  avatar.addEventListener("click", () => {
-    modal.classList.remove("show");
-    void modal.offsetWidth;
+  function openPreview() {
     modal.classList.add("show");
     avatar.classList.add("open");
     document.body.style.overflow = "hidden";
-  });
-  modal.addEventListener("click", () => {
+  }
+  function closePreview() {
     modal.classList.remove("show");
     avatar.classList.remove("open");
     document.body.style.overflow = "";
-  });
-  document.addEventListener("keydown", pressed => {
+  }
+  avatar.addEventListener("click", openPreview);
+  modal.addEventListener("click", closePreview);
+  document.addEventListener("keydown", (pressed) => {
     if (pressed.key === "Escape") {
-      modal.classList.remove("show");
-      avatar.classList.remove("open");
-      document.body.style.overflow = "";
+      closePreview();
     }
   });
 </script>
