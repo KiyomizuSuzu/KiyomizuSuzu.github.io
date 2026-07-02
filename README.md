@@ -1,5 +1,6 @@
 <details>
 <summary>日本語</summary>
+
 # KiyomizuSuzu.github.io
 HTML、CSS、JavaScriptで作った個人サイト。[GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages)と[Cloudflare Pages](https://pages.cloudflare.com/)の両方にデプロイしていて、バックエンドにはPostgreSQLベースの[Supabase](https://supabase.com)を使っている。
 
@@ -36,6 +37,7 @@ AGPL-3.0に従う以上、対象コードは同じライセンスのまま維持
 ---
 <details open>
 <summary>English</summary>
+
 # KiyomizuSuzu.github.io
 This is a personal website deployed on both [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages) and [Cloudflare Pages](https://pages.cloudflare.com/) using HTML, CSS, and JavaScript, and a [Supabase](https://supabase.com) backend powered by PostgreSQL.
 
