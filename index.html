@@ -13,6 +13,15 @@
     :root {
       --aboveALL: 1;
     }
+    @keyframes rainbowGlow {
+        0%   { box-shadow: 0 0 .5rem hsl(0, 100%, 60%); }
+        16%  { box-shadow: 0 0 .5rem hsl(60, 100%, 60%); }
+        33%  { box-shadow: 0 0 .5rem hsl(120, 100%, 60%); }
+        50%  { box-shadow: 0 0 .5rem hsl(180, 100%, 60%); }
+        66%  { box-shadow: 0 0 .5rem hsl(240, 100%, 60%); }
+        83%  { box-shadow: 0 0 .5rem hsl(300, 100%, 60%); }
+        100% { box-shadow: 0 0 .5rem hsl(360, 100%, 60%); }
+    }
     html {
       font-size: clamp(15px, 0.25vw + 12px, 20px);
     }
@@ -242,13 +251,13 @@
       border: 0.25rem solid var(--avatar-border);
       cursor: zoom-in;
       transition: transform .15s, box-shadow .15s, border-color .15s;
+      animation: rainbowGlow 5s linear infinite;
     }
     .profile img.open {
       cursor: default;
     }
     .profile img:hover {
       transform: scale(1.06);
-      box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,.25);
     }
     .name {
       margin-block: 0.625rem 0.3125rem;
@@ -608,21 +617,21 @@
   const avatar = document.querySelector(".profile img");
   const modal = document.getElementById("imagePreview");
   avatar.addEventListener("click", () => {
-      modal.classList.add("show");
-      avatar.classList.add("open");
-      document.body.style.overflow = "hidden";
+    modal.classList.add("show");
+    avatar.classList.add("open");
+    document.body.style.overflow = "hidden";
   });
   modal.addEventListener("click", () => {
+    modal.classList.remove("show");
+    avatar.classList.remove("open");
+    document.body.style.overflow = "";
+  });
+  document.addEventListener("keydown", pressed => {
+    if (pressed.key === "Escape") {
       modal.classList.remove("show");
       avatar.classList.remove("open");
       document.body.style.overflow = "";
-  });
-  document.addEventListener("keydown", pressed => {
-      if (pressed.key === "Escape") {
-          modal.classList.remove("show");
-          avatar.classList.remove("open");
-          document.body.style.overflow = "";
-      }
+    }
   });
 </script>
 </html>
