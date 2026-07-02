@@ -14,13 +14,30 @@
       --aboveALL: 1;
     }
     @keyframes rainbowGlow {
-        0%   { box-shadow: 0 0 .5rem hsl(0, 100%, 60%); }
-        16%  { box-shadow: 0 0 .5rem hsl(60, 100%, 60%); }
-        33%  { box-shadow: 0 0 .5rem hsl(120, 100%, 60%); }
-        50%  { box-shadow: 0 0 .5rem hsl(180, 100%, 60%); }
-        66%  { box-shadow: 0 0 .5rem hsl(240, 100%, 60%); }
-        83%  { box-shadow: 0 0 .5rem hsl(300, 100%, 60%); }
-        100% { box-shadow: 0 0 .5rem hsl(360, 100%, 60%); }
+      0%   { box-shadow: 0 0 .5rem hsl(0, 100%, 60%); }
+      16%  { box-shadow: 0 0 .5rem hsl(60, 100%, 60%); }
+      33%  { box-shadow: 0 0 .5rem hsl(120, 100%, 60%); }
+      50%  { box-shadow: 0 0 .5rem hsl(180, 100%, 60%); }
+      66%  { box-shadow: 0 0 .5rem hsl(240, 100%, 60%); }
+      83%  { box-shadow: 0 0 .5rem hsl(300, 100%, 60%); }
+      100% { box-shadow: 0 0 .5rem hsl(360, 100%, 60%); }
+    }
+    @keyframes loadingIn {
+      from {
+        opacity: 0;
+        transform: translateY(0.5rem);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes dots {
+      0%   { content: ""; }
+      25%  { content: "."; }
+      50%  { content: ".."; }
+      75%  { content: "..."; }
+      100% { content: ""; }
     }
     html {
       font-size: clamp(15px, 0.25vw + 12px, 20px);
@@ -98,11 +115,14 @@
       font-weight: 600;
       font-size: 1rem;
       white-space: nowrap;
-      opacity: 1;
-      transition: opacity .5s;
+      transform: translateY(0);
+      animation: loadingIn .5s forwards;
     }
-    body:not(.loadingBarrier) #loadingAssets {
-      opacity: 0;
+    #loadingAssets::after {
+      content: "";
+      display: inline-block;
+      width: 1.2em;
+      animation: dots .5s steps(4, end) infinite;
     }
     body.loadingBarrier .container {
       filter: blur(0.375rem);
@@ -404,7 +424,7 @@
   </style>
 </head>
 <body class="dark-theme loadingBarrier">
-  <div id="loadingAssets">Preparing fonts....</div>
+  <div id="loadingAssets">Preparing fonts</div>
   <div class="image-preview" id="imagePreview">
       <img src="Profile.avif" alt="">
   </div>
@@ -583,7 +603,7 @@
       const English = /** @type {HTMLElement} */ (translatable);
       English.textContent = English.dataset.en;
     });
-    loading.textContent = "Fetching repositories...";
+    loading.textContent = "Fetching repositories";
     await loadRepositories();
     loading.style.opacity = "0";
     setTimeout(() => {
