@@ -651,11 +651,10 @@
   const avatar = document.querySelector(".profile img");
   const modal = document.getElementById("imagePreview");
   function openPreview() {
-    requestAnimationFrame(() => {
-      modal.classList.add("show");
-      avatar.classList.add("open");
-      document.body.style.overflow = "hidden";
-    });
+    modal.offsetHeight;
+    modal.classList.add("show");
+    avatar.classList.add("open");
+    document.body.style.overflow = "hidden";
   }
   function closePreview() {
     modal.classList.remove("show");
@@ -664,10 +663,5 @@
   }
   avatar.addEventListener("click", openPreview);
   modal.addEventListener("click", closePreview);
-  document.addEventListener("keydown", (pressed) => {
-    if (pressed.key === "Escape") {
-      closePreview();
-    }
-  });
 </script>
 </html>
