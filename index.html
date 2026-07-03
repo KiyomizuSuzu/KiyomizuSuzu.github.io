@@ -725,7 +725,8 @@
       const x = Math.random() * (window.innerWidth - 220) + 20;
       const y = Math.random() * (window.innerHeight - 60) + 20;
       message.textContent = currentMessage();
-      message.style.transform = `translate(${x}px, ${y}px)`;
+      const rotation = Math.random() * 24 - 12;
+      message.style.transform = `translate(${x}px, ${y}px) rotate(${rotation}deg)`;
       message.classList.add('show');
       setTimeout(() => message.classList.remove('show'), 700);
       const nextGap = 1500 + Math.random() * 2000;
