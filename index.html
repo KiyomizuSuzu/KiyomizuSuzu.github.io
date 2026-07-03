@@ -655,9 +655,7 @@
   function openPreview() {
     modal.classList.add("show");
     requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        avatar.classList.add("open");
-      });
+      avatar.classList.add("open");
     });
     document.body.style.overflow = "hidden";
   }
