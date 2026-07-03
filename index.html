@@ -12,6 +12,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=block');
     :root {
       --aboveALL: 1;
+      --flame: #ff9d3c;
     }
     @keyframes rainbowGlow {
       0%   { box-shadow: 0 0 .5rem hsl(0, 100%, 60%); }
@@ -38,6 +39,28 @@
       50%  { content: ".."; }
       75%  { content: "..."; }
       100% { content: ""; }
+    }
+    @keyframes flicker {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      25% { transform: scale(1.05, 0.95) rotate(-2deg); }
+      50% { transform: scale(0.95, 1.05) rotate(1deg); }
+      75% { transform: scale(1.03, 0.97) rotate(2deg); }
+    }
+    @keyframes smokeRise {
+      0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.5);
+      }
+      12% {
+        opacity: .5;
+      }
+      55% {
+        opacity: .35;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-11px) scale(1.5);
+      }
     }
     html {
       font-size: clamp(15px, 0.25vw + 12px, 20px);
@@ -298,8 +321,71 @@
       cursor: default;
       transform: scale(1.06);
     }
-    .name {
+    .name-section {
+      display: flex;
       margin-block: 0.625rem 0.3125rem;
+    }
+    .name {
+      margin-block: 0;
+    }
+    .candle-button {
+      display: flex;
+      align-items: center;
+      background-color: transparent;
+      border: none;
+      padding-inline: 0;
+      cursor: pointer;
+      color: var(--description);
+    }
+    .candle-button svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      overflow: visible;
+      transition: transform .15s;
+    }
+    .candle-button:hover svg {
+      transform: scale(1.3);
+    }
+    .candle-outline {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      transition: stroke .15s;
+    }
+    .candle-button:hover .candle-outline,
+    .candle-button.lit .candle-outline {
+      stroke: var(--title);
+    }
+    .candle-flame {
+      fill: none;
+      stroke: var(--flame);
+      stroke-width: 1.5;
+      transform-origin: 0.75rem 0.375rem;
+      opacity: 0;
+      transform: scale(0.3);
+      transition: opacity .15s, transform .15s;
+    }
+    .candle-button.lit .candle-flame {
+      opacity: 1;
+      transform: scale(1);
+      animation: flicker .15s ease-in-out infinite;
+    }
+    .candle-button.extinguishing .candle-flame {
+      opacity: 0;
+      transform: scale(0.2) translateY(-2px);
+      transition: opacity .15s ease-out, transform .15s ease-out;
+    }
+    .candle-smoke path {
+      stroke: var(--description);
+      stroke-width: 1.3;
+      opacity: 0;
+      transform-origin: 0.75rem 0.25rem;
+    }
+    .candle-button.extinguishing .candle-smoke path {
+      animation: smokeRise 1.3s ease-out forwards;
+    }
+    .candle-button.extinguishing .candle-smoke .wisp-2 {
+      animation-delay: .15s;
     }
     .description {
       text-align: center;
@@ -449,6 +535,7 @@
   <div class="image-preview" id="imagePreview">
       <img src="Profile.avif" alt="">
   </div>
+  <audio id="bgAudio" src="Happy_Birthday_To_You-MB03-2(Reverb-Fast).mp3" preload="none"></audio>
   <div class="container">
     <div class="top">
       <button class="theme-button">
@@ -472,10 +559,26 @@
       </div>
       <div class="profile">
         <img src="Profile.avif">
-        <h1 class="name"
-          data-en="Shimizu Suzu"
-          data-ja="清水 すず"
-        ></h1>
+        <div class="name-section">
+          <h1 class="name"
+            data-en="Shimizu Suzu"
+            data-ja="清水 すず"
+          ></h1>
+          <button class="candle-button" id="candleButton" type="button" aria-pressed="false" aria-label="Toggle music">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path class="candle-outline" d="M12 6V3.5"/>
+              <g class="candle-flame">
+                <path d="M12 -1c2 2.8 3 4.8 3 6.4a3 3 0 1 1-6 0c0-1.6 1-3.6 3-6.4z"/>
+              </g>
+              <g class="candle-smoke">
+                <path class="wisp-1" d="M10.5 3 C 9 0.5, 12.5 -1, 11 -3.5 C 9.5 -6, 13 -7.5, 11.5 -10"/>
+                <path class="wisp-2" d="M13.5 3 C 15 0.5, 11.5 -1, 13 -3.5 C 14.5 -6, 11 -7.5, 12.5 -10"/>
+              </g>
+              <rect class="candle-outline" x="8.5" y="8" width="7" height="13" rx="1.2"/>
+              <path class="candle-outline" d="M8.5 12h7" stroke-width="1"/>
+            </svg>
+          </button>
+        </div>
         <p class="description"
           data-en="I make Windows automation stuff. Why? Because it gives me something to do... and I enjoy it. Probably."
           data-ja="Windowsの自動化ツール作ってる。なんでって？やることができるから。しかも楽しい……たぶん。"
@@ -630,7 +733,6 @@
     setTimeout(() => {
       document.body.classList.remove("loadingBarrier");
       loading.remove();
-      window.startHiddenMessages();
     }, 500);
   });
   document.addEventListener('DOMContentLoaded', () => {
@@ -686,67 +788,122 @@
   }
   avatar.addEventListener("click", openPreview);
   modal.addEventListener("click", closePreview);
-  window.addEventListener('DOMContentLoaded', () => {
-    const container = document.getElementById('SomethingIsWrongWithMe');
-    const messages = [
-      { en: "It hurts", ja: "痛い" },
-      { en: "I know", ja: "知ってる" },
-      { en: "Hey", ja: "ねえ" },
-      { en: "Why?", ja: "なぜ？" },
-      { en: "Where are you going?", ja: "どこへ行くの？" },
-      { en: "It's gone", ja: "消えた" },
-      { en: "No", ja: "いやだ" },
-      { en: "Stop", ja: "やめて" },
-      { en: "Don't look at me", ja: "見ないで" },
-      { en: "Please", ja: "お願い" },
-      { en: "I'm not lonely", ja: "寂しくない" },
-      { en: "Friends?", ja: "友達？" },
-      { en: "Where are you touching?", ja: "どこ触ってるの？" },
-      { en: "Don't do that", ja: "やめて、それ" },
-      { en: "Someone...", ja: "誰か…" },
-      { en: "Anyone...", ja: "誰でもいいから…" },
-    ];
-    const MAX_WORKERS = 100;
-    const START_DELAY = 60000;
-    const sessionStart = Date.now();
-    const workers = [];
-    let activeCount = 0;
-    function currentMessage() {
-      const pick = messages[Math.floor(Math.random() * messages.length)];
-      return Math.random() < 0.5 ? pick.en : pick.ja;
+  const messagesContainer = document.getElementById('SomethingIsWrongWithMe');
+  const messages = [
+    { en: "It hurts", ja: "痛い" },
+    { en: "I know", ja: "知ってる" },
+    { en: "Hey", ja: "ねえ" },
+    { en: "Why?", ja: "なぜ？" },
+    { en: "Where are you going?", ja: "どこへ行くの？" },
+    { en: "It's gone", ja: "消えた" },
+    { en: "No", ja: "いやだ" },
+    { en: "Stop", ja: "やめて" },
+    { en: "Don't look at me", ja: "見ないで" },
+    { en: "Please", ja: "お願い" },
+    { en: "I'm not lonely", ja: "寂しくない" },
+    { en: "Friends?", ja: "友達？" },
+    { en: "Where are you touching?", ja: "どこ触ってるの？" },
+    { en: "Don't do that", ja: "やめて、それ" },
+    { en: "Someone...", ja: "誰か…" },
+    { en: "Anyone...", ja: "誰でもいいから…" },
+  ];
+  const MAX_WORKERS = 100;
+  const START_DELAY = 5000;
+  let messageWorkers = [];
+  let messageTimeouts = [];
+  let messageIntervalId = null;
+  let messagesRunning = false;
+  let activeCount = 0;
+  function currentMessage() {
+    const pick = messages[Math.floor(Math.random() * messages.length)];
+    return Math.random() < 0.5 ? pick.en : pick.ja;
+  }
+  function makeWorker() {
+    const list = document.createElement('div');
+    list.className = 'message';
+    messagesContainer.appendChild(list);
+    return list;
+  }
+  function flicker(message) {
+    if (!messagesRunning) return;
+    const x = Math.random() * (window.innerWidth - 220) + 20;
+    const y = Math.random() * (window.innerHeight - 60) + 20;
+    message.textContent = currentMessage();
+    const rotation = Math.random() * 24 - 12;
+    message.style.transform = `translate(${x}px, ${y}px) rotate(${rotation}deg)`;
+    message.classList.add('show');
+    const hideId = setTimeout(() => message.classList.remove('show'), 700);
+    messageTimeouts.push(hideId);
+    const nextGap = 1500 + Math.random() * 2000;
+    const nextId = setTimeout(() => flicker(message), nextGap);
+    messageTimeouts.push(nextId);
+  }
+  function activateWorker() {
+    if (!messagesRunning || activeCount >= MAX_WORKERS) return;
+    const text = makeWorker();
+    messageWorkers.push(text);
+    activeCount++;
+    flicker(text);
+  }
+  let startDelayTimer = null;
+  function startHiddenMessages() {
+    if (messagesRunning) return;
+    messagesRunning = true;
+    startDelayTimer = setTimeout(() => {
+      if (!messagesRunning) return;
+      activateWorker();
+      messageIntervalId = setInterval(activateWorker, 5000);
+    }, START_DELAY);
+  }
+  function stopHiddenMessages() {
+    messagesRunning = false;
+    clearTimeout(startDelayTimer);
+    startDelayTimer = null;
+    clearInterval(messageIntervalId);
+    messageIntervalId = null;
+    messageTimeouts.forEach(id => clearTimeout(id));
+    messageTimeouts = [];
+    messageWorkers.forEach(message => message.remove());
+    messageWorkers = [];
+    activeCount = 0;
+  }
+  const candleButton = document.getElementById("candleButton");
+  const bgAudio = /** @type {HTMLAudioElement} */ (document.getElementById("bgAudio"));
+  let isLit = false;
+  let extinguishTimer = null;
+  function lightCandle() {
+    isLit = true;
+    candleButton.classList.remove("extinguishing");
+    candleButton.classList.add("lit");
+    candleButton.setAttribute("aria-pressed", "true");
+    startHiddenMessages();
+    bgAudio.currentTime = 0;
+    bgAudio.play().catch((err) => {
+      console.error("bgAudio.play() failed:", err);
+    });
+  }
+  function extinguishCandle() {
+    isLit = false;
+    candleButton.classList.remove("lit");
+    candleButton.setAttribute("aria-pressed", "false");
+    bgAudio.pause();
+    bgAudio.currentTime = 0;
+    stopHiddenMessages();
+    candleButton.classList.add("extinguishing");
+    clearTimeout(extinguishTimer);
+    extinguishTimer = setTimeout(() => {
+      candleButton.classList.remove("extinguishing");
+    }, 1300);
+  }
+  candleButton.addEventListener("click", () => {
+    if (isLit) {
+      extinguishCandle();
+    } else {
+      lightCandle();
     }
-    function makeWorker() {
-      const list = document.createElement('div');
-      list.className = 'message';
-      container.appendChild(list);
-      return list;
-    }
-    function flicker(message) {
-      const x = Math.random() * (window.innerWidth - 220) + 20;
-      const y = Math.random() * (window.innerHeight - 60) + 20;
-      message.textContent = currentMessage();
-      const rotation = Math.random() * 24 - 12;
-      message.style.transform = `translate(${x}px, ${y}px) rotate(${rotation}deg)`;
-      message.classList.add('show');
-      setTimeout(() => message.classList.remove('show'), 700);
-      const nextGap = 1500 + Math.random() * 2000;
-      setTimeout(() => flicker(message), nextGap);
-    }
-    function activateWorker() {
-      if (activeCount >= MAX_WORKERS) return;
-      const clones = makeWorker();
-      workers.push(clones);
-      activeCount++;
-      flicker(clones);
-    }
-    window.startHiddenMessages = () => {
-      setTimeout(() => {
-        activateWorker();
-        setInterval(() => {
-          activateWorker();
-        }, 5000);
-      }, START_DELAY);
-    };
+  });
+  bgAudio.addEventListener("ended", () => {
+    extinguishCandle();
   });
 </script>
 </html>
