@@ -425,9 +425,26 @@
       font-weight: 600;
       line-height: 1.5;
     }
+    .message {
+      position: fixed;
+      top: 0;
+      left: 0;
+      color: var(--error);
+      font-size: 2rem;
+      font-weight: 700;
+      opacity: 0;
+      pointer-events: none;
+      z-index: var(--aboveALL);
+      transition: opacity .15s;
+      white-space: nowrap;
+    }
+    .message.show {
+      opacity: 0.85;
+    }
   </style>
 </head>
 <body class="dark-theme loadingBarrier">
+  <div id="SomethingIsWrongWithMe"></div>
   <div id="loadingAssets">Preparing fonts</div>
   <div class="image-preview" id="imagePreview">
       <img src="Profile.avif" alt="">
@@ -613,6 +630,7 @@
     setTimeout(() => {
       document.body.classList.remove("loadingBarrier");
       loading.remove();
+      window.startHiddenMessages();
     }, 500);
   });
   document.addEventListener('DOMContentLoaded', () => {
@@ -668,5 +686,66 @@
   }
   avatar.addEventListener("click", openPreview);
   modal.addEventListener("click", closePreview);
+  window.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('SomethingIsWrongWithMe');
+    const messages = [
+      { en: "It hurts", ja: "痛い" },
+      { en: "I know", ja: "知ってる" },
+      { en: "Hey", ja: "ねえ" },
+      { en: "Why?", ja: "なぜ？" },
+      { en: "Where are you going?", ja: "どこへ行くの？" },
+      { en: "It's gone", ja: "消えた" },
+      { en: "No", ja: "いやだ" },
+      { en: "Stop", ja: "やめて" },
+      { en: "Don't look at me", ja: "見ないで" },
+      { en: "Please", ja: "お願い" },
+      { en: "I'm so lonely", ja: "とても寂しい" },
+      { en: "Friends?", ja: "友達？" },
+      { en: "Where are you touching?", ja: "どこ触ってるの？" },
+      { en: "Don't do that", ja: "やめて、それ" },
+      { en: "Someone...", ja: "誰か…" },
+      { en: "Anyone...", ja: "誰でもいいから…" },
+    ];
+    const MAX_WORKERS = 100;
+    const START_DELAY = 60000;
+    const sessionStart = Date.now();
+    const workers = [];
+    let activeCount = 0;
+    function currentMessage() {
+      const pick = messages[Math.floor(Math.random() * messages.length)];
+      return Math.random() < 0.5 ? pick.en : pick.ja;
+    }
+    function makeWorker() {
+      const list = document.createElement('div');
+      list.className = 'message';
+      container.appendChild(list);
+      return list;
+    }
+    function flicker(message) {
+      const x = Math.random() * (window.innerWidth - 220) + 20;
+      const y = Math.random() * (window.innerHeight - 60) + 20;
+      message.textContent = currentMessage();
+      message.style.transform = `translate(${x}px, ${y}px)`;
+      message.classList.add('show');
+      setTimeout(() => message.classList.remove('show'), 700);
+      const nextGap = 1500 + Math.random() * 2000;
+      setTimeout(() => flicker(message), nextGap);
+    }
+    function activateWorker() {
+      if (activeCount >= MAX_WORKERS) return;
+      const clones = makeWorker();
+      workers.push(clones);
+      activeCount++;
+      flicker(clones);
+    }
+    window.startHiddenMessages = () => {
+      setTimeout(() => {
+        activateWorker();
+        setInterval(() => {
+          activateWorker();
+        }, 5000);
+      }, START_DELAY);
+    };
+  });
 </script>
 </html>
