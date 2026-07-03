@@ -653,7 +653,9 @@
   function openPreview() {
     modal.offsetHeight;
     modal.classList.add("show");
-    avatar.classList.add("open");
+    requestAnimationFrame(() => {
+      avatar.classList.add("open");
+    });
     document.body.style.overflow = "hidden";
   }
   function closePreview() {
