@@ -290,6 +290,8 @@
       cursor: zoom-in;
       transition: transform .15s, box-shadow .15s, border-color .15s;
       animation: rainbowGlow 5s linear infinite;
+      backface-visibility: hidden;
+      transform: translateZ(0);
     }
     .profile img:not(.open):hover {
       transform: scale(1.06);
