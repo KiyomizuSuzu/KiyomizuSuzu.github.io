@@ -288,10 +288,10 @@
       object-fit: cover;
       border: 0.25rem solid var(--avatar-border);
       cursor: zoom-in;
-      transition: transform .15s, box-shadow .15s, border-color .15s;
       animation: rainbowGlow 5s linear infinite;
-      transform: scale(1);
-      will-change: transform;
+    }
+    .profile img.ready {
+      transition: transform .15s, box-shadow .15s, border-color .15s;
     }
     .profile img:not(.open):hover {
       transform: scale(1.06);
@@ -750,5 +750,12 @@
       }, START_DELAY);
     };
   });
+const avatar1 = document.querySelector(".profile img");
+
+requestAnimationFrame(() => {
+  requestAnimationFrame(() => {
+    avatar1.classList.add("ready");
+  });
+});
 </script>
 </html>
