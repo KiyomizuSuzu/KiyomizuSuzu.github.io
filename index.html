@@ -158,6 +158,9 @@
     .image-preview.show img {
         transform: scale(1);
     }
+    .image-preview.show .profile img {
+      transform: scale(1.06);
+    }
  /* ================================
     Container for Top and Bottom
     ================================ */
@@ -652,14 +655,10 @@
   });
   const avatar = document.querySelector(".profile img");
   const modal = document.getElementById("imagePreview");
-  function openPreview() {
-    modal.classList.add("show");
-    document.body.style.overflow = "hidden";
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        avatar.classList.add("open");
-      });
-    });
+  function closePreview() {
+    modal.classList.remove("show");
+    avatar.classList.remove("open");
+    document.body.style.overflow = "";
   }
   function closePreview() {
     modal.classList.remove("show");
