@@ -652,10 +652,12 @@
   });
   const avatar = document.querySelector(".profile img");
   const modal = document.getElementById("imagePreview");
-  function closePreview() {
-    modal.classList.remove("show");
-    avatar.classList.remove("open");
-    document.body.style.overflow = "";
+  function openPreview() {
+    modal.classList.add("show");
+    requestAnimationFrame(() => {
+      avatar.classList.add("open");
+    });
+    document.body.style.overflow = "hidden";
   }
   function closePreview() {
     modal.classList.remove("show");
