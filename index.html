@@ -654,10 +654,11 @@
   const modal = document.getElementById("imagePreview");
   function openPreview() {
     modal.classList.add("show");
+    document.body.style.overflow = "hidden";
+    avatar.getBoundingClientRect();
     requestAnimationFrame(() => {
       avatar.classList.add("open");
     });
-    document.body.style.overflow = "hidden";
   }
   function closePreview() {
     modal.classList.remove("show");
