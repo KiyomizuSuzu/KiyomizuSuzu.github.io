@@ -655,9 +655,10 @@
   function openPreview() {
     modal.classList.add("show");
     document.body.style.overflow = "hidden";
-    avatar.getBoundingClientRect();
     requestAnimationFrame(() => {
-      avatar.classList.add("open");
+      requestAnimationFrame(() => {
+        avatar.classList.add("open");
+      });
     });
   }
   function closePreview() {
