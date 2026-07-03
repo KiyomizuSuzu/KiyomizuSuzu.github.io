@@ -158,6 +158,22 @@
     .image-preview.show img {
         transform: scale(1);
     }
+    .message {
+      position: fixed;
+      top: 0;
+      left: 0;
+      color: var(--error);
+      font-size: 2rem;
+      font-weight: 700;
+      opacity: 0;
+      pointer-events: none;
+      z-index: var(--aboveALL);
+      transition: opacity .15s;
+      white-space: nowrap;
+    }
+    .message.show {
+      opacity: 0.85;
+    }
  /* ================================
     Container for Top and Bottom
     ================================ */
@@ -424,22 +440,6 @@
       color: var(--error);
       font-weight: 600;
       line-height: 1.5;
-    }
-    .message {
-      position: fixed;
-      top: 0;
-      left: 0;
-      color: var(--error);
-      font-size: 2rem;
-      font-weight: 700;
-      opacity: 0;
-      pointer-events: none;
-      z-index: var(--aboveALL);
-      transition: opacity .15s;
-      white-space: nowrap;
-    }
-    .message.show {
-      opacity: 0.85;
     }
   </style>
 </head>
