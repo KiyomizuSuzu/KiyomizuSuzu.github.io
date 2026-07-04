@@ -791,37 +791,22 @@
   modal.addEventListener("click", closePreview);
   const messagesContainer = document.getElementById('SomethingIsWrongWithMe');
   const messages = [
- { en: "It hurts", ja: "痛い" },
-
-{ en: "I know", ja: "わかってる" },
-
-{ en: "Hey", ja: "ねえ" },
-
-{ en: "Why?", ja: "なんで？" },
-
-{ en: "Where are you going?", ja: "どこ行くの？" },
-
-{ en: "It's gone", ja: "なくなった" },
-
-{ en: "No", ja: "やだ" },
-
-{ en: "Stop", ja: "やめて" },
-
-{ en: "Don't look at me", ja: "見ないでよ" },
-
-{ en: "Please", ja: "お願い" },
-
-{ en: "I'm not lonely", ja: "寂しくないから" },
-
-{ en: "Friends?", ja: "友達？" },
-
-{ en: "Where are you touching?", ja: "どこ触ってるの？" },
-
-{ en: "Don't do that", ja: "それやめて" },
-
-{ en: "Someone...", ja: "誰か…" },
-
-{ en: "Anyone...", ja: "誰でもいいから…" }
+    { en: "It hurts", ja: "痛い" },
+    { en: "I know", ja: "わかってる" },
+    { en: "Hey", ja: "ねえ" },
+    { en: "Why?", ja: "なんで？" },
+    { en: "Where are you going?", ja: "どこ行くの？" },
+    { en: "It's gone", ja: "なくなった" },
+    { en: "No", ja: "やだ" },
+    { en: "Stop", ja: "やめて" },
+    { en: "Don't look at me", ja: "見ないでよ" },
+    { en: "Please", ja: "お願い" },
+    { en: "I'm not lonely", ja: "寂しくないから" },
+    { en: "Friends?", ja: "友達？" },
+    { en: "Where are you touching?", ja: "どこ触ってるの？" },
+    { en: "Don't do that", ja: "それやめて" },
+    { en: "Someone...", ja: "誰か…" },
+    { en: "Anyone...", ja: "誰でもいいから…" }
   ];
   const MAX_WORKERS = 100;
   const START_DELAY = 5000;
@@ -841,35 +826,51 @@
     return list;
   }
   function flicker(message) {
-    if (!messagesRunning) return;
-    const x = Math.random() * (window.innerWidth - 220) + 20;
-    const y = Math.random() * (window.innerHeight - 60) + 20;
-    message.textContent = currentMessage();
-    const rotation = Math.random() * 24 - 12;
-    message.style.transform = `translate(${x}px, ${y}px) rotate(${rotation}deg)`;
-    message.classList.add('show');
-    const hideId = setTimeout(() => message.classList.remove('show'), 700);
-    messageTimeouts.push(hideId);
-    const nextGap = 1500 + Math.random() * 2000;
-    const nextId = setTimeout(() => flicker(message), nextGap);
-    messageTimeouts.push(nextId);
+    if (!messagesRunning) {
+      return;
+    }
+    else {
+      const x = Math.random() * (window.innerWidth - 220) + 20;
+      const y = Math.random() * (window.innerHeight - 60) + 20;
+      message.textContent = currentMessage();
+      const rotation = Math.random() * 24 - 12;
+      message.style.transform = `translate(${x}px, ${y}px) rotate(${rotation}deg)`;
+      message.classList.add('show');
+      const hideId = setTimeout(() => message.classList.remove('show'), 700);
+      messageTimeouts.push(hideId);
+      const nextGap = 1500 + Math.random() * 2000;
+      const nextId = setTimeout(() => flicker(message), nextGap);
+      messageTimeouts.push(nextId);
+    }
   }
   function activateWorker() {
-    if (!messagesRunning || activeCount >= MAX_WORKERS) return;
-    const text = makeWorker();
-    messageWorkers.push(text);
-    activeCount++;
-    flicker(text);
+    if (!messagesRunning || activeCount >= MAX_WORKERS) {
+      return;
+    }
+    else {
+      const text = makeWorker();
+      messageWorkers.push(text);
+      activeCount++;
+      flicker(text);
+    }
   }
   let startDelayTimer = null;
   function startHiddenMessages() {
-    if (messagesRunning) return;
-    messagesRunning = true;
-    startDelayTimer = setTimeout(() => {
-      if (!messagesRunning) return;
-      activateWorker();
-      messageIntervalId = setInterval(activateWorker, 5000);
-    }, START_DELAY);
+    if (messagesRunning) {
+      return;
+    }
+    else {
+      messagesRunning = true;
+      startDelayTimer = setTimeout(() => {
+        if (!messagesRunning) {
+          return;
+        }
+        else {
+          activateWorker();
+          messageIntervalId = setInterval(activateWorker, 5000);
+        }
+      }, START_DELAY);
+    }
   }
   function stopHiddenMessages() {
     messagesRunning = false;
