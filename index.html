@@ -891,7 +891,6 @@
     isLit = true;
     candleButton.classList.remove("extinguishing");
     candleButton.classList.add("lit");
-    candleButton.setAttribute("aria-pressed", "true");
     startHiddenMessages();
     bgAudio.currentTime = 0;
     bgAudio.play().catch((ERROR) => {
@@ -901,10 +900,8 @@
   function extinguishCandle() {
     isLit = false;
     candleButton.classList.remove("lit");
-    candleButton.setAttribute("aria-pressed", "false");
     bgAudio.pause();
     bgAudio.currentTime = 0;
-    stopHiddenMessages();
     candleButton.classList.add("extinguishing");
     clearTimeout(extinguishTimer);
     extinguishTimer = setTimeout(() => {
@@ -914,6 +911,7 @@
   candleButton.addEventListener("click", () => {
     if (isLit) {
       extinguishCandle();
+      stopHiddenMessages();
     } 
     else {
       lightCandle();
