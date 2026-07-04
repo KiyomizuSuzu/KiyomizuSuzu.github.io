@@ -623,6 +623,14 @@
     if (document.fonts?.ready) {
       await document.fonts.ready;
     }
+  if (/Mobi|Android|iPad/i.test(navigator.userAgent)) {
+    modal.style.visibility = "hidden";
+    openPreview();
+    setTimeout(() => {
+      closePreview();
+      preview.style.visibility = "";
+    }, 500);
+  }
     document.querySelectorAll('[data-en][data-ja]').forEach(translatable => {
       const English = /** @type {HTMLElement} */ (translatable);
       English.textContent = English.dataset.en;
@@ -682,14 +690,6 @@
     modal.classList.remove("show");
     avatar.classList.remove("open");
     document.body.style.overflow = "";
-  }
-  if (/Mobi|Android|iPad/i.test(navigator.userAgent)) {
-    modal.style.visibility = "hidden";
-    openPreview();
-    setTimeout(() => {
-      closePreview();
-      preview.style.visibility = "";
-    }, 500);
   }
   avatar.addEventListener("click", openPreview);
   modal.addEventListener("click", closePreview);
