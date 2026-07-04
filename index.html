@@ -878,8 +878,10 @@
       message.classList.remove('show');
       setTimeout(() => message.remove(), 200);
     });
-    messageWorkers = [];
-    activeCount = 0;
+    setTimeout(() => {
+      messageWorkers = [];
+      activeCount = 0;
+    }, 250);
   }
   const candleButton = document.getElementById("candleButton");
   const bgAudio = /** @type {HTMLAudioElement} */ (document.getElementById("bgAudio"));
