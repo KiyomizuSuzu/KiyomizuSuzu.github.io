@@ -619,8 +619,6 @@
     document.body.classList.toggle("dark-theme");
   });
   window.addEventListener("load", async () => {
-    openPreview(); 
-    closePreview();
     const loading = document.getElementById("loadingAssets");
     if (document.fonts?.ready) {
       await document.fonts.ready;
@@ -673,6 +671,7 @@
   });
   const avatar = document.querySelector(".profile img");
   const modal = document.getElementById("imagePreview");
+  getComputedStyle(avatar).transform;
   function openPreview() {
     modal.classList.add("show");
     requestAnimationFrame(() => {
