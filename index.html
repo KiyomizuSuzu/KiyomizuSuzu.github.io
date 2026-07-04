@@ -141,8 +141,8 @@
       justify-content: center;
       align-items: center;
       opacity: 0;
-      pointer-events: none;
-      transition: opacity .15s;
+      visibility: hidden;
+      transition: opacity .15s, visibility .15s;
       z-index: var(--aboveALL);
     }
     .image-preview img {
@@ -155,7 +155,7 @@
     }
     .image-preview.show {
       opacity: 1;
-      pointer-events: auto;
+      visibility: visible;
     }
     .image-preview.show img {
       transform: scale(1);
@@ -671,6 +671,11 @@
   });
   const avatar = document.querySelector(".profile img");
   const modal = document.getElementById("imagePreview");
+  requestAnimationFrame(() => {
+    modal.style.display = "flex";
+    void modal.offsetHeight;
+    modal.style.display = "";
+  });
   function openPreview() {
     modal.classList.add("show");
     requestAnimationFrame(() => {
