@@ -877,7 +877,7 @@
       messagesRunning = true;
       startDelayTimer = setTimeout(() => {
       activateWorker();
-      messageIntervalId = setInterval(activateWorker, 5000);
+      messageIntervalId = setInterval(activateWorker, 10000);
       }, DELAY_MS);
     }
   }
