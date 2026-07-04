@@ -645,18 +645,15 @@
     toggleBtn.addEventListener('click', (mouseClicked) => {
       mouseClicked.stopPropagation();
       const isOpen = dropdown.classList.toggle('open');
-      toggleBtn.setAttribute('aria-expanded', String(isOpen));
     });
     document.addEventListener('click', () => {
       dropdown.classList.remove('open');
-      toggleBtn.setAttribute('aria-expanded', 'false');
     });
     menuButtons.forEach((button) => {
       button.addEventListener('click', () => {
         const lang = button.dataset.lang;
         setLanguage(lang);
         dropdown.classList.remove('open');
-        toggleBtn.setAttribute('aria-expanded', 'false');
       });
     });
     /** @param {string} lang */
