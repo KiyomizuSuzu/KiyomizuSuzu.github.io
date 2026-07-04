@@ -687,15 +687,10 @@
   modal.addEventListener("click", closePreview);
 if (/Mobi|Android|iPad/i.test(navigator.userAgent)) {
   modal.style.visibility = "hidden";
-  avatar.style.visibility = "hidden";
-
   openPreview();
-
   setTimeout(() => {
     closePreview();
-
     modal.style.visibility = "";
-    avatar.style.visibility = "";
   }, 500);
 }
 </script>
