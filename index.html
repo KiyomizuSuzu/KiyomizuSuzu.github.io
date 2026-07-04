@@ -688,7 +688,9 @@
   if (/Mobi|Android|iPad/i.test(navigator.userAgent)) {
     modal.style.visibility = "hidden";
     openPreview();
-    closePreview();
+    setTimeout(() => {
+      closePreview();
+    }, 150);
     modal.style.visibility = "";
   }
 </script>
