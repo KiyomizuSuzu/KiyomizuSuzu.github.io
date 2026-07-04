@@ -680,7 +680,9 @@
   }
   function closePreview() {
     modal.classList.remove("show");
-    avatar.classList.remove("open");
+    requestAnimationFrame(() => {
+      avatar.classList.remove("open");
+    });
     document.body.style.overflow = "";
   }
   if (/Mobi|Android|iPad/i.test(navigator.userAgent)) {
