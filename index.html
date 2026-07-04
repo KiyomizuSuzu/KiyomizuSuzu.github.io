@@ -683,13 +683,10 @@
     avatar.classList.remove("open");
     document.body.style.overflow = "";
   }
-  const previewImg = modal.querySelector("img");
-  const transition = previewImg.style.transition;
-  previewImg.style.transition = "none";
-  openPreview();
-  closePreview();
-  void previewImg.offsetHeight;
-  previewImg.style.transition = transition;
+  if (navigator.userAgentData?.mobile) {
+    openPreview();
+    closePreview();
+  }
   avatar.addEventListener("click", openPreview);
   modal.addEventListener("click", closePreview);
 </script>
