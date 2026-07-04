@@ -672,13 +672,11 @@
   const avatar = document.querySelector(".profile img");
   const modal = document.getElementById("imagePreview");
   function openPreview() {
-    document.body.style.overflow = "hidden";
+    modal.classList.add("show");
     requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        modal.classList.add("show");
-        avatar.classList.add("open");
-      });
+      avatar.classList.add("open");
     });
+    document.body.style.overflow = "hidden";
   }
   function closePreview() {
     modal.classList.remove("show");
