@@ -889,8 +889,8 @@
     candleButton.setAttribute("aria-pressed", "true");
     startHiddenMessages();
     bgAudio.currentTime = 0;
-    bgAudio.play().catch((err) => {
-      console.error("bgAudio.play() failed:", err);
+    bgAudio.play().catch((ERROR) => {
+      console.error("bgAudio.play() failed:", ERROR);
     });
   }
   function extinguishCandle() {
