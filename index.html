@@ -671,17 +671,13 @@
   });
   const avatar = document.querySelector(".profile img");
   const modal = document.getElementById("imagePreview");
-function openPreview() {
-  modal.classList.remove("show"); // ensure initial state
-  void modal.offsetWidth;         // force reflow
-
-  requestAnimationFrame(() => {
+  function openPreview() {
     modal.classList.add("show");
-    avatar.classList.add("open");
-  });
-
-  document.body.style.overflow = "hidden";
-}
+    requestAnimationFrame(() => {
+      avatar.classList.add("open");
+    });
+    document.body.style.overflow = "hidden";
+  }
   function closePreview() {
     modal.classList.remove("show");
     avatar.classList.remove("open");
