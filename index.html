@@ -684,8 +684,8 @@
     document.body.style.overflow = "";
   }
   if (/Mobi|Android|iPad/i.test(navigator.userAgent)) {
-    openPreview();
-    closePreview();
+    modal.classList.add("show");
+    modal.classList.remove("show");
   }
   avatar.addEventListener("click", openPreview);
   modal.addEventListener("click", closePreview);
