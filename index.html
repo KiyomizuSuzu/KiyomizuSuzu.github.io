@@ -808,7 +808,7 @@
     { en: "Anyone...", ja: "誰でもいいから…" }
   ];
   const MAX_WORKERS = 100;
-  const START_DELAY = 5000;
+  const DELAY_MS = 5000;
   let messageWorkers = [];
   let messageTimeouts = [];
   let messageIntervalId = null;
@@ -861,14 +861,9 @@
     else {
       messagesRunning = true;
       startDelayTimer = setTimeout(() => {
-        if (!messagesRunning) {
-          return;
-        }
-        else {
-          activateWorker();
-          messageIntervalId = setInterval(activateWorker, 5000);
-        }
-      }, START_DELAY);
+      activateWorker();
+      messageIntervalId = setInterval(activateWorker, 5000);
+      }, DELAY_MS);
     }
   }
   function stopHiddenMessages() {
