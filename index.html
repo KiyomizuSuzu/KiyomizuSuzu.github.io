@@ -684,10 +684,10 @@
     document.body.style.overflow = "";
   }
   if (/Mobi|Android|iPad/i.test(navigator.userAgent)) {
-    openPreview();
-    requestAnimationFrame(() => {
-      closePreview();
-    });
+    modal.classList.add("show");
+    avatar.classList.add("open");
+    document.body.style.overflow = "hidden";
+    closePreview();
   }
   avatar.addEventListener("click", openPreview);
   modal.addEventListener("click", closePreview);
