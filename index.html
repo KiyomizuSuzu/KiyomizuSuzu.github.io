@@ -686,8 +686,8 @@
   if (/Mobi|Android|iPad/i.test(navigator.userAgent)) {
     openPreview();
     setTimeout(() => {
-    closePreview();
-  }, 500);
+      closePreview();
+    }, 150);
   }
   avatar.addEventListener("click", openPreview);
   modal.addEventListener("click", closePreview);
