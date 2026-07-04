@@ -889,7 +889,10 @@
     messageIntervalId = null;
     messageTimeouts.forEach(id => clearTimeout(id));
     messageTimeouts = [];
-    messageWorkers.forEach(message => message.remove());
+    messageWorkers.forEach(message => {
+      message.classList.remove('show');
+      setTimeout(() => message.remove(), 200);
+    });
     messageWorkers = [];
     activeCount = 0;
   }
@@ -929,8 +932,17 @@
       lightCandle();
     }
   });
-  bgAudio.addEventListener("ended", () => {
-    extinguishCandle();
+  const STOP_PERCENT = 0.95;
+  bgAudio.addEventListener("timeupdate", () => {
+    if (!isLit || !bgAudio.duration) {
+      return;
+    }
+    else {
+      const progress = bgAudio.currentTime / bgAudio.duration;
+      if (progress >= STOP_PERCENT) {
+        extinguishCandle();
+      }
+    }
   });
 </script>
 </html>
