@@ -671,13 +671,11 @@
   });
   const avatar = document.querySelector(".profile img");
   const modal = document.getElementById("imagePreview");
-  function openPreview({animate = true} = {}) {
+  function openPreview() {
     modal.classList.add("show");
-    if (animate) {
-      requestAnimationFrame(() => {
-        avatar.classList.add("open");
-      });
-    }
+    requestAnimationFrame(() => {
+      avatar.classList.add("open");
+    });
     document.body.style.overflow = "hidden";
   }
   function closePreview() {
@@ -689,7 +687,7 @@
   modal.addEventListener("click", closePreview);
   if (/Mobi|Android|iPad/i.test(navigator.userAgent)) {
     modal.style.visibility = "hidden";
-    openPreview({animate: false});
+    openPreview();
     setTimeout(() => {
       closePreview();
       modal.style.visibility = "";
