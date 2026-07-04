@@ -619,6 +619,8 @@
     document.body.classList.toggle("dark-theme");
   });
   window.addEventListener("load", async () => {
+    openPreview(); 
+    closePreview();
     const loading = document.getElementById("loadingAssets");
     if (document.fonts?.ready) {
       await document.fonts.ready;
