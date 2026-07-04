@@ -862,7 +862,7 @@
       messagesRunning = true;
       startDelayTimer = setTimeout(() => {
       activateWorker();
-      messageIntervalId = setInterval(activateWorker, 10000);
+      messageIntervalId = setInterval(activateWorker, 15000);
       }, DELAY_MS);
     }
   }
@@ -872,9 +872,9 @@
     startDelayTimer = null;
     clearInterval(messageIntervalId);
     messageIntervalId = null;
-    messageTimeouts.forEach(id => clearTimeout(id));
+    messageTimeouts.forEach(clearTimeout);
     messageTimeouts = [];
-    messageWorkers.forEach(message => {
+    messageWorkers.forEach((message) => {
       message.classList.remove('show');
       setTimeout(() => message.remove(), 200);
     });
@@ -919,7 +919,7 @@
       lightCandle();
     }
   });
-  const STOP_PERCENT = 0.95;
+  const STOP_PERCENT = 0.99;
   bgAudio.addEventListener("timeupdate", () => {
     if (!isLit || !bgAudio.duration) {
       return;
