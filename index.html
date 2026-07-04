@@ -683,7 +683,7 @@
     avatar.classList.remove("open");
     document.body.style.overflow = "";
   }
-  if (navigator.userAgentData?.mobile) {
+  if (/Mobi|Android|iPad/i.test(navigator.userAgent)) {
     openPreview();
     closePreview();
   }
