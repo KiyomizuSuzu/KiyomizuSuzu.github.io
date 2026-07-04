@@ -12,7 +12,6 @@
     @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=block');
     :root {
       --aboveALL: 1;
-      --flame: #ff9d3c;
     }
     @keyframes rainbowGlow {
       0%   { box-shadow: 0 0 .5rem hsl(0, 100%, 60%); }
@@ -67,6 +66,7 @@
       --link: #0366d6;
       --error: #d32f2f;
       --avatar-border: rgba(0, 0, 0, 0.35);
+      --warning: #ff8a2a;
     }
     body.dark-theme {
       --background: #0f0f0f;
@@ -77,6 +77,7 @@
       --link: #4ea1ff;
       --error: #ff6b6b;
       --avatar-border: rgba(255, 255, 255, 0.14);
+      --warning: #ff9d3c;
     }
     body {
       display: flex;
@@ -362,7 +363,7 @@
       margin-block: 0;
       font-weight: 500;
       text-decoration: underline;
-      text-decoration-color: var(--description);
+      text-decoration-color: var(--warning);
       text-decoration-thickness: 0.125rem;
       text-underline-offset: 0.15rem;
       margin-bottom: 0.1875rem;
