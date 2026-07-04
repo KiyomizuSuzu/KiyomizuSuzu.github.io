@@ -671,11 +671,13 @@
   });
   const avatar = document.querySelector(".profile img");
   const modal = document.getElementById("imagePreview");
-  function openPreview() {
+  function openPreview({animate = true} = {}) {
     modal.classList.add("show");
-    requestAnimationFrame(() => {
-      avatar.classList.add("open");
-    });
+    if (animate) {
+      requestAnimationFrame(() => {
+        avatar.classList.add("open");
+      });
+    }
     document.body.style.overflow = "hidden";
   }
   function closePreview() {
@@ -687,12 +689,11 @@
   modal.addEventListener("click", closePreview);
   if (/Mobi|Android|iPad/i.test(navigator.userAgent)) {
     modal.style.visibility = "hidden";
-    openPreview();
+    openPreview({animate: false});
     setTimeout(() => {
       closePreview();
       modal.style.visibility = "";
-      avatar.style.visibility = "";
-    }, 1);
+    }, 150);
   }
 </script>
 </html>
