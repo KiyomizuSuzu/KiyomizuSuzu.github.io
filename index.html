@@ -680,7 +680,9 @@
   }
   function closePreview() {
     modal.classList.remove("show");
-    avatar.classList.remove("open");
+    requestAnimationFrame(() => {
+      avatar.classList.remove("open");
+    });
     document.body.style.overflow = "";
   }
   avatar.addEventListener("click", openPreview);
@@ -688,10 +690,8 @@
   if (/Mobi|Android|iPad/i.test(navigator.userAgent)) {
     modal.style.visibility = "hidden";
     openPreview();
-    setTimeout(() => {
-      closePreview();
-      modal.style.visibility = "";
-    }, 150);
+    closePreview();
+    modal.style.visibility = "";
   }
 </script>
 </html>
