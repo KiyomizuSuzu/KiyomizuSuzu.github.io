@@ -684,9 +684,7 @@
     document.body.style.overflow = "";
   }
   if (/Mobi|Android|iPad/i.test(navigator.userAgent)) {
-    modal.classList.add("show");
-    avatar.classList.add("open");
-    document.body.style.overflow = "hidden";
+    openPreview();
     closePreview();
   }
   avatar.addEventListener("click", openPreview);
