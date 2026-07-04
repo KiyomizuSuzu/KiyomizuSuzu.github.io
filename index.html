@@ -925,8 +925,9 @@
     else {
       const progress = bgAudio.currentTime / bgAudio.duration;
       if (progress >= STOP_PERCENT) {
-        extinguishCandle();
+        stopHiddenMessages();
       }
+      extinguishCandle();
     }
   });
 </script>
