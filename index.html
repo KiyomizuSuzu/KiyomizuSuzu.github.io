@@ -684,10 +684,12 @@
     document.body.style.overflow = "";
   }
   if (/Mobi|Android|iPad/i.test(navigator.userAgent)) {
+    modal.style.visibility = "hidden";
     openPreview();
     setTimeout(() => {
       closePreview();
-    }, 1);
+      preview.style.visibility = "";
+    }, 500);
   }
   avatar.addEventListener("click", openPreview);
   modal.addEventListener("click", closePreview);
