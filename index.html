@@ -564,18 +564,18 @@
   const supabaseKey = "sb_publishable_aqniMrzHTzhEWxbSpBopeA_4SyoQ8mJ";
   const supabaseClient = createClient(supabaseUrl, supabaseKey);
   /**
-   * @typedef {{
-   *   Link: string;
-   *   Name: string;
-   *   Details: string | null;
-   *   Details_ja: string | null;
-   *   EstimatedTime: number | null;
-   * }} Repo
-   *
-   * @typedef {HTMLElement} DropdownElement
-   * @typedef {HTMLButtonElement} DropdownButton
-   * @typedef {NodeListOf<HTMLButtonElement>} DropdownButtons
-   */
+  * @typedef {{
+  *   Link: string;
+  *   Name: string;
+  *   Details: string | null;
+  *   Details_ja: string | null;
+  *   EstimatedTime: number | null;
+  * }} Repo
+  *
+  * @typedef {HTMLElement} DropdownElement
+  * @typedef {HTMLButtonElement} DropdownButton
+  * @typedef {NodeListOf<HTMLButtonElement>} DropdownButtons
+  */
   /** @type {Repo[]} */
   let cachedRepos = [];
   /** @param {Repo[]} repos */
