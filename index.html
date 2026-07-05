@@ -627,9 +627,6 @@
     loading.textContent = "Fetching repositories";
     await loadRepositories();
     if (/Mobi|Android|iPad/i.test(navigator.userAgent)) {
-      document.querySelectorAll(".repo-desc").forEach(description => {
-        description.style.transition = "none";
-      });
       modal.style.visibility = "hidden";
       openPreview();
       setTimeout(() => {
