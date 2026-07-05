@@ -600,12 +600,6 @@
           </div>
         `;
       }).join("");
-      const isMobile = /Mobi|Android|iPad/i.test(navigator.userAgent);
-      if (isMobile) {
-        document.querySelectorAll(".repo-desc").forEach(description => {
-          description.style.transition = "none";
-        });
-      }
     }
   }
   async function loadRepositories() {
@@ -632,6 +626,17 @@
     });
     loading.textContent = "Fetching repositories";
     await loadRepositories();
+    if (/Mobi|Android|iPad/i.test(navigator.userAgent)) {
+      document.querySelectorAll(".repo-desc").forEach(description => {
+        description.style.transition = "none";
+      });
+      modal.style.visibility = "hidden";
+      openPreview();
+      setTimeout(() => {
+        closePreview();
+        modal.style.visibility = "";
+      }, 150);
+    }
     loading.style.opacity = "0";
     setTimeout(() => {
       document.body.classList.remove("loadingBarrier");
@@ -688,13 +693,5 @@
   }
   avatar.addEventListener("click", openPreview);
   modal.addEventListener("click", closePreview);
-  if (/Mobi|Android|iPad/i.test(navigator.userAgent)) {
-    modal.style.visibility = "hidden";
-    openPreview();
-    setTimeout(() => {
-      closePreview();
-      modal.style.visibility = "";
-    }, 150);
-  }
 </script>
 </html>
