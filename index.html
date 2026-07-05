@@ -623,9 +623,7 @@
   });
   window.addEventListener("load", async () => {
     const loading = document.getElementById("loadingAssets");
-    if (document.fonts?.ready) {
-      await document.fonts.ready;
-    }
+    await document.fonts.ready;
     document.querySelectorAll('[data-en][data-ja]').forEach(translatable => {
       const English = /** @type {HTMLElement} */ (translatable);
       English.textContent = English.dataset.en;
