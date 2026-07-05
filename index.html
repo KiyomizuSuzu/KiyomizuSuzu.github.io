@@ -103,11 +103,6 @@
                   color .15s,
                   border-color .15s;
     }
-    @media (max-width: 768px) {
-      .repo-desc {
-        transition: none;
-      }
-    }
     body.loadingBarrier {
       display: flex;
       align-items: center;
@@ -688,6 +683,7 @@
   avatar.addEventListener("click", openPreview);
   modal.addEventListener("click", closePreview);
   if (/Mobi|Android|iPad/i.test(navigator.userAgent)) {
+    document.querySelector(".repo-desc").style.transition = "none";
     modal.style.visibility = "hidden";
     openPreview();
     setTimeout(() => {
