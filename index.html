@@ -683,7 +683,6 @@
   avatar.addEventListener("click", openPreview);
   modal.addEventListener("click", closePreview);
   if (/Mobi|Android|iPad/i.test(navigator.userAgent)) {
-    document.querySelector(".repo-desc").style.transition = "none";
     modal.style.visibility = "hidden";
     openPreview();
     setTimeout(() => {
