@@ -600,6 +600,11 @@
           </div>
         `;
       }).join("");
+      const isMobile = /Mobi|Android|iPad/i.test(navigator.userAgent);
+      if (isMobile) {
+        document.querySelectorAll(".repo-desc").forEach(description => {
+          description.style.transition = "none";
+      });
     }
   }
   async function loadRepositories() {
@@ -683,9 +688,6 @@
   avatar.addEventListener("click", openPreview);
   modal.addEventListener("click", closePreview);
   if (/Mobi|Android|iPad/i.test(navigator.userAgent)) {
-    document.querySelectorAll(".repo-desc").forEach(description => {
-      description.style.transition = "none";
-    });
     modal.style.visibility = "hidden";
     openPreview();
     setTimeout(() => {
