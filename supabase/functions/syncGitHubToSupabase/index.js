@@ -19,16 +19,16 @@ function calculateGitHours(commits) {
     const MIN_SESSION = 15 * 60 * 1000;
     let total = 0;
     let sessionStart = times[0];
-    let prev = times[0];
+    let previous = times[0];
     for (let i = 1; i < times.length; i++) {
-      const curr = times[i];
-      if (curr - prev > SESSION_GAP) {
-        total += Math.max(prev - sessionStart, MIN_SESSION);
-        sessionStart = curr;
+      const current = times[i];
+      if (current - previous > SESSION_GAP) {
+        total += Math.max(previous - sessionStart, MIN_SESSION);
+        sessionStart = current;
       }
-      prev = curr;
+      previous = current;
     }
-    total += Math.max(prev - sessionStart, MIN_SESSION);
+    total += Math.max(previous - sessionStart, MIN_SESSION);
     return +(total / 3600000).toFixed(2);
   }
 }
