@@ -37,7 +37,7 @@ export default {
   async fetch(_req) {
     // @ts-ignore
     const supabase = createClient(Deno.env.get("SUPABASE_URL"), Deno.env.get("SUPABASE_SERVICE_ROLE_KEY"));
-    const res = await fetch("https://api.github.com/users/KiyomizuSuzu/repos?per_page=100", {
+    const res = await fetch("https://api.github.com/users/KiyomizuSuzu/repos", {
                               headers: {
                                 // @ts-ignore
                                 Authorization: `Bearer ${Deno.env.get("GITHUB_TOKEN")}`,
@@ -63,7 +63,7 @@ export default {
       const githubIds = repos.map(repo => repo.id);
       const formatted = await Promise.all(
         repos.map(async (repo) => {
-          const commitRes = await fetch(`https://api.github.com/repos/KiyomizuSuzu/${repo.name}/commits?per_page=100`, {
+          const commitRes = await fetch(`https://api.github.com/repos/KiyomizuSuzu/${repo.name}/commits`, {
                               headers: {
                                 // @ts-ignore
                                 Authorization: `Bearer ${Deno.env.get("GITHUB_TOKEN")}`,
