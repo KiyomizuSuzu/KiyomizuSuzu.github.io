@@ -32,6 +32,7 @@ function calculateGitHours(commits) {
     return +(total / 3600000).toFixed(2);
   }
 }
+/** @param {string} repoName */
 async function getAllCommits(repoName) {
   let allCommits = [];
   let page = 1;
