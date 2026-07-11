@@ -32,6 +32,29 @@ function calculateGitHours(commits) {
     return +(total / 3600000).toFixed(2);
   }
 }
+async function getAllCommits(repoName) {
+  let allCommits = [];
+  let page = 1;
+  while (true) {
+    const res = await fetch(
+      `https://api.github.com/repos/KiyomizuSuzu/${repoName}/commits?per_page=100&page=${page}`,
+      {
+        headers: {
+          // @ts-ignore
+          Authorization: `Bearer ${Deno.env.get("GITHUB_TOKEN")}`,
+          Accept: "application/vnd.github+json",
+        },
+      }
+    );
+    if (!res.ok) break;
+    const data = await res.json();
+    if (data.length === 0) break;
+    allCommits.push(...data);
+    if (data.length < 100) break;
+    page++;
+  }
+  return allCommits;
+}
 export default {
   /** @param {Request} _req */
   async fetch(_req) {
@@ -63,21 +86,7 @@ export default {
       const githubIds = repos.map(repo => repo.id);
       const formatted = await Promise.all(
         repos.map(async (repo) => {
-          const commitRes = await fetch(`https://api.github.com/repos/KiyomizuSuzu/${repo.name}/commits`, {
-                              headers: {
-                                // @ts-ignore
-                                Authorization: `Bearer ${Deno.env.get("GITHUB_TOKEN")}`,
-                                Accept: "application/vnd.github+json",
-                              },
-                            }
-                        );
-          let commits;
-          if (commitRes.ok) {
-            commits = await commitRes.json();
-          }
-          else {
-            commits = [];
-          }
+          const commits = await getAllCommits(repo.name);
           const estimatedTime = calculateGitHours(commits);
           return {
             ID: repo.id,
