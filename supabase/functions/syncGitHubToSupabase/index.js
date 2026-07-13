@@ -56,6 +56,24 @@ async function getAllCommits(repoName) {
   }
   return allCommits;
 }
+/** @param {string} repoName */
+async function getLanguages(repoName) {
+  const res = await fetch(`https://api.github.com/repos/KiyomizuSuzu/${repoName}/languages`, {
+                            headers: {
+                              // @ts-ignore
+                              Authorization: `Bearer ${Deno.env.get("GITHUB_TOKEN")}`,
+                              Accept: "application/vnd.github+json",
+                            },
+                        }
+  );
+  if (!res.ok) {
+    return [];
+  }
+  else{
+    const languages = await res.json();
+    return Object.keys(languages);
+  }
+}
 export default {
   /** @param {Request} _req */
   async fetch(_req) {
@@ -87,8 +105,10 @@ export default {
       const githubIds = repos.map(repo => repo.id);
       const formatted = await Promise.all(
         repos.map(async (repo) => {
-          const commits = await getAllCommits(repo.name);
-          const estimatedTime = calculateGitHours(commits);
+          const [commits, languages] = await Promise.all([
+            getAllCommits(repo.name),
+            getLanguages(repo.name)
+          ]);
           return {
             ID: repo.id,
             Name: repo.name,
@@ -96,7 +116,8 @@ export default {
             Details: repo.description,
             DisplayOrder: repo.created_at,
             CommitCount: commits.length,
-            EstimatedTime: estimatedTime
+            EstimatedTime: calculateGitHours(commits),
+            Languages: languages
           };
         })
       );
