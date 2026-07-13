@@ -641,7 +641,6 @@
               ${(repo.Languages ?? []).map(language => {
                 const ClassName =
                   language === "C#" ? "csharp" :
-                  language === "C++" ? "cpp" :
                   language.toLowerCase().replace(/[ +.#]/g, "-");
                 return `
                   <span class="repo-badge ${ClassName}">
