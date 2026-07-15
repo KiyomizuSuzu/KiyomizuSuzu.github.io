@@ -74,7 +74,8 @@
       --error: #d32f2f;
       --avatar-border: rgba(0, 0, 0, 0.35);
       --warning: #ff8a2a;
-      --language-color: 40%;
+      --language-color: 60%;
+      --icon: rgba(78, 161, 255, 0.8);
     }
     html[data-theme="dark"] {
       --background: black;
@@ -87,7 +88,8 @@
       --error: #ff6b6b;
       --avatar-border: rgba(255, 255, 255, 0.14);
       --warning: #ff9d3c;
-      --language-color: 20%;
+      --language-color: 30%;
+      --icon: rgba(78, 161, 255, 1);
     }
     body {
       display: flex;
@@ -348,10 +350,10 @@
     .icons a:hover {
       transform: translateY(-0.1875rem);
     }
-    .icons a:hover svg{
-      transform: scale(1.1);
-      filter: drop-shadow(0 0 0.75rem rgba(78, 161, 255, 0.4));
-    }
+    .icons a:hover svg {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 0.75rem var(--icon));
+}
  /* ================================
     Bottom container
     ================================ */
