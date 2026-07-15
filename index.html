@@ -64,24 +64,26 @@
       }
     }
     html[data-theme="light"] {
-      --background: #ffffff;
-      --title: #383838;
+      --background: white;
+      --title: black;
       --description: #555555;
       --box: #f2f2f2;
       --highlight: #ccc;
       --link: #0366d6;
+      --bloom: #383838;
       --error: #d32f2f;
       --avatar-border: rgba(0, 0, 0, 0.35);
       --warning: #ff8a2a;
       --language-color: 60%;
     }
     html[data-theme="dark"] {
-      --background: #0f0f0f;
-      --title: #eaeaea;
+      --background: black;
+      --title: white;
       --description: #b5b5b5;
       --box: #1a1a1a;
       --highlight: #333;
       --link: #4ea1ff;
+      --bloom: #cfcfcf;
       --error: #ff6b6b;
       --avatar-border: rgba(255, 255, 255, 0.14);
       --warning: #ff9d3c;
@@ -447,7 +449,7 @@
       padding: 0.15rem 0.55rem;
       border-radius: 0.5rem;
       background-color: color-mix(in srgb, var(--language) var(--language-color), var(--box));
-      color: var(--title);
+      color: var(--bloom);
       font-size: 0.75rem;
       font-weight: 700;
     }
