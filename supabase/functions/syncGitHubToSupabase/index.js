@@ -37,22 +37,27 @@ async function getAllCommits(repoName) {
   let allCommits = [];
   let page = 1;
   while (true) {
-    const res = await fetch(
-      `https://api.github.com/repos/KiyomizuSuzu/${repoName}/commits?per_page=100&page=${page}`,
-      {
-        headers: {
-          // @ts-ignore
-          Authorization: `Bearer ${Deno.env.get("GITHUB_TOKEN")}`,
-          Accept: "application/vnd.github+json",
-        },
+    const res = await fetch(`https://api.github.com/repos/KiyomizuSuzu/${repoName}/commits?per_page=100&page=${page}`, {
+                              headers: {
+                                // @ts-ignore
+                                Authorization: `Bearer ${Deno.env.get("GITHUB_TOKEN")}`,
+                                Accept: "application/vnd.github+json",
+                              },
+                            }
+                        );
+    if (!res.ok) {
+      throw new Error("Failed to fetch GitHub commits");
+    }
+    else {
+      const data = await res.json();
+      allCommits.push(...data);
+      if (data.length < 100) {
+        break;
       }
-    );
-    if (!res.ok) break;
-    const data = await res.json();
-    if (data.length === 0) break;
-    allCommits.push(...data);
-    if (data.length < 100) break;
-    page++;
+      else {
+        page++;
+      }
+    }
   }
   return allCommits;
 }
@@ -64,8 +69,8 @@ async function getLanguages(repoName) {
                               Authorization: `Bearer ${Deno.env.get("GITHUB_TOKEN")}`,
                               Accept: "application/vnd.github+json",
                             },
-                        }
-  );
+                          }
+                      );
   if (!res.ok) {
     return [];
   }
@@ -85,12 +90,12 @@ export default {
                                 Authorization: `Bearer ${Deno.env.get("GITHUB_TOKEN")}`,
                                 Accept: "application/vnd.github+json",
                               },
-                          }
-    );
-    if (!res.ok) {
-      return Response.json({error: "Failed to fetch GitHub repositories"},
-                           {status: 500}
+                            }
                         );
+    if (!res.ok) {
+      return Response.json({error: "Failed to fetch GitHub repositories"}, {
+                            status: 500}
+                      );
     }
     else {
       /** @type {{
@@ -124,14 +129,14 @@ export default {
       const {error: upsertError} = await supabase.from("Repositories").upsert(formatted, {onConflict: "ID" });
       const {data: existingRepos, error: selectError} = await supabase.from("Repositories").select("ID");
       if (upsertError) {
-        return Response.json({error: upsertError.message},
-                            {status: 500}
-                          );
+        return Response.json({error: upsertError.message}, {
+                              status: 500}
+                        );
       }
       else if (selectError) {
-        return Response.json({error: selectError.message},
-                            {status: 500}
-                          );
+        return Response.json({error: selectError.message}, {
+                              status: 500}
+                        );
       }
       else {
         /** @type {{ 
@@ -145,9 +150,9 @@ export default {
           if (idsToDelete.length > 0) {
             const {error: deleteError} = await supabase.from("Repositories").delete().in("ID", idsToDelete);
             if (deleteError) {
-              return Response.json({error: deleteError.message},
-                                  {status: 500}
-                                );
+              return Response.json({error: deleteError.message}, {
+                                    status: 500}
+                              );
             }
           }
           throw new Error();
