@@ -1,15 +1,32 @@
-// @ts-ignore
 import {createClient} from "jsr:@supabase/supabase-js@2";
-/**
-* @param {{
-*    commit: {
-*     author: {
-*       date: string
-*     }
-*   }
-* }[]} commits
-*/
-function calculateGitHours(commits) {
+interface GithubCommit {
+  commit: {
+    author: {
+      date: string;
+    };
+  };
+}
+interface GithubRepo {
+  id: number;
+  name: string;
+  html_url: string;
+  description: string | null;
+  created_at: string;
+}
+interface FormattedRepo {
+  ID: number;
+  Name: string;
+  Link: string;
+  Details: string | null;
+  DisplayOrder: string;
+  CommitCount: number;
+  EstimatedTime: number;
+  Languages: string[];
+}
+interface ExistingRepoRow {
+  ID: number;
+}
+function calculateGitHours(commits: GithubCommit[]): number {
   if (!commits.length) {
     return 0;
   }
@@ -32,14 +49,12 @@ function calculateGitHours(commits) {
     return +(total / 3600000).toFixed(2);
   }
 }
-/** @param {string} repoName */
-async function getAllCommits(repoName) {
-  let allCommits = [];
+async function getAllCommits(repoName: string): Promise<GithubCommit[]> {
+  let allCommits: GithubCommit[] = [];
   let page = 1;
   while (true) {
     const res = await fetch(`https://api.github.com/repos/KiyomizuSuzu/${repoName}/commits?per_page=100&page=${page}`, {
                               headers: {
-                                // @ts-ignore
                                 Authorization: `Bearer ${Deno.env.get("GITHUB_TOKEN")}`,
                                 Accept: "application/vnd.github+json",
                               },
@@ -61,11 +76,9 @@ async function getAllCommits(repoName) {
   }
   return allCommits;
 }
-/** @param {string} repoName */
-async function getLanguages(repoName) {
+async function getLanguages(repoName: string): Promise<string[]> {
   const res = await fetch(`https://api.github.com/repos/KiyomizuSuzu/${repoName}/languages`, {
                             headers: {
-                              // @ts-ignore
                               Authorization: `Bearer ${Deno.env.get("GITHUB_TOKEN")}`,
                               Accept: "application/vnd.github+json",
                             },
@@ -74,19 +87,16 @@ async function getLanguages(repoName) {
   if (!res.ok) {
     return [];
   }
-  else{
+  else {
     const languages = await res.json();
     return Object.keys(languages);
   }
 }
 export default {
-  /** @param {Request} _req */
-  async fetch(_req) {
-    // @ts-ignore
-    const supabase = createClient(Deno.env.get("SUPABASE_URL"), Deno.env.get("SUPABASE_SERVICE_ROLE_KEY"));
+  async fetch(_req: Request): Promise<Response> {
+    const supabase = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
     const res = await fetch("https://api.github.com/users/KiyomizuSuzu/repos", {
                               headers: {
-                                // @ts-ignore
                                 Authorization: `Bearer ${Deno.env.get("GITHUB_TOKEN")}`,
                                 Accept: "application/vnd.github+json",
                               },
@@ -98,22 +108,13 @@ export default {
                       );
     }
     else {
-      /** @type {{
-      *   id: number,
-      *   name: string,
-      *   html_url: string,
-      *   description: string | null,
-      *   created_at: string
-      * }[]}
-      */
-      const repos = await res.json();
+      const repos: GithubRepo[] = await res.json();
       const githubIds = repos.map(repo => repo.id);
-      const formatted = await Promise.all(
+      const formatted: FormattedRepo[] = await Promise.all(
         repos.map(async (repo) => {
-          const [commits, languages] = await Promise.all([
-            getAllCommits(repo.name),
-            getLanguages(repo.name)
-          ]);
+          const [commits, languages] = await Promise.all([getAllCommits(repo.name),
+                                                          getLanguages(repo.name)
+                                                    ]);
           return {
             ID: repo.id,
             Name: repo.name,
@@ -123,7 +124,7 @@ export default {
             CommitCount: commits.length,
             EstimatedTime: calculateGitHours(commits),
             Languages: languages
-          };
+          }
         })
       );
       const {error: upsertError} = await supabase.from("Repositories").upsert(formatted, {onConflict: "ID" });
@@ -139,11 +140,7 @@ export default {
                         );
       }
       else {
-        /** @type {{ 
-        *   ID: number 
-        * }[]}
-        */
-        const existingRows = existingRepos ?? [];
+        const existingRows: ExistingRepoRow[] = existingRepos ?? [];
         const existingIds = existingRows.map(repo => repo.ID);
         const idsToDelete = existingIds.filter(id => !githubIds.includes(id));
         try {
