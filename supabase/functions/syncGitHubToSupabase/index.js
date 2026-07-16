@@ -159,8 +159,8 @@ export default {
         }
         catch {
           return Response.json({synced: formatted.length,
-                                deleted: idsToDelete.length
-                            });
+                                deleted: idsToDelete.length}
+                          );
         }
       }
     }
