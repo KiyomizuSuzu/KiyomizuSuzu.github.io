@@ -42,7 +42,7 @@ AGPL-3.0に従う以上、対象コードは同じライセンスのまま維持
 This is a personal website deployed on both [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages) and [Cloudflare Pages](https://pages.cloudflare.com/) using HTML, CSS, and JavaScript, and a [Supabase](https://supabase.com) backend powered by PostgreSQL.
 
 ## Credits
-- [Devicon](https://devicon.dev/) – Icons for programming languages, tools, and companies.
+- [Devicon](https://devicon.dev/) – Icons for programming languages, frameworks, and tools.
 
 ## Live sites
 - GitHub Pages: https://kiyomizusuzu.github.io/
