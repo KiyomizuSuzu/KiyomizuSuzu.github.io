@@ -620,6 +620,7 @@
       repoList.innerHTML = repos.map(repo => {
         const details = (lang === 'ja' && repo.Details_ja) ? repo.Details_ja : repo.Details;
         const unit = lang === 'ja' ? '時間' : (repo.EstimatedTime === 1 ? 'Hour' : 'Hours');
+        const hiddenLanguages = ["PLpgSQL"];
         return `
           <div class="repo-div">
             <h3 class="repo-name">
@@ -633,16 +634,17 @@
             </h3>
             <p class="repo-desc">${details ?? ""}</p>
             <div class="repo-languages">
-              ${(repo.Languages ?? []).map(language => {
-                const ClassName =
-                  language === "C#" ? "csharp" :
-                  language.toLowerCase().replace(/[ +.#]/g, "-");
-                return `
-                  <span class="repo-badge ${ClassName}">
-                    ${language}
-                  </span>
-                `;
-              }).join("")}
+              ${(repo.Languages ?? []).filter(language => !hiddenLanguages.includes(language)).map(language => {
+                  const ClassName =
+                    language === "C#" ? "csharp" :
+                    language.toLowerCase().replace(/[ +.#]/g, "-");
+                  return `
+                    <span class="repo-badge ${ClassName}">
+                      ${language}
+                    </span>
+                  `;
+                })
+                .join("")}
             </div>
           </div>
         `;
