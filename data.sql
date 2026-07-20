@@ -41,7 +41,7 @@ VALUES
     46.46,
     459,
     'GitHub Pagesフロントエンド（HTML/CSS/JS）とSupabaseバックエンド（PostgreSQL）で構成されています。',
-    ARRAY['HTML', 'TypeScript']
+    ARRAY['HTML', 'TypeScript', 'PLpgSQL']
 ),
 (
     1267960686,
