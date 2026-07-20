@@ -19,13 +19,13 @@
       --powershell: #5391fe;
     }
     @keyframes rainbowGlow {
-      0%      { box-shadow: 0 0 .5rem hsl(0 100% 60%); }
-      16.666% { box-shadow: 0 0 .5rem hsl(60 100% 60%); }
+      0%      { box-shadow: 0 0 .5rem hsl(  0 100% 60%); }
+      16.666% { box-shadow: 0 0 .5rem hsl( 60 100% 60%); }
       33.333% { box-shadow: 0 0 .5rem hsl(120 100% 60%); }
       50%     { box-shadow: 0 0 .5rem hsl(180 100% 60%); }
       66.666% { box-shadow: 0 0 .5rem hsl(240 100% 60%); }
       83.333% { box-shadow: 0 0 .5rem hsl(300 100% 60%); }
-      100%    { box-shadow: 0 0 .5rem hsl(360 100% 60%); }
+      100%    { box-shadow: 0 0 .5rem hsl(  0 100% 60%); }
     }
     @keyframes loadingIn {
       from {
@@ -38,11 +38,11 @@
       }
     }
     @keyframes dots {
-      0%   { content: ""; }
-      25%  { content: "."; }
-      50%  { content: ".."; }
+      0%   { content: "\00a0\00a0\00a0"; }
+      25%  { content: ".\00a0\00a0"; }
+      50%  { content: "..\00a0"; }
       75%  { content: "..."; }
-      100% { content: ""; }
+      100% { content: "\00a0\00a0\00a0"; }
     }
     html {
       font-size: clamp(15px, 0.25vw + 12px, 20px);
