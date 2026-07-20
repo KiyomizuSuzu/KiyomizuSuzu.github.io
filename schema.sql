@@ -67,7 +67,6 @@ ALTER FUNCTION public.rls_auto_enable() OWNER TO postgres;
 -- =============================================================================
 -- Tables
 -- =============================================================================
-
 CREATE TABLE IF NOT EXISTS public."Repositories" (
     "ID"              integer NOT NULL,
     "Name"            text NOT NULL,
