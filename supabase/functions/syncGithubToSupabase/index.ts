@@ -50,7 +50,7 @@ function calculateGitHours(commits: GithubCommit[]): number {
   }
 }
 async function getAllCommits(repoName: string): Promise<GithubCommit[]> {
-  let allCommits: GithubCommit[] = [];
+  const allCommits: GithubCommit[] = [];
   let page = 1;
   while (true) {
     const res = await fetch(`https://api.github.com/repos/KiyomizuSuzu/${repoName}/commits?per_page=100&page=${page}`, {
