@@ -595,10 +595,6 @@
   </div>
 </body>
 <script type="module">
-  import {createClient} from "https://esm.sh/@supabase/supabase-js@2";
-  const supabaseUrl = "https://iardacsuwzgfjsdefqdj.supabase.co";
-  const supabaseKey = "sb_publishable_aqniMrzHTzhEWxbSpBopeA_4SyoQ8mJ";
-  const supabaseClient = createClient(supabaseUrl, supabaseKey);
   /**
   * @typedef {{
   *   Link: string;
@@ -606,12 +602,13 @@
   *   Details: string | null;
   *   Details_ja: string | null;
   *   EstimatedTime: number | null;
+  *   Languages: string[] | null;
   * }} Repo
-  *
-  * @typedef {HTMLElement} DropdownElement
-  * @typedef {HTMLButtonElement} DropdownButton
-  * @typedef {NodeListOf<HTMLButtonElement>} DropdownButtons
   */
+  import {createClient} from "https://esm.sh/@supabase/supabase-js@2";
+  const supabaseUrl = "https://iardacsuwzgfjsdefqdj.supabase.co";
+  const supabaseKey = "sb_publishable_aqniMrzHTzhEWxbSpBopeA_4SyoQ8mJ";
+  const supabaseClient = createClient(supabaseUrl, supabaseKey);
   /** @type {Repo[]} */
   let cachedRepos = [];
   /** @param {Repo[]} repos */
@@ -685,15 +682,12 @@
     }, 500);
   });
   document.addEventListener('DOMContentLoaded', () => {
-    /** @type {DropdownElement} */
-    const dropdown = (document.querySelector('.translate-dropdown'));
-    /** @type {DropdownButton} */
-    const toggleBtn = (dropdown.querySelector('.translate-button'));
-    /** @type {DropdownButtons} */
-    const menuButtons = (dropdown.querySelectorAll('.translate-menu button'));
+    const dropdown = /** @type {HTMLElement} */ (document.querySelector(".translate-dropdown"));
+    const toggleBtn = /** @type {HTMLButtonElement} */ (dropdown.querySelector(".translate-button"));
+    const menuButtons = /** @type {NodeListOf<HTMLButtonElement>} */ (dropdown.querySelectorAll(".translate-menu button"));
     toggleBtn.addEventListener('click', (mouseClicked) => {
       mouseClicked.stopPropagation();
-      const isOpen = dropdown.classList.toggle('open');
+      dropdown.classList.toggle("open");
     });
     document.addEventListener('click', () => {
       dropdown.classList.remove('open');
