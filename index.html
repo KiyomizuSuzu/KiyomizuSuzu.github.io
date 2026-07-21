@@ -661,9 +661,7 @@
                 ${(repo.Languages ?? []).filter(language => !hiddenLanguages.includes(language)).map(language => {
                     const ClassName = language === "C#" ? "csharp" : language.toLowerCase();
                     return `
-                      <span class="repo-badge ${ClassName}">
-                        ${language}
-                      </span>
+                      <span class="repo-badge ${ClassName}">${language}</span>
                     `;
                   })
                   .join("")}
