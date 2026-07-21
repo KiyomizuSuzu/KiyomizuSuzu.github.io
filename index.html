@@ -1,764 +1,764 @@
 <!DOCTYPE html>
 <html data-theme="dark" lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KiyomizuSuzu</title>
-  <link rel="icon" href="Profile.avif" type="image/avif">
-  <style>
- /* ================================
-    DEFAULT
-    ================================ */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=block');
-    :root {
-      --aboveALL: 1;
-      --csharp: #239120;
-      --typescript: #3178c6;
-      --html: #e34f26;
-      --rust: #dea584;
-      --powershell: #5391fe;
-    }
-    @keyframes rainbowGlow {
-      0%      { box-shadow: 0 0 .5rem hsl(  0 100% 60%); }
-      16.666% { box-shadow: 0 0 .5rem hsl( 60 100% 60%); }
-      33.333% { box-shadow: 0 0 .5rem hsl(120 100% 60%); }
-      50%     { box-shadow: 0 0 .5rem hsl(180 100% 60%); }
-      66.666% { box-shadow: 0 0 .5rem hsl(240 100% 60%); }
-      83.333% { box-shadow: 0 0 .5rem hsl(300 100% 60%); }
-      100%    { box-shadow: 0 0 .5rem hsl(  0 100% 60%); }
-    }
-    @keyframes loadingIn {
-      from {
-        opacity: 0;
-        transform: translate(-50%, calc(-50% + 0.5rem));
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KiyomizuSuzu</title>
+    <link rel="icon" href="Profile.avif" type="image/avif">
+    <style>
+  /* ================================
+      DEFAULT
+      ================================ */
+      @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=block');
+      :root {
+        --aboveALL: 1;
+        --csharp: #239120;
+        --typescript: #3178c6;
+        --html: #e34f26;
+        --rust: #dea584;
+        --powershell: #5391fe;
       }
-      to {
-        opacity: 1;
+      @keyframes rainbowGlow {
+        0%      { box-shadow: 0 0 .5rem hsl(  0 100% 60%); }
+        16.666% { box-shadow: 0 0 .5rem hsl( 60 100% 60%); }
+        33.333% { box-shadow: 0 0 .5rem hsl(120 100% 60%); }
+        50%     { box-shadow: 0 0 .5rem hsl(180 100% 60%); }
+        66.666% { box-shadow: 0 0 .5rem hsl(240 100% 60%); }
+        83.333% { box-shadow: 0 0 .5rem hsl(300 100% 60%); }
+        100%    { box-shadow: 0 0 .5rem hsl(  0 100% 60%); }
+      }
+      @keyframes loadingIn {
+        from {
+          opacity: 0;
+          transform: translate(-50%, calc(-50% + 0.5rem));
+        }
+        to {
+          opacity: 1;
+          transform: translate(-50%, -50%);
+        }
+      }
+      @keyframes dots {
+        0%   { content: "\00a0\00a0\00a0"; }
+        25%  { content: ".\00a0\00a0"; }
+        50%  { content: "..\00a0"; }
+        75%  { content: "..."; }
+        100% { content: "\00a0\00a0\00a0"; }
+      }
+      html {
+        font-size: clamp(15px, 0.25vw + 12px, 20px);
+
+        @media (min-width: 1920px) {
+          font-size: 23.5px;
+        }
+        @media (min-width: 2560px) {
+          font-size: 31.5px;
+        }
+        @media (min-width: 3840px) {
+          font-size: 50px;
+        }
+        &[data-theme="light"] {
+          --background: white;
+          --title: black;
+          --description: #555555;
+          --box: #f3f3f3;
+          --highlight: #d6d6d6;
+          --bloom: #333;
+          --link: #0366d6;
+          --error: #d32f2f;
+          --avatar-border: rgba(0, 0, 0, 0.35);
+          --warning: #ff8a2a;
+          --language-color: 50%;
+          --icon: #2979d7;
+
+          .icon-moon {
+            display: none;
+          }
+        }
+        &[data-theme="dark"] {
+          --background: black;
+          --title: white;
+          --description: #b5b5b5;
+          --box: #1a1a1a;
+          --highlight: #333;
+          --bloom: #ccc;
+          --link: #4ea1ff;
+          --error: #ff6b6b;
+          --avatar-border: rgba(255, 255, 255, 0.14);
+          --warning: #ff9d3c;
+          --language-color: 30%;
+          --icon: #6bb8ff;
+
+          .icon-sun {
+            display: none;
+          }
+        }
+        &[lang="ja"] .description {
+          font-weight: 600;
+        }
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        margin-block: 0;
+        background-color: var(--background);
+        font-family: "Inter", sans-serif;
+        color: var(--title);
+
+        &.loadingBarrier {
+          align-items: center;
+
+          .container {
+            filter: blur(0.375rem);
+            pointer-events: none;
+            user-select: none;
+          }
+        }
+      }
+      body,
+      .theme-button,
+      .translate-button,
+      .translate-menu,
+      .translate-menu button,
+      .description,
+      .profile img,
+      .repo-name a,
+      .repo-desc,
+      .repo-time,
+      .notice,
+      .notice-details,
+      .repo-badge {
+        transition: background-color .15s,
+                    color .15s,
+                    border-color .15s;
+      }
+      #loadingAssets {
+        position: fixed;
+        top: 50%;
+        left: 50%;
         transform: translate(-50%, -50%);
-      }
-    }
-    @keyframes dots {
-      0%   { content: "\00a0\00a0\00a0"; }
-      25%  { content: ".\00a0\00a0"; }
-      50%  { content: "..\00a0"; }
-      75%  { content: "..."; }
-      100% { content: "\00a0\00a0\00a0"; }
-    }
-    html {
-      font-size: clamp(15px, 0.25vw + 12px, 20px);
-
-      @media (min-width: 1920px) {
-        font-size: 23.5px;
-      }
-      @media (min-width: 2560px) {
-        font-size: 31.5px;
-      }
-      @media (min-width: 3840px) {
-        font-size: 50px;
-      }
-      &[data-theme="light"] {
-        --background: white;
-        --title: black;
-        --description: #555555;
-        --box: #f3f3f3;
-        --highlight: #d6d6d6;
-        --bloom: #333;
-        --link: #0366d6;
-        --error: #d32f2f;
-        --avatar-border: rgba(0, 0, 0, 0.35);
-        --warning: #ff8a2a;
-        --language-color: 50%;
-        --icon: #2979d7;
-
-        .icon-moon {
-          display: none;
-        }
-      }
-      &[data-theme="dark"] {
-        --background: black;
-        --title: white;
-        --description: #b5b5b5;
-        --box: #1a1a1a;
-        --highlight: #333;
-        --bloom: #ccc;
-        --link: #4ea1ff;
-        --error: #ff6b6b;
-        --avatar-border: rgba(255, 255, 255, 0.14);
-        --warning: #ff9d3c;
-        --language-color: 30%;
-        --icon: #6bb8ff;
-
-        .icon-sun {
-          display: none;
-        }
-      }
-      &[lang="ja"] .description {
+        z-index: var(--aboveALL);
+        padding: 1rem 1.5rem;
+        background-color: rgba(40, 55, 95, 0.60);
+        border-radius: 0.375rem;
+        font-family: sans-serif;
         font-weight: 600;
-      }
-    }
-    body {
-      display: flex;
-      justify-content: center;
-      margin-block: 0;
-      background-color: var(--background);
-      font-family: "Inter", sans-serif;
-      color: var(--title);
+        font-size: 1rem;
+        white-space: nowrap;
+        animation: loadingIn .5s forwards;
 
-      &.loadingBarrier {
-        align-items: center;
-
-        .container {
-          filter: blur(0.375rem);
-          pointer-events: none;
-          user-select: none;
+        &::after {
+          content: "";
+          animation: dots .5s steps(4, end) infinite;
         }
       }
-    }
-    body,
-    .theme-button,
-    .translate-button,
-    .translate-menu,
-    .translate-menu button,
-    .description,
-    .profile img,
-    .repo-name a,
-    .repo-desc,
-    .repo-time,
-    .notice,
-    .notice-details,
-    .repo-badge {
-      transition: background-color .15s,
-                  color .15s,
-                  border-color .15s;
-    }
-    #loadingAssets {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: var(--aboveALL);
-      padding: 1rem 1.5rem;
-      background-color: rgba(40, 55, 95, 0.60);
-      border-radius: 0.375rem;
-      font-family: sans-serif;
-      font-weight: 600;
-      font-size: 1rem;
-      white-space: nowrap;
-      animation: loadingIn .5s forwards;
-
-      &::after {
-        content: "";
-        animation: dots .5s steps(4, end) infinite;
-      }
-    }
-    .image-preview {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.85);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity .15s, visibility .15s;
-      z-index: var(--aboveALL);
-
-      img {
-        width: min(80vw, 35rem);
-        aspect-ratio: 1;
-        object-fit: cover;
-        border-radius: 50%;
-        transform: scale(.4);
-        transition: transform .15s;
-      }
-      &.show {
-        opacity: 1;
-        visibility: visible;
+      .image-preview {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.85);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .15s, visibility .15s;
+        z-index: var(--aboveALL);
 
         img {
-          transform: scale(1);
-        }
-      }
-    }
-    .message {
-      position: fixed;
-      top: 0;
-      left: 0;
-      color: var(--error);
-      font-size: 2rem;
-      font-weight: 700;
-      opacity: 0;
-      pointer-events: none;
-      z-index: var(--aboveALL);
-      transition: opacity .15s;
-      white-space: nowrap;
-
-      &.show {
-        opacity: 0.85;
-      }
-    }
- /* ================================
-    Container for Top and Bottom
-    ================================ */
-    .container {
-      display: flex;
-      flex-direction: column;
-      max-width: 34.4rem;
-      min-height: 100dvh;
-      transition: filter .5s;
-    }
- /* ================================
-    Top container
-    ================================ */
-    .top {
-      display: flex;
-      position: relative;
-      justify-content: center;
-    }
-    .theme-button, .translate-button {
-      display: flex;
-      padding: 0.5rem;
-      background-color: var(--box);
-      border: 0.0625rem solid var(--highlight);
-      border-radius: 0.5rem;
-
-      &:hover {
-        background-color: var(--highlight);
-        border-color: var(--title);
-        transform: scale(1.05);
-      }
-      svg {
-        width: 1.375rem;
-        height: 1.375rem;
-      }
-    }
-    .theme-button, .translate-button, .translate-menu button {
-      cursor: pointer;
-      color: var(--title);
-    }
-    .theme-button, .translate-dropdown {
-      position: absolute;
-      top: 0.625rem;
-    }
-    .theme-button { 
-      right: 0.625rem; 
-    }
-    .translate-dropdown {
-      left: 0.625rem;
-
-      &.open .translate-menu {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-        transition: opacity .15s, transform .15s;
-      }
-      &:not(.open) .translate-menu button {
-        cursor: default;
-      }
-    }
-    .translate-menu {
-      position: absolute;
-      top: calc(100% + 0.375rem);
-      left: 0;
-      margin-block: 0;
-      padding: 0.375rem;
-      width: 5rem;
-      list-style: none;
-      background-color: var(--box);
-      border: 0.0625rem solid var(--highlight);
-      border-radius: 0.5rem;
-      box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.15);
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-0.25rem);
-      transition: background-color .15s, border-color .15s,
-                  opacity .15s, transform .15s, visibility .15s;
-
-      button {
-        padding: 0.375rem 0.625rem;
-        background-color: transparent;
-        border: none;
-        border-radius: 0.375rem;
-        font-size: 1rem;
-        width: 100%;
-
-        &:hover, &:focus {
-          background-color: var(--highlight);
-        }
-        &[data-active] {
-          background-color: color-mix(in srgb, var(--link) 15%, transparent);
-          color: var(--link);
-          font-weight: 600;
-        }
-      }
-    }
-    .profile {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-
-      img {
-        margin-top: 0.625rem;
-        width: 7.5rem;
-        height: 7.5rem;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 0.25rem solid var(--avatar-border);
-        cursor: zoom-in;
-        transition: transform .15s, box-shadow .15s, border-color .15s;
-        animation: rainbowGlow 5s linear infinite;
-
-        &:not(.open):hover {
-          transform: scale(1.06);
-        }
-        &.open {
-          cursor: default;
-          transform: scale(1.06);
-        }
-      }
-      .name {
-        margin-block: 0;
-        line-height: 1.5;
-      }
-      .description {
-        text-align: center;
-        margin-block: 0;
-        margin-bottom: 0.0625rem;
-        color: var(--description);
-        font-style: italic;
-        font-weight: 500;
-        width: 90%;
-      }
-      .icons {
-        div {
-          display: flex;
-          justify-content: center;
-          gap: 1rem;
-          margin-top: 0.75rem;
-          flex-wrap: wrap;
-
-          &:first-child {
-            transform: translateX(-1rem);
-          }
-          &:last-child {
-            transform: translateX(1rem);
-          }
-        }
-        svg {
-          width: 4rem;
-          height: 4rem;
-          transition: transform .15s , filter .15s;
-        }
-        a {
+          width: min(80vw, 35rem);
+          aspect-ratio: 1;
+          object-fit: cover;
+          border-radius: 50%;
+          transform: scale(.4);
           transition: transform .15s;
+        }
+        &.show {
+          opacity: 1;
+          visibility: visible;
 
-          &:hover {
-            transform: translateY(-0.1875rem);
-
-            svg {
-              transform: scale(1.1);
-              filter: drop-shadow(0 0 1rem color-mix(in srgb, var(--icon) 60%, transparent));
-            }
+          img {
+            transform: scale(1);
           }
         }
       }
-    }
- /* ================================
-    Bottom container
-    ================================ */
-    .bottom {
-      display: flex;
-      flex-direction: column;
-    }
-    .repo-header {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 0.375rem;
-      margin-top: 0.75rem;
-      margin-bottom: 0.25rem;
-
-      svg {
-        display: flex;
-        width: 1.75rem;
-        height: 1.75rem;
-        border: 0.0625rem solid #fff;
-        border-radius: 50%;
-        transition: transform .15s , filter .15s;
-      }
-      p {
-        margin-block: 0;
-        font-weight: 500;
-        text-decoration: underline;
-        text-decoration-color: var(--warning);
-        text-decoration-thickness: 0.125rem;
-        text-underline-offset: 0.15rem;
-      }
-      a:hover svg {
-        transform: scale(1.2);
-        filter: drop-shadow(0 0 1rem color-mix(in srgb, var(--icon) 60%, transparent));
-      }
-      .repo-title {
-        margin-block: 0;
-        white-space: nowrap;
-      }
-    }
-    .repo-list {
-      .notice {
-        padding: 1rem;
-        border-radius: 0.375rem;
-        border: 0.0625rem solid var(--highlight);
-        background-color: var(--box);
-        text-align: center;
+      .message {
+        position: fixed;
+        top: 0;
+        left: 0;
         color: var(--error);
+        font-size: 2rem;
+        font-weight: 700;
+        opacity: 0;
+        pointer-events: none;
+        z-index: var(--aboveALL);
+        transition: opacity .15s;
+        white-space: nowrap;
 
-        .notice-message {
-          margin-block: 0;
-          margin-bottom: 0.5rem;
-          font-weight: 700;
-        }
-        .notice-details {
-          margin-block: 0;
-          color: var(--error);
-          font-weight: 600;
-          line-height: 1.5;
+        &.show {
+          opacity: 0.85;
         }
       }
-      .repo-div {
-        padding: 0.625rem;
-        border: 0.125rem solid var(--highlight);
-        border-radius: 0.375rem;
+  /* ================================
+      Container for Top and Bottom
+      ================================ */
+      .container {
+        display: flex;
+        flex-direction: column;
+        max-width: 34.4rem;
+        min-height: 100dvh;
+        transition: filter .5s;
+      }
+  /* ================================
+      Top container
+      ================================ */
+      .top {
+        display: flex;
+        position: relative;
+        justify-content: center;
+      }
+      .theme-button, .translate-button {
+        display: flex;
+        padding: 0.5rem;
         background-color: var(--box);
-        transition: background-color .15s, border-color .15s, transform .15s;
+        border: 0.0625rem solid var(--highlight);
+        border-radius: 0.5rem;
 
         &:hover {
-          transform: translateY(-0.125rem);
+          background-color: var(--highlight);
           border-color: var(--title);
-          box-shadow: 0 0.25rem 0.75rem var(--box);
+          transform: scale(1.05);
         }
-        .repo-name {
-          display: flex;
-          align-items: center;
-          gap: 0.375rem;
-          margin-block: 0;
+        svg {
+          width: 1.375rem;
+          height: 1.375rem;
+        }
+      }
+      .theme-button, .translate-button, .translate-menu button {
+        cursor: pointer;
+        color: var(--title);
+      }
+      .theme-button, .translate-dropdown {
+        position: absolute;
+        top: 0.625rem;
+      }
+      .theme-button { 
+        right: 0.625rem; 
+      }
+      .translate-dropdown {
+        left: 0.625rem;
+
+        &.open .translate-menu {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+          transition: opacity .15s, transform .15s;
+        }
+        &:not(.open) .translate-menu button {
+          cursor: default;
+        }
+      }
+      .translate-menu {
+        position: absolute;
+        top: calc(100% + 0.375rem);
+        left: 0;
+        margin-block: 0;
+        padding: 0.375rem;
+        width: 5rem;
+        list-style: none;
+        background-color: var(--box);
+        border: 0.0625rem solid var(--highlight);
+        border-radius: 0.5rem;
+        box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.15);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-0.25rem);
+        transition: background-color .15s, border-color .15s,
+                    opacity .15s, transform .15s, visibility .15s;
+
+        button {
+          padding: 0.375rem 0.625rem;
+          background-color: transparent;
+          border: none;
+          border-radius: 0.375rem;
           font-size: 1rem;
+          width: 100%;
 
-          a {
-            text-decoration: none;
-            color: var(--link);
-
-            &:hover {
-              text-decoration: underline;
-            }
-          }
-          .repo-time {
-            display: flex;
-            align-items: center;
-            line-height: 1;
-            gap: 0.25rem;
-            font-size: 0.75rem;
-            padding: 0.125rem 0.375rem;
-            border-radius: 50rem;
+          &:hover, &:focus {
             background-color: var(--highlight);
-            color: var(--description);
-
-            svg {
-              width: 0.875rem;
-              height: 0.875rem;
-            }
           }
-        }
-        .repo-desc {
-          margin-block: 0;
-          margin-top: 0.3125rem;
-          font-size: 0.8125rem;
-          font-weight: 600;
-          color: var(--description);
-          line-height: 1.5;
-        }
-        .repo-languages {
-          display: flex;
-          gap: 0.35rem;
-          margin-top: 0.5rem;
-
-          .repo-badge {
-            padding: 0.15rem 0.55rem;
-            border-radius: 0.5rem;
-            background-color: color-mix(in srgb, var(--language) var(--language-color), var(--box));
-            color: var(--bloom);
-            font-size: 0.75rem;
-            font-weight: 700;
-
-            &.csharp     { --language: var(--csharp); }
-            &.typescript { --language: var(--typescript); }
-            &.html       { --language: var(--html); }
-            &.rust       { --language: var(--rust); }
-            &.powershell { --language: var(--powershell); }
+          &[data-active] {
+            background-color: color-mix(in srgb, var(--link) 15%, transparent);
+            color: var(--link);
+            font-weight: 600;
           }
         }
       }
-    }
-  </style>
-</head>
-<body class="loadingBarrier">
-  <div id="loadingAssets">Preparing fonts</div>
-  <div class="image-preview" id="imagePreview">
-      <img src="Profile.avif" alt="">
-  </div>
-  <div class="container">
-    <div class="top">
-      <button class="theme-button">
-        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/>
-        </svg>
-        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 13.2A8 8 0 1 1 10.8 2.9 6.5 6.5 0 1 0 21 13.2z"/>
-        </svg>
-      </button>
-      <div class="translate-dropdown">
-        <button class="translate-button">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/>
+      .profile {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        img {
+          margin-top: 0.625rem;
+          width: 7.5rem;
+          height: 7.5rem;
+          border-radius: 50%;
+          object-fit: cover;
+          border: 0.25rem solid var(--avatar-border);
+          cursor: zoom-in;
+          transition: transform .15s, box-shadow .15s, border-color .15s;
+          animation: rainbowGlow 5s linear infinite;
+
+          &:not(.open):hover {
+            transform: scale(1.06);
+          }
+          &.open {
+            cursor: default;
+            transform: scale(1.06);
+          }
+        }
+        .name {
+          margin-block: 0;
+          line-height: 1.5;
+        }
+        .description {
+          text-align: center;
+          margin-block: 0;
+          margin-bottom: 0.0625rem;
+          color: var(--description);
+          font-style: italic;
+          font-weight: 500;
+          width: 90%;
+        }
+        .icons {
+          div {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 0.75rem;
+            flex-wrap: wrap;
+
+            &:first-child {
+              transform: translateX(-1rem);
+            }
+            &:last-child {
+              transform: translateX(1rem);
+            }
+          }
+          svg {
+            width: 4rem;
+            height: 4rem;
+            transition: transform .15s , filter .15s;
+          }
+          a {
+            transition: transform .15s;
+
+            &:hover {
+              transform: translateY(-0.1875rem);
+
+              svg {
+                transform: scale(1.1);
+                filter: drop-shadow(0 0 1rem color-mix(in srgb, var(--icon) 60%, transparent));
+              }
+            }
+          }
+        }
+      }
+  /* ================================
+      Bottom container
+      ================================ */
+      .bottom {
+        display: flex;
+        flex-direction: column;
+      }
+      .repo-header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.375rem;
+        margin-top: 0.75rem;
+        margin-bottom: 0.25rem;
+
+        svg {
+          display: flex;
+          width: 1.75rem;
+          height: 1.75rem;
+          border: 0.0625rem solid #fff;
+          border-radius: 50%;
+          transition: transform .15s , filter .15s;
+        }
+        p {
+          margin-block: 0;
+          font-weight: 500;
+          text-decoration: underline;
+          text-decoration-color: var(--warning);
+          text-decoration-thickness: 0.125rem;
+          text-underline-offset: 0.15rem;
+        }
+        a:hover svg {
+          transform: scale(1.2);
+          filter: drop-shadow(0 0 1rem color-mix(in srgb, var(--icon) 60%, transparent));
+        }
+        .repo-title {
+          margin-block: 0;
+          white-space: nowrap;
+        }
+      }
+      .repo-list {
+        .notice {
+          padding: 1rem;
+          border-radius: 0.375rem;
+          border: 0.0625rem solid var(--highlight);
+          background-color: var(--box);
+          text-align: center;
+          color: var(--error);
+
+          .notice-message {
+            margin-block: 0;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+          }
+          .notice-details {
+            margin-block: 0;
+            color: var(--error);
+            font-weight: 600;
+            line-height: 1.5;
+          }
+        }
+        .repo-div {
+          padding: 0.625rem;
+          border: 0.125rem solid var(--highlight);
+          border-radius: 0.375rem;
+          background-color: var(--box);
+          transition: background-color .15s, border-color .15s, transform .15s;
+
+          &:hover {
+            transform: translateY(-0.125rem);
+            border-color: var(--title);
+            box-shadow: 0 0.25rem 0.75rem var(--box);
+          }
+          .repo-name {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            margin-block: 0;
+            font-size: 1rem;
+
+            a {
+              text-decoration: none;
+              color: var(--link);
+
+              &:hover {
+                text-decoration: underline;
+              }
+            }
+            .repo-time {
+              display: flex;
+              align-items: center;
+              line-height: 1;
+              gap: 0.25rem;
+              font-size: 0.75rem;
+              padding: 0.125rem 0.375rem;
+              border-radius: 50rem;
+              background-color: var(--highlight);
+              color: var(--description);
+
+              svg {
+                width: 0.875rem;
+                height: 0.875rem;
+              }
+            }
+          }
+          .repo-desc {
+            margin-block: 0;
+            margin-top: 0.3125rem;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--description);
+            line-height: 1.5;
+          }
+          .repo-languages {
+            display: flex;
+            gap: 0.35rem;
+            margin-top: 0.5rem;
+
+            .repo-badge {
+              padding: 0.15rem 0.55rem;
+              border-radius: 0.5rem;
+              background-color: color-mix(in srgb, var(--language) var(--language-color), var(--box));
+              color: var(--bloom);
+              font-size: 0.75rem;
+              font-weight: 700;
+
+              &.csharp     { --language: var(--csharp); }
+              &.typescript { --language: var(--typescript); }
+              &.html       { --language: var(--html); }
+              &.rust       { --language: var(--rust); }
+              &.powershell { --language: var(--powershell); }
+            }
+          }
+        }
+      }
+    </style>
+  </head>
+  <body class="loadingBarrier">
+    <div id="loadingAssets">Preparing fonts</div>
+    <div class="image-preview" id="imagePreview">
+        <img src="Profile.avif" alt="">
+    </div>
+    <div class="container">
+      <div class="top">
+        <button class="theme-button">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 13.2A8 8 0 1 1 10.8 2.9 6.5 6.5 0 1 0 21 13.2z"/>
           </svg>
         </button>
-        <ul class="translate-menu">
-          <li><button data-lang="en" data-active>English</button></li>
-          <li><button data-lang="ja">日本語</button></li>
-        </ul>
-      </div>
-      <div class="profile">
-        <img src="Profile.avif">
-        <h1 class="name"
-          data-en="Shimizu Suzu"
-          data-ja="清水 すず"
-        ></h1>
-        <p class="description"
-          data-en="I make Windows automation stuff. Why? Because it gives me something to do... and I enjoy it. Probably."
-          data-ja="Windowsの自動化ツール作ってる。なんでって？やることができるから。しかも楽しい……たぶん。"
-        ></p>
-        <div class="icons">
-            <div>
-            <a href="https://dotnet.microsoft.com/en-us/languages/csharp" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 128 128">
-                <path fill="#9B4F96" d="M115.4 30.7L67.1 2.9c-.8-.5-1.9-.7-3.1-.7-1.2 0-2.3.3-3.1.7l-48 27.9c-1.7 1-2.9 3.5-2.9 5.4v55.7c0 1.1.2 2.4 1 3.5l106.8-62c-.6-1.2-1.5-2.1-2.4-2.7z"></path><path fill="#68217A" d="M10.7 95.3c.5.8 1.2 1.5 1.9 1.9l48.2 27.9c.8.5 1.9.7 3.1.7 1.2 0 2.3-.3 3.1-.7l48-27.9c1.7-1 2.9-3.5 2.9-5.4V36.1c0-.9-.1-1.9-.6-2.8l-106.6 62z"></path><path fill="#fff" d="M85.3 76.1C81.1 83.5 73.1 88.5 64 88.5c-13.5 0-24.5-11-24.5-24.5s11-24.5 24.5-24.5c9.1 0 17.1 5 21.3 12.5l13-7.5c-6.8-11.9-19.6-20-34.3-20-21.8 0-39.5 17.7-39.5 39.5s17.7 39.5 39.5 39.5c14.6 0 27.4-8 34.2-19.8l-12.9-7.6zM97 66.2l.9-4.3h-4.2v-4.7h5.1L100 51h4.9l-1.2 6.1h3.8l1.2-6.1h4.8l-1.2 6.1h2.4v4.7h-3.3l-.9 4.3h4.2v4.7h-5.1l-1.2 6h-4.9l1.2-6h-3.8l-1.2 6h-4.8l1.2-6h-2.4v-4.7H97zm4.8 0h3.8l.9-4.3h-3.8l-.9 4.3z"></path>
-              </svg>
-            </a>
-            <a href="https://dotnet.microsoft.com/en-us/learn/dotnet/what-is-dotnet" target="_blank" rel="noopener noreferrer">
-              <svg width="456" height="456" viewBox="0 0 456 456" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="228" cy="228" r="228" fill="#512BD4"/><path d="M81.2738 291.333C78.0496 291.333 75.309 290.259 73.052 288.11C70.795 285.906 69.6665 283.289 69.6665 280.259C69.6665 277.173 70.795 274.529 73.052 272.325C75.309 270.121 78.0496 269.019 81.2738 269.019C84.5518 269.019 87.3193 270.121 89.5763 272.325C91.887 274.529 93.0424 277.173 93.0424 280.259C93.0424 283.289 91.887 285.906 89.5763 288.11C87.3193 290.259 84.5518 291.333 81.2738 291.333Z" fill="white"/><path d="M210.167 289.515H189.209L133.994 202.406C132.597 200.202 131.441 197.915 130.528 195.546H130.044C130.474 198.081 130.689 203.508 130.689 211.827V289.515H112.149V171H134.477L187.839 256.043C190.096 259.57 191.547 261.994 192.192 263.316H192.514C191.977 260.176 191.708 254.859 191.708 247.365V171H210.167V289.515Z" fill="white"/><path d="M300.449 289.515H235.561V171H297.87V187.695H254.746V221.249H294.485V237.861H254.746V272.903H300.449V289.515Z" fill="white"/><path d="M392.667 187.695H359.457V289.515H340.272V187.695H307.143V171H392.667V187.695Z" fill="white"/>
-              </svg>
-            </a>
-            <a href="https://learn.microsoft.com/en-us/powershell/scripting/overview" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 128 128">
-                <linearGradient id="a" x1="96.306" x2="25.454" y1="35.144" y2="98.431" gradientTransform="matrix(1 0 0 -1 0 128)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#a9c8ff"></stop><stop offset="1" stop-color="#c7e6ff"></stop></linearGradient><path fill="url(#a)" fill-rule="evenodd" d="M7.2 110.5c-1.7 0-3.1-.7-4.1-1.9-1-1.2-1.3-2.9-.9-4.6l18.6-80.5c.8-3.4 4-6 7.4-6h92.6c1.7 0 3.1.7 4.1 1.9 1 1.2 1.3 2.9.9 4.6l-18.6 80.5c-.8 3.4-4 6-7.4 6H7.2z" clip-rule="evenodd" opacity=".8"></path><linearGradient id="b" x1="25.336" x2="94.569" y1="98.33" y2="36.847" gradientTransform="matrix(1 0 0 -1 0 128)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#2d4664"></stop><stop offset=".169" stop-color="#29405b"></stop><stop offset=".445" stop-color="#1e2f43"></stop><stop offset=".79" stop-color="#0c131b"></stop><stop offset="1"></stop></linearGradient><path fill="url(#b)" fill-rule="evenodd" d="M120.3 18.5H28.5c-2.9 0-5.7 2.3-6.4 5.2L3.7 104.3c-.7 2.9 1.1 5.2 4 5.2h91.8c2.9 0 5.7-2.3 6.4-5.2l18.4-80.5c.7-2.9-1.1-5.3-4-5.3z" clip-rule="evenodd"></path><path fill="#2C5591" fill-rule="evenodd" d="M64.2 88.3h22.3c2.6 0 4.7 2.2 4.7 4.9s-2.1 4.9-4.7 4.9H64.2c-2.6 0-4.7-2.2-4.7-4.9s2.1-4.9 4.7-4.9zM78.7 66.5c-.4.8-1.2 1.6-2.6 2.6L34.6 98.9c-2.3 1.6-5.5 1-7.3-1.4-1.7-2.4-1.3-5.7.9-7.3l37.4-27.1v-.6l-23.5-25c-1.9-2-1.7-5.3.4-7.4 2.2-2 5.5-2 7.4 0l28.2 30c1.7 1.9 1.8 4.5.6 6.4z" clip-rule="evenodd"></path><path fill="#FFF" fill-rule="evenodd" d="M77.6 65.5c-.4.8-1.2 1.6-2.6 2.6L33.6 97.9c-2.3 1.6-5.5 1-7.3-1.4-1.7-2.4-1.3-5.7.9-7.3l37.4-27.1v-.6l-23.5-25c-1.9-2-1.7-5.3.4-7.4 2.2-2 5.5-2 7.4 0l28.2 30c1.7 1.8 1.8 4.4.5 6.4zM63.5 87.8h22.3c2.6 0 4.7 2.1 4.7 4.6 0 2.6-2.1 4.6-4.7 4.6H63.5c-2.6 0-4.7-2.1-4.7-4.6 0-2.6 2.1-4.6 4.7-4.6z" clip-rule="evenodd"></path>
-              </svg>
-            </a>
-            <a href="https://rust-lang.org" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 128 128">
-                <circle cx="64" cy="64" r="64" fill="#fff"/><path d="M62.96.242c-.232.135-1.203 1.528-2.16 3.097-2.4 3.94-2.426 3.942-5.65.55-2.098-2.208-2.605-2.612-3.28-2.607-.44.002-.995.152-1.235.332-.24.18-.916 1.612-1.504 3.183-1.346 3.6-1.41 3.715-2.156 3.86-.46.086-1.343-.407-3.463-1.929-1.565-1.125-3.1-2.045-3.411-2.045-1.291 0-1.655.706-2.27 4.4-.78 4.697-.754 4.681-4.988 2.758-1.71-.776-3.33-1.41-3.603-1.41-.274 0-.792.293-1.15.652-.652.652-.653.655-.475 4.246l.178 3.595-.68.364c-.602.322-1.017.283-3.684-.348-3.48-.822-4.216-.8-4.92.15l-.516.693.692 2.964c.38 1.63.745 3.2.814 3.487.067.287-.05.746-.26 1.02-.348.448-.717.49-3.94.44-5.452-.086-5.761.382-3.51 5.3.718 1.56 1.305 2.98 1.305 3.15 0 .898-.717 1.224-3.794 1.727-1.722.28-3.218.51-3.326.51-.107 0-.43.235-.717.522-.937.936-.671 1.816 1.453 4.814 2.646 3.735 2.642 3.75-1.73 5.421-4.971 1.902-5.072 2.37-1.287 5.96 3.525 3.344 3.53 3.295-.461 5.804C.208 62.8.162 62.846.085 63.876c-.093 1.253-.071 1.275 3.538 3.48 3.57 2.18 3.57 2.246.067 5.56C-.078 76.48.038 77 5.013 78.877c4.347 1.64 4.353 1.66 1.702 5.394-1.502 2.117-1.981 3-1.981 3.653 0 1.223.637 1.535 4.44 2.174 3.206.54 3.92.857 3.92 1.741 0 .182-.588 1.612-1.307 3.177-2.236 4.87-1.981 5.275 3.31 5.275 4.93 0 4.799-.15 3.737 4.294-.8 3.35-.813 3.992-.088 4.715.554.556 1.6.494 4.87-.289 2.499-.596 2.937-.637 3.516-.328l.66.354-.177 3.594c-.178 3.593-.177 3.595.475 4.248.358.36.884.652 1.165.652.282 0 1.903-.63 3.604-1.404 4.22-1.916 4.194-1.932 4.973 2.75.617 3.711.977 4.4 2.294 4.4.327 0 1.83-.88 3.34-1.958 2.654-1.893 3.342-2.19 4.049-1.74.182.115.89 1.67 1.572 3.455 1.003 2.625 1.37 3.31 1.929 3.576 1.062.51 1.72.1 4.218-2.62 3.016-3.286 3.14-3.27 5.602.72 2.72 4.406 3.424 4.396 6.212-.089 2.402-3.864 2.374-3.862 5.621-.47 2.157 2.25 2.616 2.61 3.343 2.61.464 0 1.019-.175 1.23-.388.214-.213.92-1.786 1.568-3.496.649-1.71 1.321-3.2 1.495-3.31.687-.436 1.398-.13 4.048 1.752 1.56 1.108 3.028 1.96 3.377 1.96 1.296 0 1.764-.92 2.302-4.535.46-3.082.554-3.378 1.16-3.685.596-.302.954-.2 3.75 1.07 1.701.77 3.323 1.402 3.604 1.402.282 0 .816-.302 1.184-.672l.672-.67-.184-3.448c-.177-3.29-.16-3.468.364-3.943.54-.488.596-.486 3.615.204 3.656.835 4.338.857 5.025.17.671-.67.664-.818-.254-4.69-1.03-4.346-1.168-4.19 3.78-4.19 3.374 0 3.75-.049 4.18-.523.718-.793.547-1.702-.896-4.779-.729-1.55-1.32-2.96-1.315-3.135.024-.914.743-1.227 4.065-1.767 2.033-.329 3.553-.71 3.829-.96.923-.833.584-1.918-1.523-4.873-2.642-3.703-2.63-3.738 1.599-5.297 5.064-1.866 5.209-2.488 1.419-6.09-3.51-3.335-3.512-3.317.333-5.677 4.648-2.853 4.655-3.496.082-6.335-3.933-2.44-3.93-2.406-.405-5.753 3.78-3.593 3.678-4.063-1.295-5.965-4.388-1.679-4.402-1.72-1.735-5.38 1.588-2.18 1.982-2.903 1.982-3.65 0-1.306-.586-1.598-4.436-2.22-3.216-.52-3.924-.835-3.924-1.75 0-.174.588-1.574 1.307-3.113 1.406-3.013 1.604-4.22.808-4.94-.428-.387-1-.443-4.067-.392-3.208.054-3.618.008-4.063-.439-.486-.488-.48-.557.278-3.725.931-3.88.935-3.975.17-4.694-.777-.73-1.262-.718-4.826.121-2.597.612-3.027.653-3.617.337l-.67-.36.185-3.582.186-3.58-.67-.67c-.369-.37-.891-.67-1.163-.67-.27 0-1.884.64-3.583 1.421-2.838 1.306-3.143 1.393-3.757 1.072-.612-.32-.714-.637-1.237-3.829-.603-3.693-.977-4.412-2.288-4.412-.311 0-1.853.925-3.426 2.055-2.584 1.856-2.93 2.032-3.574 1.807-.533-.186-.843-.59-1.221-1.599-.28-.742-.817-2.172-1.194-3.177-.762-2.028-1.187-2.482-2.328-2.482-.637 0-1.213.458-3.28 2.604-3.25 3.375-3.261 3.374-5.65-.545C66.073 1.78 65.075.382 64.81.24c-.597-.32-1.3-.32-1.85.002m2.96 11.798c2.83 2.014 1.326 6.75-2.144 6.75-3.368 0-5.064-4.057-2.66-6.36 1.358-1.3 3.304-1.459 4.805-.39m-3.558 12.507c1.855.705 2.616.282 6.852-3.8l3.182-3.07 1.347.18c4.225.56 12.627 4.25 17.455 7.666 4.436 3.14 10.332 9.534 12.845 13.93l.537.942-2.38 5.364c-1.31 2.95-2.382 5.673-2.382 6.053 0 .878.576 2.267 1.13 2.726.234.195 2.457 1.265 4.939 2.378l4.51 2.025.178 1.148c.23 1.495.26 5.167.052 6.21l-.163.816h-2.575c-2.987 0-2.756-.267-2.918 3.396-.118 2.656-.76 4.124-2.22 5.075-2.377 1.551-6.304 1.27-7.97-.57-.255-.284-.752-1.705-1.105-3.16-1.03-4.254-2.413-6.64-5.193-8.965-.878-.733-1.595-1.418-1.595-1.522 0-.102.965-.915 2.145-1.803 4.298-3.24 6.77-7.012 7.04-10.747.519-7.126-5.158-13.767-13.602-15.92-2.002-.51-2.857-.526-27.624-.526-14.057 0-25.56-.092-25.56-.204 0-.263 3.125-3.295 4.965-4.816 5.054-4.178 11.618-7.465 18.417-9.22l2.35-.61 3.34 3.387c1.839 1.863 3.64 3.5 4.003 3.637M20.3 46.34c1.539 1.008 2.17 3.54 1.26 5.062-1.405 2.356-4.966 2.455-6.373.178-2.046-3.309 1.895-7.349 5.113-5.24m90.672.13c4.026 2.454.906 8.493-3.404 6.586-2.877-1.273-2.97-5.206-.155-6.64 1.174-.6 2.523-.579 3.56.053M32.163 61.5v15.02h-13.28l-.526-2.285c-1.036-4.5-1.472-9.156-1.211-12.969l.182-2.679 4.565-2.047c2.864-1.283 4.706-2.262 4.943-2.625 1.038-1.584.94-2.715-.518-5.933l-.68-1.502h6.523V61.5M70.39 47.132c2.843.74 4.345 2.245 4.349 4.355.002 1.55-.765 2.52-2.67 3.38-1.348.61-1.562.625-10.063.708l-8.686.084v-8.92h7.782c6.078 0 8.112.086 9.288.393m-2.934 21.554c1.41.392 3.076 1.616 3.93 2.888.898 1.337 1.423 3.076 2.667 8.836 1.05 4.87 1.727 6.46 3.62 8.532 2.345 2.566 1.8 2.466 13.514 2.466 5.61 0 10.198.09 10.198.2 0 .197-3.863 4.764-4.03 4.764-.048 0-2.066-.422-4.484-.939-6.829-1.458-7.075-1.287-8.642 6.032l-1.008 4.702-.91.448c-1.518.75-6.453 2.292-9.01 2.82-4.228.87-8.828 1.162-12.871.821-6.893-.585-16.02-3.259-16.377-4.8-.075-.327-.535-2.443-1.018-4.704-.485-2.26-1.074-4.404-1.31-4.764-1.13-1.724-2.318-1.83-7.547-.674-1.98.44-3.708.796-3.84.796-.248 0-3.923-4.249-3.923-4.535 0-.09 8.728-.194 19.396-.23l19.395-.066.07-6.89c.05-4.865-.018-6.997-.23-7.25-.234-.284-1.485-.358-6.011-.358H53.32v-8.36l6.597.001c3.626.002 7.02.12 7.539.264M37.57 100.02c3.084 1.88 1.605 6.804-2.043 6.8-3.74 0-5.127-4.88-1.94-6.826 1.055-.643 2.908-.63 3.983.026m56.48.206c1.512 1.108 2.015 3.413 1.079 4.95-2.46 4.034-8.612.827-6.557-3.419 1.01-2.085 3.695-2.837 5.478-1.53"></path>
-              </svg>
-            </a>
-          </div>
-          <div>
-            <a href="https://html.spec.whatwg.org/#background" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 128 128">
-                <path fill="#E44D26" d="M19.037 113.876L9.032 1.661h109.936l-10.016 112.198-45.019 12.48z"></path><path fill="#F16529" d="M64 116.8l36.378-10.086 8.559-95.878H64z"></path><path fill="#EBEBEB" d="M64 52.455H45.788L44.53 38.361H64V24.599H29.489l.33 3.692 3.382 37.927H64zm0 35.743l-.061.017-15.327-4.14-.979-10.975H33.816l1.928 21.609 28.193 7.826.063-.017z"></path><path fill="#fff" d="M63.952 52.455v13.763h16.947l-1.597 17.849-15.35 4.143v14.319l28.215-7.82.207-2.325 3.234-36.233.335-3.696h-3.708zm0-27.856v13.762h33.244l.276-3.092.628-6.978.329-3.692z"></path>
-              </svg>
-            </a>
-            <a href="https://www.w3.org/Style/CSS/Overview.en.html" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 128 128">
-                <path fill="#1572B6" d="M18.814 114.123L8.76 1.352h110.48l-10.064 112.754-45.243 12.543-45.119-12.526z"></path><path fill="#33A9DC" d="M64.001 117.062l36.559-10.136 8.601-96.354h-45.16v106.49z"></path><path fill="#fff" d="M64.001 51.429h18.302l1.264-14.163H64.001V23.435h34.682l-.332 3.711-3.4 38.114h-30.95V51.429z"></path><path fill="#EBEBEB" d="M64.083 87.349l-.061.018-15.403-4.159-.985-11.031H33.752l1.937 21.717 28.331 7.863.063-.018v-14.39z"></path><path fill="#fff" d="M81.127 64.675l-1.666 18.522-15.426 4.164v14.39l28.354-7.858.208-2.337 2.406-26.881H81.127z"></path><path fill="#EBEBEB" d="M64.048 23.435v13.831H30.64l-.277-3.108-.63-7.012-.331-3.711h34.646zm-.047 27.996v13.831H48.792l-.277-3.108-.631-7.012-.33-3.711h16.447z"></path>
-              </svg>
-            </a>
-            <a href="https://www.typescriptlang.org" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 128 128">
-                <path fill="#fff" d="M22.67 47h99.67v73.67H22.67z"></path><path data-name="original" fill="#007acc" d="M1.5 63.91v62.5h125v-125H1.5zm100.73-5a15.56 15.56 0 017.82 4.5 20.58 20.58 0 013 4c0 .16-5.4 3.81-8.69 5.85-.12.08-.6-.44-1.13-1.23a7.09 7.09 0 00-5.87-3.53c-3.79-.26-6.23 1.73-6.21 5a4.58 4.58 0 00.54 2.34c.83 1.73 2.38 2.76 7.24 4.86 8.95 3.85 12.78 6.39 15.16 10 2.66 4 3.25 10.46 1.45 15.24-2 5.2-6.9 8.73-13.83 9.9a38.32 38.32 0 01-9.52-.1 23 23 0 01-12.72-6.63c-1.15-1.27-3.39-4.58-3.25-4.82a9.34 9.34 0 011.15-.73L82 101l3.59-2.08.75 1.11a16.78 16.78 0 004.74 4.54c4 2.1 9.46 1.81 12.16-.62a5.43 5.43 0 00.69-6.92c-1-1.39-3-2.56-8.59-5-6.45-2.78-9.23-4.5-11.77-7.24a16.48 16.48 0 01-3.43-6.25 25 25 0 01-.22-8c1.33-6.23 6-10.58 12.82-11.87a31.66 31.66 0 019.49.26zm-29.34 5.24v5.12H56.66v46.23H45.15V69.26H28.88v-5a49.19 49.19 0 01.12-5.17C29.08 59 39 59 51 59h21.83z"></path>
-              </svg>
-            </a>
-            <a href="https://supabase.com" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 128 128">
-                <defs><linearGradient id="a" x1="53.974" x2="94.163" y1="54.974" y2="71.829" gradientTransform="translate(29.387 60.096) scale(1.1436)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#249361"></stop><stop offset="1" stop-color="#3ecf8e"></stop></linearGradient><linearGradient id="b" x1="36.156" x2="54.484" y1="30.578" y2="65.081" gradientTransform="translate(29.387 60.096) scale(1.1436)" gradientUnits="userSpaceOnUse"><stop offset="0"></stop><stop offset="1" stop-opacity="0"></stop></linearGradient></defs><path fill="url(#a)" d="M102.24 186.21c-3.267 4.117-9.904 1.862-9.977-3.397l-1.156-76.906h51.715c9.365 0 14.587 10.817 8.763 18.149z" transform="translate(-27.722 -60.338)"></path><path fill="url(#b)" fill-opacity=".2" d="M102.24 186.21c-3.267 4.117-9.904 1.862-9.977-3.397l-1.156-76.906h51.715c9.365 0 14.587 10.817 8.763 18.149z" transform="translate(-27.722 -60.338)"></path><path fill="#3ecf8e" d="M53.484 2.128c3.267-4.117 9.905-1.862 9.977 3.396l.508 76.907H12.902c-9.365 0-14.587-10.817-8.764-18.149z"></path>
-              </svg>
-            </a>
-          </div>
+        <div class="translate-dropdown">
+          <button class="translate-button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/>
+            </svg>
+          </button>
+          <ul class="translate-menu">
+            <li><button data-lang="en" data-active>English</button></li>
+            <li><button data-lang="ja">日本語</button></li>
+          </ul>
         </div>
-      </div>
-    </div>
-    <div class="bottom">
-      <div class="repo-header">
-        <h2 class="repo-title" 
-          data-en="Repositories" 
-          data-ja="リポジトリ"
-        ></h2>
-        <a href="https://github.com/KiyomizuSuzu" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 128 128">
-            <circle cx="64" cy="64" r="58" fill="#fff"/><g fill="#181616"><path fill-rule="evenodd" clip-rule="evenodd" d="M64 5.103c-33.347 0-60.388 27.035-60.388 60.388 0 26.682 17.303 49.317 41.297 57.303 3.017.56 4.125-1.31 4.125-2.905 0-1.44-.056-6.197-.082-11.243-16.8 3.653-20.345-7.125-20.345-7.125-2.747-6.98-6.705-8.836-6.705-8.836-5.48-3.748.413-3.67.413-3.67 6.063.425 9.257 6.223 9.257 6.223 5.386 9.23 14.127 6.562 17.573 5.02.542-3.903 2.107-6.568 3.834-8.076-13.413-1.525-27.514-6.704-27.514-29.843 0-6.593 2.36-11.98 6.223-16.21-.628-1.52-2.695-7.662.584-15.98 0 0 5.07-1.623 16.61 6.19C53.7 35 58.867 34.327 64 34.304c5.13.023 10.3.694 15.127 2.033 11.526-7.813 16.59-6.19 16.59-6.19 3.287 8.317 1.22 14.46.593 15.98 3.872 4.23 6.215 9.617 6.215 16.21 0 23.194-14.127 28.3-27.574 29.796 2.167 1.874 4.097 5.55 4.097 11.183 0 8.08-.07 14.583-.07 16.572 0 1.607 1.088 3.49 4.148 2.897 23.98-7.994 41.263-30.622 41.263-57.294C124.388 32.14 97.35 5.104 64 5.104z"></path><path d="M26.484 91.806c-.133.3-.605.39-1.035.185-.44-.196-.685-.605-.543-.906.13-.31.603-.395 1.04-.188.44.197.69.61.537.91zm2.446 2.729c-.287.267-.85.143-1.232-.28-.396-.42-.47-.983-.177-1.254.298-.266.844-.14 1.24.28.394.426.472.984.17 1.255zM31.312 98.012c-.37.258-.976.017-1.35-.52-.37-.538-.37-1.183.01-1.44.373-.258.97-.025 1.35.507.368.545.368 1.19-.01 1.452zm3.261 3.361c-.33.365-1.036.267-1.552-.23-.527-.487-.674-1.18-.343-1.544.336-.366 1.045-.264 1.564.23.527.486.686 1.18.333 1.543zm4.5 1.951c-.147.473-.825.688-1.51.486-.683-.207-1.13-.76-.99-1.238.14-.477.823-.7 1.512-.485.683.206 1.13.756.988 1.237zm4.943.361c.017.498-.563.91-1.28.92-.723.017-1.308-.387-1.315-.877 0-.503.568-.91 1.29-.924.717-.013 1.306.387 1.306.88zm4.598-.782c.086.485-.413.984-1.126 1.117-.7.13-1.35-.172-1.44-.653-.086-.498.422-.997 1.122-1.126.714-.123 1.354.17 1.444.663zm0 0"></path></g>
-          </svg>
-        </a>
-        <p
-          data-en="Actual time spent may differ significantly."
-          data-ja="実際にかかる時間は、大きく異なる場合があります。"  
-        ></p>
-      </div>
-      <div class="repo-list" id="repoList">
-        <div class="notice">
-          <h3 class="notice-message"
-            data-en="Unable to Load Repositories" 
-            data-ja="リポジトリを読み込めませんでした"
-          ></h3>
-          <p class="notice-details"
-            data-en="Database might be offline, this isn't an issue on your side." 
-            data-ja="データベースがオフラインかもしれない。これはあなたの問題ではありません。"
+        <div class="profile">
+          <img src="Profile.avif">
+          <h1 class="name"
+            data-en="Shimizu Suzu"
+            data-ja="清水 すず"
+          ></h1>
+          <p class="description"
+            data-en="I make Windows automation stuff. Why? Because it gives me something to do... and I enjoy it. Probably."
+            data-ja="Windowsの自動化ツール作ってる。なんでって？やることができるから。しかも楽しい……たぶん。"
           ></p>
-        </div>
-      </div>
-    </div>
-  </div>
-</body>
-<script type="module">
-  /**
-  * @typedef {{
-  *   Link: string;
-  *   Name: string;
-  *   Details: string | null;
-  *   Details_ja: string | null;
-  *   EstimatedTime: number | null;
-  *   Languages: string[] | null;
-  * }} Repo
-  */
-  import {createClient} from "https://esm.sh/@supabase/supabase-js@2";
-  const supabaseUrl = "https://iardacsuwzgfjsdefqdj.supabase.co";
-  const supabaseKey = "sb_publishable_aqniMrzHTzhEWxbSpBopeA_4SyoQ8mJ";
-  const supabaseClient = createClient(supabaseUrl, supabaseKey);
-  /** @type {Repo[]} */
-  let cachedRepos = [];
-  /** @param {Repo[]} repos */
-  function renderRepositories(repos) {
-    if (repos.length === 0) {
-      return;
-    }
-    else {
-      const lang = document.documentElement.lang;
-      const repoList = document.getElementById("repoList");
-      repoList.innerHTML = repos.map(repo => {
-        const details = (lang === 'ja' && repo.Details_ja) ? repo.Details_ja : repo.Details;
-        const unit = lang === 'ja' ? '時間' : (repo.EstimatedTime === 1 ? 'Hour' : 'Hours');
-        const hiddenLanguages = ["PLpgSQL"];
-        return `
-          <div class="repo-div">
-            <h3 class="repo-name">
-              <a href="${repo.Link}" target="_blank">${repo.Name}</a>
-              <span class="repo-time">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <path d="M12 6v6l4 2"></path>
-                </svg>${repo.EstimatedTime} ${unit}
-              </span>
-            </h3>
-            <p class="repo-desc">${details ?? ""}</p>
-            <div class="repo-languages">
-              ${(repo.Languages ?? []).filter(language => !hiddenLanguages.includes(language)).map(language => {
-                  const ClassName =
-                    language === "C#" ? "csharp" :
-                    language.toLowerCase().replace(/[ +.#]/g, "-");
-                  return `
-                    <span class="repo-badge ${ClassName}">
-                      ${language}
-                    </span>
-                  `;
-                })
-                .join("")}
+          <div class="icons">
+              <div>
+              <a href="https://dotnet.microsoft.com/en-us/languages/csharp" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 128 128">
+                  <path fill="#9B4F96" d="M115.4 30.7L67.1 2.9c-.8-.5-1.9-.7-3.1-.7-1.2 0-2.3.3-3.1.7l-48 27.9c-1.7 1-2.9 3.5-2.9 5.4v55.7c0 1.1.2 2.4 1 3.5l106.8-62c-.6-1.2-1.5-2.1-2.4-2.7z"></path><path fill="#68217A" d="M10.7 95.3c.5.8 1.2 1.5 1.9 1.9l48.2 27.9c.8.5 1.9.7 3.1.7 1.2 0 2.3-.3 3.1-.7l48-27.9c1.7-1 2.9-3.5 2.9-5.4V36.1c0-.9-.1-1.9-.6-2.8l-106.6 62z"></path><path fill="#fff" d="M85.3 76.1C81.1 83.5 73.1 88.5 64 88.5c-13.5 0-24.5-11-24.5-24.5s11-24.5 24.5-24.5c9.1 0 17.1 5 21.3 12.5l13-7.5c-6.8-11.9-19.6-20-34.3-20-21.8 0-39.5 17.7-39.5 39.5s17.7 39.5 39.5 39.5c14.6 0 27.4-8 34.2-19.8l-12.9-7.6zM97 66.2l.9-4.3h-4.2v-4.7h5.1L100 51h4.9l-1.2 6.1h3.8l1.2-6.1h4.8l-1.2 6.1h2.4v4.7h-3.3l-.9 4.3h4.2v4.7h-5.1l-1.2 6h-4.9l1.2-6h-3.8l-1.2 6h-4.8l1.2-6h-2.4v-4.7H97zm4.8 0h3.8l.9-4.3h-3.8l-.9 4.3z"></path>
+                </svg>
+              </a>
+              <a href="https://dotnet.microsoft.com/en-us/learn/dotnet/what-is-dotnet" target="_blank" rel="noopener noreferrer">
+                <svg width="456" height="456" viewBox="0 0 456 456" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="228" cy="228" r="228" fill="#512BD4"/><path d="M81.2738 291.333C78.0496 291.333 75.309 290.259 73.052 288.11C70.795 285.906 69.6665 283.289 69.6665 280.259C69.6665 277.173 70.795 274.529 73.052 272.325C75.309 270.121 78.0496 269.019 81.2738 269.019C84.5518 269.019 87.3193 270.121 89.5763 272.325C91.887 274.529 93.0424 277.173 93.0424 280.259C93.0424 283.289 91.887 285.906 89.5763 288.11C87.3193 290.259 84.5518 291.333 81.2738 291.333Z" fill="white"/><path d="M210.167 289.515H189.209L133.994 202.406C132.597 200.202 131.441 197.915 130.528 195.546H130.044C130.474 198.081 130.689 203.508 130.689 211.827V289.515H112.149V171H134.477L187.839 256.043C190.096 259.57 191.547 261.994 192.192 263.316H192.514C191.977 260.176 191.708 254.859 191.708 247.365V171H210.167V289.515Z" fill="white"/><path d="M300.449 289.515H235.561V171H297.87V187.695H254.746V221.249H294.485V237.861H254.746V272.903H300.449V289.515Z" fill="white"/><path d="M392.667 187.695H359.457V289.515H340.272V187.695H307.143V171H392.667V187.695Z" fill="white"/>
+                </svg>
+              </a>
+              <a href="https://learn.microsoft.com/en-us/powershell/scripting/overview" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 128 128">
+                  <linearGradient id="a" x1="96.306" x2="25.454" y1="35.144" y2="98.431" gradientTransform="matrix(1 0 0 -1 0 128)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#a9c8ff"></stop><stop offset="1" stop-color="#c7e6ff"></stop></linearGradient><path fill="url(#a)" fill-rule="evenodd" d="M7.2 110.5c-1.7 0-3.1-.7-4.1-1.9-1-1.2-1.3-2.9-.9-4.6l18.6-80.5c.8-3.4 4-6 7.4-6h92.6c1.7 0 3.1.7 4.1 1.9 1 1.2 1.3 2.9.9 4.6l-18.6 80.5c-.8 3.4-4 6-7.4 6H7.2z" clip-rule="evenodd" opacity=".8"></path><linearGradient id="b" x1="25.336" x2="94.569" y1="98.33" y2="36.847" gradientTransform="matrix(1 0 0 -1 0 128)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#2d4664"></stop><stop offset=".169" stop-color="#29405b"></stop><stop offset=".445" stop-color="#1e2f43"></stop><stop offset=".79" stop-color="#0c131b"></stop><stop offset="1"></stop></linearGradient><path fill="url(#b)" fill-rule="evenodd" d="M120.3 18.5H28.5c-2.9 0-5.7 2.3-6.4 5.2L3.7 104.3c-.7 2.9 1.1 5.2 4 5.2h91.8c2.9 0 5.7-2.3 6.4-5.2l18.4-80.5c.7-2.9-1.1-5.3-4-5.3z" clip-rule="evenodd"></path><path fill="#2C5591" fill-rule="evenodd" d="M64.2 88.3h22.3c2.6 0 4.7 2.2 4.7 4.9s-2.1 4.9-4.7 4.9H64.2c-2.6 0-4.7-2.2-4.7-4.9s2.1-4.9 4.7-4.9zM78.7 66.5c-.4.8-1.2 1.6-2.6 2.6L34.6 98.9c-2.3 1.6-5.5 1-7.3-1.4-1.7-2.4-1.3-5.7.9-7.3l37.4-27.1v-.6l-23.5-25c-1.9-2-1.7-5.3.4-7.4 2.2-2 5.5-2 7.4 0l28.2 30c1.7 1.9 1.8 4.5.6 6.4z" clip-rule="evenodd"></path><path fill="#FFF" fill-rule="evenodd" d="M77.6 65.5c-.4.8-1.2 1.6-2.6 2.6L33.6 97.9c-2.3 1.6-5.5 1-7.3-1.4-1.7-2.4-1.3-5.7.9-7.3l37.4-27.1v-.6l-23.5-25c-1.9-2-1.7-5.3.4-7.4 2.2-2 5.5-2 7.4 0l28.2 30c1.7 1.8 1.8 4.4.5 6.4zM63.5 87.8h22.3c2.6 0 4.7 2.1 4.7 4.6 0 2.6-2.1 4.6-4.7 4.6H63.5c-2.6 0-4.7-2.1-4.7-4.6 0-2.6 2.1-4.6 4.7-4.6z" clip-rule="evenodd"></path>
+                </svg>
+              </a>
+              <a href="https://rust-lang.org" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 128 128">
+                  <circle cx="64" cy="64" r="64" fill="#fff"/><path d="M62.96.242c-.232.135-1.203 1.528-2.16 3.097-2.4 3.94-2.426 3.942-5.65.55-2.098-2.208-2.605-2.612-3.28-2.607-.44.002-.995.152-1.235.332-.24.18-.916 1.612-1.504 3.183-1.346 3.6-1.41 3.715-2.156 3.86-.46.086-1.343-.407-3.463-1.929-1.565-1.125-3.1-2.045-3.411-2.045-1.291 0-1.655.706-2.27 4.4-.78 4.697-.754 4.681-4.988 2.758-1.71-.776-3.33-1.41-3.603-1.41-.274 0-.792.293-1.15.652-.652.652-.653.655-.475 4.246l.178 3.595-.68.364c-.602.322-1.017.283-3.684-.348-3.48-.822-4.216-.8-4.92.15l-.516.693.692 2.964c.38 1.63.745 3.2.814 3.487.067.287-.05.746-.26 1.02-.348.448-.717.49-3.94.44-5.452-.086-5.761.382-3.51 5.3.718 1.56 1.305 2.98 1.305 3.15 0 .898-.717 1.224-3.794 1.727-1.722.28-3.218.51-3.326.51-.107 0-.43.235-.717.522-.937.936-.671 1.816 1.453 4.814 2.646 3.735 2.642 3.75-1.73 5.421-4.971 1.902-5.072 2.37-1.287 5.96 3.525 3.344 3.53 3.295-.461 5.804C.208 62.8.162 62.846.085 63.876c-.093 1.253-.071 1.275 3.538 3.48 3.57 2.18 3.57 2.246.067 5.56C-.078 76.48.038 77 5.013 78.877c4.347 1.64 4.353 1.66 1.702 5.394-1.502 2.117-1.981 3-1.981 3.653 0 1.223.637 1.535 4.44 2.174 3.206.54 3.92.857 3.92 1.741 0 .182-.588 1.612-1.307 3.177-2.236 4.87-1.981 5.275 3.31 5.275 4.93 0 4.799-.15 3.737 4.294-.8 3.35-.813 3.992-.088 4.715.554.556 1.6.494 4.87-.289 2.499-.596 2.937-.637 3.516-.328l.66.354-.177 3.594c-.178 3.593-.177 3.595.475 4.248.358.36.884.652 1.165.652.282 0 1.903-.63 3.604-1.404 4.22-1.916 4.194-1.932 4.973 2.75.617 3.711.977 4.4 2.294 4.4.327 0 1.83-.88 3.34-1.958 2.654-1.893 3.342-2.19 4.049-1.74.182.115.89 1.67 1.572 3.455 1.003 2.625 1.37 3.31 1.929 3.576 1.062.51 1.72.1 4.218-2.62 3.016-3.286 3.14-3.27 5.602.72 2.72 4.406 3.424 4.396 6.212-.089 2.402-3.864 2.374-3.862 5.621-.47 2.157 2.25 2.616 2.61 3.343 2.61.464 0 1.019-.175 1.23-.388.214-.213.92-1.786 1.568-3.496.649-1.71 1.321-3.2 1.495-3.31.687-.436 1.398-.13 4.048 1.752 1.56 1.108 3.028 1.96 3.377 1.96 1.296 0 1.764-.92 2.302-4.535.46-3.082.554-3.378 1.16-3.685.596-.302.954-.2 3.75 1.07 1.701.77 3.323 1.402 3.604 1.402.282 0 .816-.302 1.184-.672l.672-.67-.184-3.448c-.177-3.29-.16-3.468.364-3.943.54-.488.596-.486 3.615.204 3.656.835 4.338.857 5.025.17.671-.67.664-.818-.254-4.69-1.03-4.346-1.168-4.19 3.78-4.19 3.374 0 3.75-.049 4.18-.523.718-.793.547-1.702-.896-4.779-.729-1.55-1.32-2.96-1.315-3.135.024-.914.743-1.227 4.065-1.767 2.033-.329 3.553-.71 3.829-.96.923-.833.584-1.918-1.523-4.873-2.642-3.703-2.63-3.738 1.599-5.297 5.064-1.866 5.209-2.488 1.419-6.09-3.51-3.335-3.512-3.317.333-5.677 4.648-2.853 4.655-3.496.082-6.335-3.933-2.44-3.93-2.406-.405-5.753 3.78-3.593 3.678-4.063-1.295-5.965-4.388-1.679-4.402-1.72-1.735-5.38 1.588-2.18 1.982-2.903 1.982-3.65 0-1.306-.586-1.598-4.436-2.22-3.216-.52-3.924-.835-3.924-1.75 0-.174.588-1.574 1.307-3.113 1.406-3.013 1.604-4.22.808-4.94-.428-.387-1-.443-4.067-.392-3.208.054-3.618.008-4.063-.439-.486-.488-.48-.557.278-3.725.931-3.88.935-3.975.17-4.694-.777-.73-1.262-.718-4.826.121-2.597.612-3.027.653-3.617.337l-.67-.36.185-3.582.186-3.58-.67-.67c-.369-.37-.891-.67-1.163-.67-.27 0-1.884.64-3.583 1.421-2.838 1.306-3.143 1.393-3.757 1.072-.612-.32-.714-.637-1.237-3.829-.603-3.693-.977-4.412-2.288-4.412-.311 0-1.853.925-3.426 2.055-2.584 1.856-2.93 2.032-3.574 1.807-.533-.186-.843-.59-1.221-1.599-.28-.742-.817-2.172-1.194-3.177-.762-2.028-1.187-2.482-2.328-2.482-.637 0-1.213.458-3.28 2.604-3.25 3.375-3.261 3.374-5.65-.545C66.073 1.78 65.075.382 64.81.24c-.597-.32-1.3-.32-1.85.002m2.96 11.798c2.83 2.014 1.326 6.75-2.144 6.75-3.368 0-5.064-4.057-2.66-6.36 1.358-1.3 3.304-1.459 4.805-.39m-3.558 12.507c1.855.705 2.616.282 6.852-3.8l3.182-3.07 1.347.18c4.225.56 12.627 4.25 17.455 7.666 4.436 3.14 10.332 9.534 12.845 13.93l.537.942-2.38 5.364c-1.31 2.95-2.382 5.673-2.382 6.053 0 .878.576 2.267 1.13 2.726.234.195 2.457 1.265 4.939 2.378l4.51 2.025.178 1.148c.23 1.495.26 5.167.052 6.21l-.163.816h-2.575c-2.987 0-2.756-.267-2.918 3.396-.118 2.656-.76 4.124-2.22 5.075-2.377 1.551-6.304 1.27-7.97-.57-.255-.284-.752-1.705-1.105-3.16-1.03-4.254-2.413-6.64-5.193-8.965-.878-.733-1.595-1.418-1.595-1.522 0-.102.965-.915 2.145-1.803 4.298-3.24 6.77-7.012 7.04-10.747.519-7.126-5.158-13.767-13.602-15.92-2.002-.51-2.857-.526-27.624-.526-14.057 0-25.56-.092-25.56-.204 0-.263 3.125-3.295 4.965-4.816 5.054-4.178 11.618-7.465 18.417-9.22l2.35-.61 3.34 3.387c1.839 1.863 3.64 3.5 4.003 3.637M20.3 46.34c1.539 1.008 2.17 3.54 1.26 5.062-1.405 2.356-4.966 2.455-6.373.178-2.046-3.309 1.895-7.349 5.113-5.24m90.672.13c4.026 2.454.906 8.493-3.404 6.586-2.877-1.273-2.97-5.206-.155-6.64 1.174-.6 2.523-.579 3.56.053M32.163 61.5v15.02h-13.28l-.526-2.285c-1.036-4.5-1.472-9.156-1.211-12.969l.182-2.679 4.565-2.047c2.864-1.283 4.706-2.262 4.943-2.625 1.038-1.584.94-2.715-.518-5.933l-.68-1.502h6.523V61.5M70.39 47.132c2.843.74 4.345 2.245 4.349 4.355.002 1.55-.765 2.52-2.67 3.38-1.348.61-1.562.625-10.063.708l-8.686.084v-8.92h7.782c6.078 0 8.112.086 9.288.393m-2.934 21.554c1.41.392 3.076 1.616 3.93 2.888.898 1.337 1.423 3.076 2.667 8.836 1.05 4.87 1.727 6.46 3.62 8.532 2.345 2.566 1.8 2.466 13.514 2.466 5.61 0 10.198.09 10.198.2 0 .197-3.863 4.764-4.03 4.764-.048 0-2.066-.422-4.484-.939-6.829-1.458-7.075-1.287-8.642 6.032l-1.008 4.702-.91.448c-1.518.75-6.453 2.292-9.01 2.82-4.228.87-8.828 1.162-12.871.821-6.893-.585-16.02-3.259-16.377-4.8-.075-.327-.535-2.443-1.018-4.704-.485-2.26-1.074-4.404-1.31-4.764-1.13-1.724-2.318-1.83-7.547-.674-1.98.44-3.708.796-3.84.796-.248 0-3.923-4.249-3.923-4.535 0-.09 8.728-.194 19.396-.23l19.395-.066.07-6.89c.05-4.865-.018-6.997-.23-7.25-.234-.284-1.485-.358-6.011-.358H53.32v-8.36l6.597.001c3.626.002 7.02.12 7.539.264M37.57 100.02c3.084 1.88 1.605 6.804-2.043 6.8-3.74 0-5.127-4.88-1.94-6.826 1.055-.643 2.908-.63 3.983.026m56.48.206c1.512 1.108 2.015 3.413 1.079 4.95-2.46 4.034-8.612.827-6.557-3.419 1.01-2.085 3.695-2.837 5.478-1.53"></path>
+                </svg>
+              </a>
+            </div>
+            <div>
+              <a href="https://html.spec.whatwg.org/#background" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 128 128">
+                  <path fill="#E44D26" d="M19.037 113.876L9.032 1.661h109.936l-10.016 112.198-45.019 12.48z"></path><path fill="#F16529" d="M64 116.8l36.378-10.086 8.559-95.878H64z"></path><path fill="#EBEBEB" d="M64 52.455H45.788L44.53 38.361H64V24.599H29.489l.33 3.692 3.382 37.927H64zm0 35.743l-.061.017-15.327-4.14-.979-10.975H33.816l1.928 21.609 28.193 7.826.063-.017z"></path><path fill="#fff" d="M63.952 52.455v13.763h16.947l-1.597 17.849-15.35 4.143v14.319l28.215-7.82.207-2.325 3.234-36.233.335-3.696h-3.708zm0-27.856v13.762h33.244l.276-3.092.628-6.978.329-3.692z"></path>
+                </svg>
+              </a>
+              <a href="https://www.w3.org/Style/CSS/Overview.en.html" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 128 128">
+                  <path fill="#1572B6" d="M18.814 114.123L8.76 1.352h110.48l-10.064 112.754-45.243 12.543-45.119-12.526z"></path><path fill="#33A9DC" d="M64.001 117.062l36.559-10.136 8.601-96.354h-45.16v106.49z"></path><path fill="#fff" d="M64.001 51.429h18.302l1.264-14.163H64.001V23.435h34.682l-.332 3.711-3.4 38.114h-30.95V51.429z"></path><path fill="#EBEBEB" d="M64.083 87.349l-.061.018-15.403-4.159-.985-11.031H33.752l1.937 21.717 28.331 7.863.063-.018v-14.39z"></path><path fill="#fff" d="M81.127 64.675l-1.666 18.522-15.426 4.164v14.39l28.354-7.858.208-2.337 2.406-26.881H81.127z"></path><path fill="#EBEBEB" d="M64.048 23.435v13.831H30.64l-.277-3.108-.63-7.012-.331-3.711h34.646zm-.047 27.996v13.831H48.792l-.277-3.108-.631-7.012-.33-3.711h16.447z"></path>
+                </svg>
+              </a>
+              <a href="https://www.typescriptlang.org" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 128 128">
+                  <path fill="#fff" d="M22.67 47h99.67v73.67H22.67z"></path><path data-name="original" fill="#007acc" d="M1.5 63.91v62.5h125v-125H1.5zm100.73-5a15.56 15.56 0 017.82 4.5 20.58 20.58 0 013 4c0 .16-5.4 3.81-8.69 5.85-.12.08-.6-.44-1.13-1.23a7.09 7.09 0 00-5.87-3.53c-3.79-.26-6.23 1.73-6.21 5a4.58 4.58 0 00.54 2.34c.83 1.73 2.38 2.76 7.24 4.86 8.95 3.85 12.78 6.39 15.16 10 2.66 4 3.25 10.46 1.45 15.24-2 5.2-6.9 8.73-13.83 9.9a38.32 38.32 0 01-9.52-.1 23 23 0 01-12.72-6.63c-1.15-1.27-3.39-4.58-3.25-4.82a9.34 9.34 0 011.15-.73L82 101l3.59-2.08.75 1.11a16.78 16.78 0 004.74 4.54c4 2.1 9.46 1.81 12.16-.62a5.43 5.43 0 00.69-6.92c-1-1.39-3-2.56-8.59-5-6.45-2.78-9.23-4.5-11.77-7.24a16.48 16.48 0 01-3.43-6.25 25 25 0 01-.22-8c1.33-6.23 6-10.58 12.82-11.87a31.66 31.66 0 019.49.26zm-29.34 5.24v5.12H56.66v46.23H45.15V69.26H28.88v-5a49.19 49.19 0 01.12-5.17C29.08 59 39 59 51 59h21.83z"></path>
+                </svg>
+              </a>
+              <a href="https://supabase.com" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 128 128">
+                  <defs><linearGradient id="a" x1="53.974" x2="94.163" y1="54.974" y2="71.829" gradientTransform="translate(29.387 60.096) scale(1.1436)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#249361"></stop><stop offset="1" stop-color="#3ecf8e"></stop></linearGradient><linearGradient id="b" x1="36.156" x2="54.484" y1="30.578" y2="65.081" gradientTransform="translate(29.387 60.096) scale(1.1436)" gradientUnits="userSpaceOnUse"><stop offset="0"></stop><stop offset="1" stop-opacity="0"></stop></linearGradient></defs><path fill="url(#a)" d="M102.24 186.21c-3.267 4.117-9.904 1.862-9.977-3.397l-1.156-76.906h51.715c9.365 0 14.587 10.817 8.763 18.149z" transform="translate(-27.722 -60.338)"></path><path fill="url(#b)" fill-opacity=".2" d="M102.24 186.21c-3.267 4.117-9.904 1.862-9.977-3.397l-1.156-76.906h51.715c9.365 0 14.587 10.817 8.763 18.149z" transform="translate(-27.722 -60.338)"></path><path fill="#3ecf8e" d="M53.484 2.128c3.267-4.117 9.905-1.862 9.977 3.396l.508 76.907H12.902c-9.365 0-14.587-10.817-8.764-18.149z"></path>
+                </svg>
+              </a>
             </div>
           </div>
-        `;
-      }).join("");
+        </div>
+      </div>
+      <div class="bottom">
+        <div class="repo-header">
+          <h2 class="repo-title" 
+            data-en="Repositories" 
+            data-ja="リポジトリ"
+          ></h2>
+          <a href="https://github.com/KiyomizuSuzu" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 128 128">
+              <circle cx="64" cy="64" r="58" fill="#fff"/><g fill="#181616"><path fill-rule="evenodd" clip-rule="evenodd" d="M64 5.103c-33.347 0-60.388 27.035-60.388 60.388 0 26.682 17.303 49.317 41.297 57.303 3.017.56 4.125-1.31 4.125-2.905 0-1.44-.056-6.197-.082-11.243-16.8 3.653-20.345-7.125-20.345-7.125-2.747-6.98-6.705-8.836-6.705-8.836-5.48-3.748.413-3.67.413-3.67 6.063.425 9.257 6.223 9.257 6.223 5.386 9.23 14.127 6.562 17.573 5.02.542-3.903 2.107-6.568 3.834-8.076-13.413-1.525-27.514-6.704-27.514-29.843 0-6.593 2.36-11.98 6.223-16.21-.628-1.52-2.695-7.662.584-15.98 0 0 5.07-1.623 16.61 6.19C53.7 35 58.867 34.327 64 34.304c5.13.023 10.3.694 15.127 2.033 11.526-7.813 16.59-6.19 16.59-6.19 3.287 8.317 1.22 14.46.593 15.98 3.872 4.23 6.215 9.617 6.215 16.21 0 23.194-14.127 28.3-27.574 29.796 2.167 1.874 4.097 5.55 4.097 11.183 0 8.08-.07 14.583-.07 16.572 0 1.607 1.088 3.49 4.148 2.897 23.98-7.994 41.263-30.622 41.263-57.294C124.388 32.14 97.35 5.104 64 5.104z"></path><path d="M26.484 91.806c-.133.3-.605.39-1.035.185-.44-.196-.685-.605-.543-.906.13-.31.603-.395 1.04-.188.44.197.69.61.537.91zm2.446 2.729c-.287.267-.85.143-1.232-.28-.396-.42-.47-.983-.177-1.254.298-.266.844-.14 1.24.28.394.426.472.984.17 1.255zM31.312 98.012c-.37.258-.976.017-1.35-.52-.37-.538-.37-1.183.01-1.44.373-.258.97-.025 1.35.507.368.545.368 1.19-.01 1.452zm3.261 3.361c-.33.365-1.036.267-1.552-.23-.527-.487-.674-1.18-.343-1.544.336-.366 1.045-.264 1.564.23.527.486.686 1.18.333 1.543zm4.5 1.951c-.147.473-.825.688-1.51.486-.683-.207-1.13-.76-.99-1.238.14-.477.823-.7 1.512-.485.683.206 1.13.756.988 1.237zm4.943.361c.017.498-.563.91-1.28.92-.723.017-1.308-.387-1.315-.877 0-.503.568-.91 1.29-.924.717-.013 1.306.387 1.306.88zm4.598-.782c.086.485-.413.984-1.126 1.117-.7.13-1.35-.172-1.44-.653-.086-.498.422-.997 1.122-1.126.714-.123 1.354.17 1.444.663zm0 0"></path></g>
+            </svg>
+          </a>
+          <p
+            data-en="Actual time spent may differ significantly."
+            data-ja="実際にかかる時間は、大きく異なる場合があります。"  
+          ></p>
+        </div>
+        <div class="repo-list" id="repoList">
+          <div class="notice">
+            <h3 class="notice-message"
+              data-en="Unable to Load Repositories" 
+              data-ja="リポジトリを読み込めませんでした"
+            ></h3>
+            <p class="notice-details"
+              data-en="Database might be offline, this isn't an issue on your side." 
+              data-ja="データベースがオフラインかもしれない。これはあなたの問題ではありません。"
+            ></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="module">
+    /**
+    * @typedef {{
+    *   Link: string;
+    *   Name: string;
+    *   Details: string | null;
+    *   Details_ja: string | null;
+    *   EstimatedTime: number | null;
+    *   Languages: string[] | null;
+    * }} Repo
+    */
+    import {createClient} from "https://esm.sh/@supabase/supabase-js@2";
+    const supabaseUrl = "https://iardacsuwzgfjsdefqdj.supabase.co";
+    const supabaseKey = "sb_publishable_aqniMrzHTzhEWxbSpBopeA_4SyoQ8mJ";
+    const supabaseClient = createClient(supabaseUrl, supabaseKey);
+    /** @type {Repo[]} */
+    let cachedRepos = [];
+    /** @param {Repo[]} repos */
+    function renderRepositories(repos) {
+      if (repos.length === 0) {
+        return;
+      }
+      else {
+        const lang = document.documentElement.lang;
+        const repoList = document.getElementById("repoList");
+        repoList.innerHTML = repos.map(repo => {
+          const details = (lang === 'ja' && repo.Details_ja) ? repo.Details_ja : repo.Details;
+          const unit = lang === 'ja' ? '時間' : (repo.EstimatedTime === 1 ? 'Hour' : 'Hours');
+          const hiddenLanguages = ["PLpgSQL"];
+          return `
+            <div class="repo-div">
+              <h3 class="repo-name">
+                <a href="${repo.Link}" target="_blank">${repo.Name}</a>
+                <span class="repo-time">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 6v6l4 2"></path>
+                  </svg>${repo.EstimatedTime} ${unit}
+                </span>
+              </h3>
+              <p class="repo-desc">${details ?? ""}</p>
+              <div class="repo-languages">
+                ${(repo.Languages ?? []).filter(language => !hiddenLanguages.includes(language)).map(language => {
+                    const ClassName =
+                      language === "C#" ? "csharp" :
+                      language.toLowerCase().replace(/[ +.#]/g, "-");
+                    return `
+                      <span class="repo-badge ${ClassName}">
+                        ${language}
+                      </span>
+                    `;
+                  })
+                  .join("")}
+              </div>
+            </div>
+          `;
+        }).join("");
+      }
     }
-  }
-  async function loadRepositories() {
-    const {data, error} = await supabaseClient.from("Repositories").select("*").order("DisplayOrder");
-    if (error) {
-      console.error(error);
-      return;
+    async function loadRepositories() {
+      const {data, error} = await supabaseClient.from("Repositories").select("*").order("DisplayOrder");
+      if (error) {
+        console.error(error);
+        return;
+      }
+      else {
+        cachedRepos = data ?? [];
+        renderRepositories(cachedRepos);
+      }
     }
-    else {
-      cachedRepos = data ?? [];
-      renderRepositories(cachedRepos);
-    }
-  }
-  document.querySelector(".theme-button")?.addEventListener("click", () => {
-    const html = document.documentElement;
-    html.dataset.theme = html.dataset.theme === "dark" ? "light" : "dark";
-  });
-  window.addEventListener("load", async () => {
-    const loading = document.getElementById("loadingAssets");
-    await document.fonts.ready;
-    document.querySelectorAll('[data-en][data-ja]').forEach(translatable => {
-      const English = /** @type {HTMLElement} */ (translatable);
-      English.textContent = English.dataset.en;
+    document.querySelector(".theme-button")?.addEventListener("click", () => {
+      const html = document.documentElement;
+      html.dataset.theme = html.dataset.theme === "dark" ? "light" : "dark";
     });
-    loading.textContent = "Fetching repositories";
-    await loadRepositories();
-    loading.style.opacity = "0";
-    setTimeout(() => {
-      document.body.classList.remove("loadingBarrier");
-      loading.remove();
-    }, 500);
-  });
-  document.addEventListener('DOMContentLoaded', () => {
-    const dropdown = /** @type {HTMLElement} */ (document.querySelector(".translate-dropdown"));
-    const toggleBtn = /** @type {HTMLButtonElement} */ (dropdown.querySelector(".translate-button"));
-    const menuButtons = /** @type {NodeListOf<HTMLButtonElement>} */ (dropdown.querySelectorAll(".translate-menu button"));
-    toggleBtn.addEventListener('click', (mouseClicked) => {
-      mouseClicked.stopPropagation();
-      dropdown.classList.toggle("open");
+    window.addEventListener("load", async () => {
+      const loading = document.getElementById("loadingAssets");
+      await document.fonts.ready;
+      document.querySelectorAll('[data-en][data-ja]').forEach(translatable => {
+        const English = /** @type {HTMLElement} */ (translatable);
+        English.textContent = English.dataset.en;
+      });
+      loading.textContent = "Fetching repositories";
+      await loadRepositories();
+      loading.style.opacity = "0";
+      setTimeout(() => {
+        document.body.classList.remove("loadingBarrier");
+        loading.remove();
+      }, 500);
     });
-    document.addEventListener('click', () => {
-      dropdown.classList.remove('open');
-    });
-    menuButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        const lang = button.dataset.lang;
-        setLanguage(lang);
+    document.addEventListener('DOMContentLoaded', () => {
+      const dropdown = /** @type {HTMLElement} */ (document.querySelector(".translate-dropdown"));
+      const toggleBtn = /** @type {HTMLButtonElement} */ (dropdown.querySelector(".translate-button"));
+      const menuButtons = /** @type {NodeListOf<HTMLButtonElement>} */ (dropdown.querySelectorAll(".translate-menu button"));
+      toggleBtn.addEventListener('click', (mouseClicked) => {
+        mouseClicked.stopPropagation();
+        dropdown.classList.toggle("open");
+      });
+      document.addEventListener('click', () => {
         dropdown.classList.remove('open');
       });
+      menuButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const lang = button.dataset.lang;
+          setLanguage(lang);
+          dropdown.classList.remove('open');
+        });
+      });
+      /** @param {string} lang */
+      function setLanguage(lang) {
+        document.documentElement.lang = lang;
+        menuButtons.forEach(button => {
+          button.toggleAttribute('data-active', button.dataset.lang === lang);
+        });
+        document.querySelectorAll('[data-en][data-ja]').forEach(translatable => {
+          const Selected = /** @type {HTMLElement} */ (translatable);
+          Selected.textContent = Selected.dataset[lang];
+        });
+        renderRepositories(cachedRepos);
+      }
     });
-    /** @param {string} lang */
-    function setLanguage(lang) {
-      document.documentElement.lang = lang;
-      menuButtons.forEach(button => {
-        button.toggleAttribute('data-active', button.dataset.lang === lang);
+    const avatar = document.querySelector(".profile img");
+    const modal = document.getElementById("imagePreview");
+    function openPreview() {
+      modal.classList.add("show");
+      requestAnimationFrame(() => {
+        avatar.classList.add("open");
       });
-      document.querySelectorAll('[data-en][data-ja]').forEach(translatable => {
-        const Selected = /** @type {HTMLElement} */ (translatable);
-        Selected.textContent = Selected.dataset[lang];
-      });
-      renderRepositories(cachedRepos);
+      document.body.style.overflow = "hidden";
     }
-  });
-  const avatar = document.querySelector(".profile img");
-  const modal = document.getElementById("imagePreview");
-  function openPreview() {
-    modal.classList.add("show");
-    requestAnimationFrame(() => {
-      avatar.classList.add("open");
-    });
-    document.body.style.overflow = "hidden";
-  }
-  function closePreview() {
-    modal.classList.remove("show");
-    avatar.classList.remove("open");
-    document.body.style.overflow = "";
-  }
-  if (/Mobi|Android|iPad/i.test(navigator.userAgent)) {
-    modal.style.visibility = "hidden";
-    openPreview();
-    setTimeout(() => {
-      closePreview();
-      modal.style.visibility = "";
-    }, 150);
-  }
-  avatar.addEventListener("click", openPreview);
-  modal.addEventListener("click", closePreview);
-</script>
+    function closePreview() {
+      modal.classList.remove("show");
+      avatar.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+    if (/Mobi|Android|iPad/i.test(navigator.userAgent)) {
+      modal.style.visibility = "hidden";
+      openPreview();
+      setTimeout(() => {
+        closePreview();
+        modal.style.visibility = "";
+      }, 150);
+    }
+    avatar.addEventListener("click", openPreview);
+    modal.addEventListener("click", closePreview);
+  </script>
 </html>
