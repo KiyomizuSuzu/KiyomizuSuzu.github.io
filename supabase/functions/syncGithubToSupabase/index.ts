@@ -1,3 +1,4 @@
+// @ts-ignore
 import {createClient} from "jsr:@supabase/supabase-js@2";
 interface GithubCommit {
   commit: {
@@ -55,6 +56,7 @@ async function getAllCommits(repoName: string): Promise<GithubCommit[]> {
   while (true) {
     const res = await fetch(`https://api.github.com/repos/KiyomizuSuzu/${repoName}/commits?per_page=100&page=${page}`, {
                               headers: {
+                                // @ts-ignore
                                 Authorization: `Bearer ${Deno.env.get("GITHUB_TOKEN")}`,
                                 Accept: "application/vnd.github+json",
                               },
@@ -79,6 +81,7 @@ async function getAllCommits(repoName: string): Promise<GithubCommit[]> {
 async function getLanguages(repoName: string): Promise<string[]> {
   const res = await fetch(`https://api.github.com/repos/KiyomizuSuzu/${repoName}/languages`, {
                             headers: {
+                              // @ts-ignore
                               Authorization: `Bearer ${Deno.env.get("GITHUB_TOKEN")}`,
                               Accept: "application/vnd.github+json",
                             },
@@ -94,9 +97,11 @@ async function getLanguages(repoName: string): Promise<string[]> {
 }
 export default {
   async fetch(_req: Request): Promise<Response> {
+    // @ts-ignore
     const supabase = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
     const res = await fetch("https://api.github.com/users/KiyomizuSuzu/repos", {
                               headers: {
+                                // @ts-ignore
                                 Authorization: `Bearer ${Deno.env.get("GITHUB_TOKEN")}`,
                                 Accept: "application/vnd.github+json",
                               },
@@ -143,22 +148,17 @@ export default {
         const existingRows: ExistingRepoRow[] = existingRepos ?? [];
         const existingIds = existingRows.map(repo => repo.ID);
         const idsToDelete = existingIds.filter(id => !githubIds.includes(id));
-        try {
-          if (idsToDelete.length > 0) {
-            const {error: deleteError} = await supabase.from("Repositories").delete().in("ID", idsToDelete);
-            if (deleteError) {
-              return Response.json({error: deleteError.message}, {
-                                    status: 500}
-                              );
-            }
+        const {error: deleteError} = await supabase.from("Repositories").delete().in("ID", idsToDelete);
+          if ((idsToDelete.length > 0) && deleteError) {
+            return Response.json({error: deleteError.message}, {
+                                  status: 500}
+                            );
           }
-          throw new Error();
-        }
-        catch {
-          return Response.json({synced: formatted.length,
-                                deleted: idsToDelete.length}
-                          );
-        }
+          else {
+            return Response.json({synced: formatted.length,
+                                  deleted: idsToDelete.length}
+                            );
+          }
       }
     }
   }
