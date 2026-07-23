@@ -659,7 +659,7 @@
               <p class="repo-desc">${details ?? ""}</p>
               <div class="repo-languages">
                 ${(repo.Languages ?? []).filter(language => !hiddenLanguages.includes(language)).map(language => {
-                    const ClassName = language === "C#" ? "csharp" : language;
+                    const ClassName = language.toLowerCase().replace("#", "sharp");
                     return `
                       <span class="repo-badge ${ClassName}">${language}</span>
                     `;
