@@ -674,8 +674,7 @@
     async function loadRepositories() {
       const {data, error} = await supabaseClient.from("Repositories").select("*").order("DisplayOrder");
       if (error) {
-        console.error(error);
-        return;
+        return console.error(error);
       }
       else {
         cachedRepos = data ?? [];
