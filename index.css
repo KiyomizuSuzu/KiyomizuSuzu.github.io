@@ -9,6 +9,8 @@ DEFAULT
 	--html: #e34f26;
 	--rust: #dea584;
 	--powershell: #5391fe;
+    --css: #a074c4;
+    --javascript: #f1e05a;
 }
 @keyframes rainbowGlow {
 	0%      { box-shadow: 0 0 .5rem hsl(  0 100% 60%); }
@@ -488,11 +490,13 @@ Bottom container
 				font-size: 0.75rem;
 				font-weight: 700;
 
-				&.csharp     { --language: var(--csharp); }
-				&.typescript { --language: var(--typescript); }
 				&.html       { --language: var(--html); }
+				&.css 		 { --language: var(--css); }
+				&.javascript { --language: var(--javascript); }
+				&.typescript { --language: var(--typescript); }
 				&.rust       { --language: var(--rust); }
 				&.powershell { --language: var(--powershell); }
+				&.csharp     { --language: var(--csharp); }
 			}
 		}
 	}
