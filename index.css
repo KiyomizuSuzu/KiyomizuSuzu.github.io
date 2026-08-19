@@ -414,6 +414,9 @@ Bottom container
 		white-space: nowrap;
 	}
 }
+html[lang="ja"] .repo-header p {
+    font-weight: 600;
+}
 .repo-list {
 	.notice {
 		padding: 1rem;
