@@ -388,12 +388,25 @@ Bottom container
 		transition: transform .15s , filter .15s;
 	}
 	p {
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
 		margin-block: 0;
 		font-weight: 500;
 		text-decoration: underline;
 		text-decoration-color: var(--warning);
 		text-decoration-thickness: 0.125rem;
 		text-underline-offset: 0.15rem;
+
+		&::before {
+			content: "";
+			width: 0;
+			height: 0;
+			border-top: 0.375rem solid transparent;
+			border-bottom: 0.375rem solid transparent;
+			border-right: 0.5rem solid var(--warning);
+			flex-shrink: 0;
+		}
 	}
 	a:hover svg {
 		transform: scale(1.2);
