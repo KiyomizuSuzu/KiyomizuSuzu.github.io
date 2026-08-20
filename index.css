@@ -392,7 +392,8 @@ Bottom container
 		align-items: center;
 		gap: 0.4rem;
 		margin-block: 0;
-		font-weight: 500;
+		color: var(--warning);
+		font-weight: 600;
 		text-decoration: underline;
 		text-decoration-color: var(--warning);
 		text-decoration-thickness: 0.225rem;
@@ -413,9 +414,6 @@ Bottom container
 		margin-block: 0;
 		white-space: nowrap;
 	}
-}
-html[lang="ja"] .repo-header p {
-    font-weight: 600;
 }
 .repo-list {
 	.notice {
