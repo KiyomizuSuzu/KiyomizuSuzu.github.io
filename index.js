@@ -69,13 +69,15 @@ document.querySelector(".theme-button")?.addEventListener("click", () => {
 });
 window.addEventListener("load", async () => {
 	const loading = document.getElementById("loadingAssets");
-	await document.fonts.ready;
 	document.querySelectorAll('[data-en][data-ja]').forEach(translatable => {
 		const English = /** @type {HTMLElement} */ (translatable);
     	English.textContent = English.dataset.en;
   	});
 	loading.textContent = "Fetching repositories";
-	await loadRepositories();
+	await Promise.race([
+		loadRepositories(),
+		new Promise(resolve => setTimeout(resolve, 500))
+	]);
 	loading.style.opacity = "0";
 	setTimeout(() => {
     	document.body.classList.remove("loadingBarrier");
