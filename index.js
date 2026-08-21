@@ -73,7 +73,6 @@ window.addEventListener("load", async () => {
 		const English = /** @type {HTMLElement} */ (translatable);
     	English.textContent = English.dataset.en;
   	});
-	loading.textContent = "Fetching repositories";
 	await Promise.race([
 		loadRepositories(),
 		new Promise(resolve => setTimeout(resolve, 500))
