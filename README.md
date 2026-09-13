@@ -4,21 +4,13 @@
 HTML、CSS、JavaScriptで作った個人サイト。[GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages)と[Cloudflare Pages](https://pages.cloudflare.com/)の両方にデプロイしていて、バックエンドにはPostgreSQLベースの[Supabase](https://supabase.com)を使っている。
 ## 公開先
 - GitHub Pages: https://kiyomizusuzu.github.io/
-- Cloudflare Pages: https://kiyomizusuzu.pages.dev/
+- Cloudflare domain: https://kiyomizusuzu.dev/
 ### GitHub Pagesの使い方
 1. `(username).github.io` という名前のリポジトリを作成する。
 2. リポジトリのルートに `index.html` を追加する。
 3. HTML、CSS、JavaScriptでサイトを書く。
 4. GitHubにpushして、GitHub Pagesが自動でビルド・公開するのを待つ。
 5. ブラウザで `https://(username).github.io` を開けば確認できる。
-### Cloudflare Pagesの使い方
-1. https://dash.cloudflare.com からダッシュボードを開く。
-2. Buildセクションに進み、Computeカテゴリを展開してWorkers & Pagesへ移動する。
-3. アプリケーションを作成し、Workerとしてではなく、Pagesとしてデプロイする方法を選ぶ。
-4. サイトのファイルが入ったGitHubリポジトリと連携する。
-5. リポジトリを選択し、ドメイン用のプロジェクト名を設定する（後から変更不可）。
-6. プロジェクトをデプロイし、Cloudflareが自動でビルドするのを待つ。
-7. 発行された `https://(project-name).pages.dev` のURLでアクセスできる。
 ## AGPL-3.0 ライセンス
 参照：https://licenses.opensource.jp/AGPL-3.0/AGPL-3.0.html
 
