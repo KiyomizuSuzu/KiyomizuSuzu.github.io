@@ -4,7 +4,7 @@
 HTML、CSS、JavaScriptで作った個人サイト。[GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages)と[Cloudflare Pages](https://pages.cloudflare.com/)の両方にデプロイしていて、バックエンドにはPostgreSQLベースの[Supabase](https://supabase.com)を使っている。
 ## 公開先
 - GitHub Pages: https://kiyomizusuzu.github.io/
-- Cloudflare domain: https://kiyomizusuzu.dev/
+- カスタムドメイン: https://kiyomizusuzu.dev/
 ### GitHub Pagesの使い方
 1. `(username).github.io` という名前のリポジトリを作成する。
 2. リポジトリのルートに `index.html` を追加する。
@@ -30,7 +30,7 @@ This is a personal website deployed on both [GitHub Pages](https://docs.github.c
 - [Devicon](https://devicon.dev/) – Icons for programming languages, frameworks, and tools.
 ## Live sites
 - GitHub Pages: https://kiyomizusuzu.github.io/
-- Cloudflare Domain: https://kiyomizusuzu.dev/
+- Custom Domain: https://kiyomizusuzu.dev/
 ### How to use Github Pages
 1. Create a repository named `(username).github.io`.
 2. Add an `index.html` file to the root of the repository.
