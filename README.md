@@ -1,16 +1,10 @@
 <details><summary>日本語</summary>
 
 # KiyomizuSuzu.github.io
-HTML、CSS、JavaScriptで作った個人サイト。[GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages)と[Cloudflare Pages](https://pages.cloudflare.com/)の両方にデプロイしていて、バックエンドにはPostgreSQLベースの[Supabase](https://supabase.com)を使っている。
+HTML、CSS、JavaScriptで作成した個人サイトです。[GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages)にデプロイし、[Cloudflare](https://www.cloudflare.com/)で管理しているカスタムドメインを使用しています。また、PostgreSQLを基盤とする[Supabase](https://supabase.com)バックエンドを使用しています。
 ## 公開先
-- GitHub Pages: https://kiyomizusuzu.github.io/
 - カスタムドメイン: https://kiyomizusuzu.dev/
-### GitHub Pagesの使い方
-1. `(username).github.io` という名前のリポジトリを作成する。
-2. リポジトリのルートに `index.html` を追加する。
-3. HTML、CSS、JavaScriptでサイトを書く。
-4. GitHubにpushして、GitHub Pagesが自動でビルド・公開するのを待つ。
-5. ブラウザで `https://(username).github.io` を開けば確認できる。
+- GitHub Pages: https://kiyomizusuzu.github.io/
 ## AGPL-3.0 ライセンス
 参照：https://licenses.opensource.jp/AGPL-3.0/AGPL-3.0.html
 
@@ -25,18 +19,12 @@ AGPL-3.0に従う以上、対象コードは同じライセンスのまま維持
 <details open><summary>English</summary>
 
 # KiyomizuSuzu.github.io
-This is a personal website deployed on both [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages) and [Cloudflare Pages](https://pages.cloudflare.com/) using HTML, CSS, and JavaScript, and a [Supabase](https://supabase.com) backend powered by PostgreSQL.
+This is a personal website built with HTML, CSS, and JavaScript, deployed on [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages) with a custom domain managed by [Cloudflare](https://www.cloudflare.com/), and a [Supabase](https://supabase.com) backend powered by PostgreSQL.
 ## Credits
 - [Devicon](https://devicon.dev/) – Icons for programming languages, frameworks, and tools.
 ## Live sites
-- GitHub Pages: https://kiyomizusuzu.github.io/
 - Custom Domain: https://kiyomizusuzu.dev/
-### How to use Github Pages
-1. Create a repository named `(username).github.io`.
-2. Add an `index.html` file to the root of the repository.
-3. Write your website using HTML, CSS, and JavaScript.
-4. Push your changes to GitHub and wait for GitHub Pages to automatically build and publish the site.
-5. Open `https://(username).github.io` in your browser to view it.
+- GitHub Pages: https://kiyomizusuzu.github.io/
 ## AGPL-3.0 License
 Source: https://www.gnu.org/licenses/agpl-3.0.en.html
 
