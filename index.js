@@ -75,7 +75,7 @@ window.addEventListener("load", async () => {
   	});
 	await Promise.race([
 		loadRepositories(),
-		new Promise(resolve => setTimeout(resolve, 500))
+		new Promise(resolve => setTimeout(resolve, 2000))
 	]);
 	loading.style.opacity = "0";
 	setTimeout(() => {
