@@ -1,6 +1,6 @@
 <details><summary>日本語</summary>
 
-# Personal Website
+# KiyomizuSuzu.github.io
 HTML、CSS、JavaScriptで作成した個人サイトです。[GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages)にデプロイし、[Cloudflare](https://www.cloudflare.com/)で管理しているカスタムドメインを使用しています。また、PostgreSQLを基盤とする[Supabase](https://supabase.com)バックエンドを使用しています。
 ## 公開先
 - カスタムドメイン: https://kiyomizusuzu.dev/
@@ -17,7 +17,7 @@ AGPL-3.0に従う以上、対象コードは同じライセンスのまま維持
 ---
 <details open><summary>English</summary>
 
-# Personal Website
+# KiyomizuSuzu.github.io
 This is a personal website built with HTML, CSS, and JavaScript, deployed on [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages) with a custom domain managed by [Cloudflare](https://www.cloudflare.com/), and a [Supabase](https://supabase.com) backend powered by PostgreSQL.
 ## Credits
 - [Devicon](https://devicon.dev/) – Icons for programming languages, frameworks, and tools.
