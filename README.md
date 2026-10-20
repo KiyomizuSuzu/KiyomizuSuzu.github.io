@@ -2,8 +2,10 @@
 
 # KiyomizuSuzu.github.io
 HTML、CSS、JavaScriptで作成した個人サイトです。[GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages)にデプロイし、[Cloudflare](https://www.cloudflare.com/)で管理しているカスタムドメインを使用しています。また、PostgreSQLを基盤とする[Supabase](https://supabase.com)バックエンドを使用しています。
-## 公開先
-- カスタムドメイン: https://kiyomizusuzu.dev/
+
+**公開サイト：** [https://kiyomizusuzu.dev](https://kiyomizusuzu.dev)
+## クレジット
+- [Devicon](https://devicon.dev/) – プログラミング言語、フレームワーク、ツールのアイコン。
 ## AGPL-3.0 ライセンス
 参照：https://licenses.opensource.jp/AGPL-3.0/AGPL-3.0.html
 
@@ -19,10 +21,10 @@ AGPL-3.0に従う以上、対象コードは同じライセンスのまま維持
 
 # KiyomizuSuzu.github.io
 This is a personal website built with HTML, CSS, and JavaScript, deployed on [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages) with a custom domain managed by [Cloudflare](https://www.cloudflare.com/), and a [Supabase](https://supabase.com) backend powered by PostgreSQL.
+
+**Live Site:** [https://kiyomizusuzu.dev](https://kiyomizusuzu.dev)
 ## Credits
 - [Devicon](https://devicon.dev/) – Icons for programming languages, frameworks, and tools.
-## Live sites
-- Custom Domain: https://kiyomizusuzu.dev/
 ## AGPL-3.0 License
 Source: https://www.gnu.org/licenses/agpl-3.0.en.html
 
