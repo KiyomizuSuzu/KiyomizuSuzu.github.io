@@ -200,6 +200,7 @@ Container for Top and Bottom
 	max-width: 34.4rem;
 	min-height: 100dvh;
 	transition: filter .5s;
+	margin-block: 0.625rem;
 }
 /* ================================
 Top container
@@ -232,7 +233,6 @@ Top container
 }
 .theme-button, .translate-dropdown {
 	position: absolute;
-	top: 0.625rem;
 }
 .theme-button { 
 	right: 0.625rem; 
@@ -292,7 +292,6 @@ Top container
 	flex-direction: column;
 
 	img {
-		margin-top: 0.625rem;
 		width: 7.5rem;
 		height: 7.5rem;
 		border-radius: 50%;
