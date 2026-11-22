@@ -11,6 +11,7 @@ DEFAULT
 	--powershell: #5391fe;
     --css: #a074c4;
     --javascript: #f1e05a;
+	--kotlin: #7F52FF;
 }
 @keyframes rainbowGlow {
 	0%      { box-shadow: 0 0 .5rem hsl(  0 100% 60%); }
@@ -507,6 +508,7 @@ Bottom container
 				&.rust       { --language: var(--rust); }
 				&.powershell { --language: var(--powershell); }
 				&.csharp     { --language: var(--csharp); }
+				&.kotlin 	 { --language: var(--kotlin); } 
 			}
 		}
 	}
