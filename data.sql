@@ -71,7 +71,7 @@ VALUES
     'https://github.com/KiyomizuSuzu/KanaTyping', 
     'An Android app built with Kotlin for practising Japanese kana typing.', 
     '2026-11-21 14:54:46+00', 
-    '2.88', 
+    2.88, 
     41, 
     'Kotlinで開発された、
     日本語のかな入力練習用Androidアプリ。', 
