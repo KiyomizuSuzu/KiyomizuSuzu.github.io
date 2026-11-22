@@ -64,4 +64,16 @@ VALUES
     17,
     'ASUSのパフォーマンスモード（Balanced／Turbo／Silent）をCLIから切り替える、Rust製ツール。',
     ARRAY['Rust']
+),
+(
+    1466648803, 
+    'KanaTyping', 
+    'https://github.com/KiyomizuSuzu/KanaTyping', 
+    'An Android app built with Kotlin for practising Japanese kana typing.', 
+    '2026-11-21 14:54:46+00', 
+    '2.88', 
+    41, 
+    'Kotlinで開発された、
+    日本語のかな入力練習用Androidアプリ。', 
+    ARRAY['Kotlin']
 );
