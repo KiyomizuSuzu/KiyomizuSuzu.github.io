@@ -73,7 +73,7 @@ if (themeButton && bottomContainer) {
     });
     const placeholder = document.createComment("theme-button");
     themeButton.before(placeholder);
-    const desktop = window.matchMedia("(min-width: 1920px)");
+    const desktop = window.matchMedia("(min-width: 1520px)");
     const moveThemeButton = () => {
         if (desktop.matches) {
             bottomContainer.appendChild(themeButton);
