@@ -8,6 +8,7 @@
 *   	Languages: string[] | null;
 * 	}} Repo
 */
+// @ts-expect-error
 import {createClient} from "https://esm.sh/@supabase/supabase-js@2";
 const supabaseUrl = "https://iardacsuwzgfjsdefqdj.supabase.co";
 const supabaseKey = "sb_publishable_aqniMrzHTzhEWxbSpBopeA_4SyoQ8mJ";
@@ -63,10 +64,27 @@ async function loadRepositories() {
     	renderRepositories(cachedRepos);
   	}
 }
-document.querySelector(".theme-button")?.addEventListener("click", () => {
-	const html = document.documentElement;
-	html.dataset.theme = html.dataset.theme === "dark" ? "light" : "dark";
-});
+const themeButton = document.querySelector(".theme-button");
+const bottomContainer = document.querySelector(".bottom");
+if (themeButton && bottomContainer) {
+    themeButton.addEventListener("click", () => {
+        const html = document.documentElement;
+        html.dataset.theme = html.dataset.theme === "dark" ? "light" : "dark";
+    });
+    const placeholder = document.createComment("theme-button");
+    themeButton.before(placeholder);
+    const desktop = window.matchMedia("(min-width: 1920px)");
+    const moveThemeButton = () => {
+        if (desktop.matches) {
+            bottomContainer.appendChild(themeButton);
+        } 
+		else {
+            placeholder.before(themeButton);
+        }
+    };
+    desktop.addEventListener("change", moveThemeButton);
+    moveThemeButton();
+}
 window.addEventListener("load", async () => {
 	const loading = document.getElementById("loadingAssets");
 	document.querySelectorAll('[data-en][data-ja]').forEach(translatable => {

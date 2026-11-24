@@ -1,4 +1,4 @@
-// @ts-ignore
+// @ts-expect-error
 import {createClient} from "jsr:@supabase/supabase-js@2";
 interface GithubCommit {
 	commit: {

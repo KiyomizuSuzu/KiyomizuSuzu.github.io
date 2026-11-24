@@ -42,15 +42,15 @@ DEFAULT
 html {
   	font-size: clamp(15px, 0.25vw + 12px, 20px);
 
-  	@media (min-width: 1920px) {
-    	font-size: 23.5px;
-  	}
-  	@media (min-width: 2560px) {
-    	font-size: 31.5px;
-  	}
-  	@media (min-width: 3840px) {
-    	font-size: 50px;
-  	}
+	@media (min-width: 1520px) {
+		font-size: 20px;
+	}
+	@media (min-width: 2040px) {
+		font-size: 25px;
+	}
+	@media (min-width: 2560px) {
+		font-size: 30px;
+	}
   	&[data-theme="light"] {
 	    --background: white;
 	    --title: black;
@@ -199,7 +199,6 @@ Container for Top and Bottom
 	display: flex;
 	flex-direction: column;
 	max-width: 34.4rem;
-	min-height: 100dvh;
 	transition: filter .5s;
 	margin-block: 0.625rem;
 }
@@ -512,4 +511,43 @@ Bottom container
 			}
 		}
 	}
+}
+/* ================================
+LARGE DESKTOP LAYOUT
+================================ */
+@media (min-width: 1520px) {
+    .container {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 3rem;
+        max-width: 90%;
+        margin-right: auto;
+        margin-inline: 0.625rem;
+        margin-top: 2rem;
+    }
+    .top {
+        flex: 1;
+    }
+    .bottom {
+        flex: 2;
+        position: relative;
+
+        .repo-header {
+            margin-bottom: 0.6rem;
+        }
+        .repo-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+
+            .repo-div {
+                flex: 1 1 calc(50% - 0.5rem);
+                box-sizing: border-box;
+            }
+        }
+        .theme-button {
+            top: 0;
+            right: 0;
+        }
+    }
 }
