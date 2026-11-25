@@ -515,7 +515,7 @@ Bottom container
 /* ================================
 LARGE DESKTOP LAYOUT
 ================================ */
-@media (min-width: 1140px) {
+@media (min-width: 1000px) {
     .container {
         flex-direction: row;
         align-items: flex-start;
