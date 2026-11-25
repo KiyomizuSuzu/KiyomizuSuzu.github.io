@@ -40,17 +40,8 @@ DEFAULT
 	100% { content: "\00a0\00a0\00a0"; }
 }
 html {
-  	font-size: clamp(15px, 0.25vw + 12px, 20px);
+	font-size: clamp(10px, 0.96154vw + 5.3846px, 40px);
 
-	@media (min-width: 1520px) {
-		font-size: 20px;
-	}
-	@media (min-width: 2040px) {
-		font-size: 25px;
-	}
-	@media (min-width: 2560px) {
-		font-size: 30px;
-	}
   	&[data-theme="light"] {
 	    --background: white;
 	    --title: black;
@@ -515,7 +506,7 @@ Bottom container
 /* ================================
 LARGE DESKTOP LAYOUT
 ================================ */
-@media (min-width: 1000px) {
+@media (min-width: 1400px) {
     .container {
         flex-direction: row;
         align-items: flex-start;
