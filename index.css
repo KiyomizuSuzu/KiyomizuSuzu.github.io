@@ -41,9 +41,9 @@ DEFAULT
 }
 html {
 	font-size: clamp(0.625rem, 1.30208vw, 1.875rem);
-	
+
 	@media (max-width: 62.5rem) {
-		font-size: clamp(0.75rem, 2.5vw, 0.9375rem);
+		font-size: clamp(0.9375rem, 2.5vw, 1.25rem);
 	}
 	@media (min-width: 63.5rem) {
 		.container {
