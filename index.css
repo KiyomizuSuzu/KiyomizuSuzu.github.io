@@ -40,12 +40,12 @@ DEFAULT
 	100% { content: "\00a0\00a0\00a0"; }
 }
 html {
-	font-size: clamp(0.625rem, 1.30208vw, 1.875rem);
-
-	@media (max-width: 62.5rem) {
-		font-size: clamp(0.9375rem, 2.5vw, 1.25rem);
+	@media (min-width: 22.5rem) {
+		font-size: clamp(0.9375rem, 2.5vw, 1.5625rem);
 	}
-	@media (min-width: 63.5rem) {
+	@media (min-width: 64rem) {
+		font-size: clamp(0.625rem, 1.30208vw, 1.875rem);
+
 		.container {
 			flex-direction: row;
 			align-items: flex-start;
