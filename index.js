@@ -71,15 +71,15 @@ if (themeButton && bottomContainer) {
         const html = document.documentElement;
         html.dataset.theme = html.dataset.theme === "dark" ? "light" : "dark";
     });
-    const placeholder = document.createComment("theme-button");
-    themeButton.before(placeholder);
-    const desktop = window.matchMedia("(min-width: 1520px)");
+    const moving = document.createComment("theme-button");
+    themeButton.before(moving);
+    const desktop = window.matchMedia("(min-width: 64rem)");
     const moveThemeButton = () => {
         if (desktop.matches) {
             bottomContainer.appendChild(themeButton);
         } 
 		else {
-            placeholder.before(themeButton);
+            moving.before(themeButton);
         }
     };
     desktop.addEventListener("change", moveThemeButton);
