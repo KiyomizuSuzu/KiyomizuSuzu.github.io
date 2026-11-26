@@ -40,11 +40,14 @@ DEFAULT
 	100% { content: "\00a0\00a0\00a0"; }
 }
 html {
+ @media (min-aspect-ratio: 21/9) {
+  font-size: min(1.875rem, 1.30208vw);
+ }
 	@media (min-width: 22.5rem) {
 		font-size: max(0.9375rem, 3vw);
 	}
 	@media (min-width: 64rem) {
-		font-size: clamp(0.625rem, 1.30208vw, 1.875rem);
+		font-size: max(0.625rem, 1.30208vw);
 
 		.container {
 			flex-direction: row;
