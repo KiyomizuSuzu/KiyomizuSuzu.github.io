@@ -41,7 +41,7 @@ DEFAULT
 }
 html {
 	@media (min-width: 22.5rem) {
-		font-size: max(0.9375rem, 2.5vw);
+		font-size: max(0.9375rem, 3vw);
 	}
 	@media (min-width: 64rem) {
 		font-size: clamp(0.625rem, 1.30208vw, 1.875rem);
