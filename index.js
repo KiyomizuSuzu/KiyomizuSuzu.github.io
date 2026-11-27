@@ -122,9 +122,9 @@ document.addEventListener('DOMContentLoaded', () => {
     	menuButtons.forEach(button => {
       		button.toggleAttribute('data-active', button.dataset.lang === lang);
     	});
-    	document.querySelectorAll('[data-en][data-ja]').forEach(translatable => {
-      		const Selected = /** @type {HTMLElement} */ (translatable);
-      		Selected.textContent = Selected.dataset[lang];
+		document.querySelectorAll('[data-ja]').forEach(translatable => {
+			const English = /** @type {HTMLElement} */ (translatable);
+			English.dataset.en = English.textContent;
 		});
     	renderRepositories(cachedRepos);
   	}
