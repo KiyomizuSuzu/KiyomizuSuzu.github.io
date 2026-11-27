@@ -85,22 +85,18 @@ if (themeButton && bottomContainer) {
     desktop.addEventListener("change", moveThemeButton);
     moveThemeButton();
 }
-window.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", async () => {
 	const loading = document.getElementById("loadingAssets");
 	document.querySelectorAll('[data-en][data-ja]').forEach(translatable => {
 		const English = /** @type {HTMLElement} */ (translatable);
     	English.textContent = English.dataset.en;
   	});
-	try {
-		await Promise.race([loadRepositories(), new Promise(resolve => setTimeout(resolve, 2000))]);
-	}
-	finally {
-		loading.style.opacity = "0";
-		setTimeout(() => {
-			document.body.classList.remove("loadingBarrier");
-			loading.remove();
-		}, 500);
-	}
+	await Promise.race([loadRepositories(), new Promise(resolve => setTimeout(resolve, 2000))]);
+	loading.style.opacity = "0";
+	setTimeout(() => {
+    	document.body.classList.remove("loadingBarrier");
+    	loading.remove();
+  	}, 500);
 });
 document.addEventListener('DOMContentLoaded', () => {
 	const dropdown = /** @type {HTMLElement} */ (document.querySelector(".translate-dropdown"));
