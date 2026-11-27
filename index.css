@@ -79,6 +79,10 @@ html {
 					flex: 1 1 calc(50% - 0.5rem);
 					box-sizing: border-box;
 				}
+				.notice {
+					flex: 1 1 100%;
+					box-sizing: border-box;
+				}
 			}
 			.theme-button {
 				inset: 0 0 auto auto;
