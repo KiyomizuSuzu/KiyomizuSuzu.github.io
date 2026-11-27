@@ -1,6 +1,7 @@
 /* ================================
 DEFAULT
 ================================ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 :root {
 	--aboveALL: 1;
 	--csharp: #239120;
@@ -39,7 +40,7 @@ DEFAULT
 	100% { content: "\00a0\00a0\00a0"; }
 }
 html {
-	font-family: "Inter", sans-serif;
+	font-family: sans-serif;
 	@media (min-aspect-ratio: 21/9) {
 		font-size: min(1.875rem, 1.30208vw);
 	}
@@ -134,6 +135,7 @@ body {
   	justify-content: center;
   	margin-block: 0;
   	background-color: var(--background);
+	font-family: "Inter"; 
   	color: var(--title);
 
   	&.loadingBarrier {
