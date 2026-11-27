@@ -91,12 +91,16 @@ window.addEventListener("DOMContentLoaded", async () => {
 		const English = /** @type {HTMLElement} */ (translatable);
     	English.textContent = English.dataset.en;
   	});
-	await Promise.race([loadRepositories(), new Promise(resolve => setTimeout(resolve, 2000))]);
-	loading.style.opacity = "0";
-	setTimeout(() => {
-    	document.body.classList.remove("loadingBarrier");
-    	loading.remove();
-  	}, 500);
+	try {
+		await Promise.race([loadRepositories(), new Promise(resolve => setTimeout(resolve, 2000))]);
+	}
+	finally {
+		loading.style.opacity = "0";
+		setTimeout(() => {
+			document.body.classList.remove("loadingBarrier");
+			loading.remove();
+		}, 500);
+	}
 });
 document.addEventListener('DOMContentLoaded', () => {
 	const dropdown = /** @type {HTMLElement} */ (document.querySelector(".translate-dropdown"));
