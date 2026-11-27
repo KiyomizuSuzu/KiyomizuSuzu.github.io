@@ -56,13 +56,16 @@ html {
 			gap: 3rem;
 			max-width: 90%;
 			margin-top: 2rem;
-		}
-		.top {
-			flex: 1;
 
 			.translate-dropdown {
 				left: 0;
 			}
+			.theme-button {
+				inset: 0 0 auto auto;
+			}
+		}
+		.top {
+			flex: 1;
 		}
 		.bottom {
 			flex: 2;
@@ -84,9 +87,6 @@ html {
 					flex: 1 1 100%;
 					box-sizing: border-box;
 				}
-			}
-			.theme-button {
-				inset: 0 0 auto auto;
 			}
 		}
 	}
@@ -233,16 +233,9 @@ Container for Top and Bottom
 .container {
 	display: flex;
 	flex-direction: column;
+	position: relative;
 	transition: filter .5s;
 	margin-block: 0.625rem;
-}
-/* ================================
-Top container
-================================ */
-.top {
-	display: flex;
-	position: relative;
-	justify-content: center;
 }
 .theme-button, .translate-button {
 	display: flex;
@@ -267,6 +260,7 @@ Top container
 }
 .theme-button, .translate-dropdown {
 	position: absolute;
+	z-index: var(--aboveALL);
 }
 .theme-button { 
 	right: 0.625rem; 
@@ -317,6 +311,14 @@ Top container
 			font-weight: 600;
 		}
 	}
+}
+/* ================================
+Top container
+================================ */
+.top {
+	display: flex;
+	position: relative;
+	justify-content: center;
 }
 .profile {
 	display: flex;

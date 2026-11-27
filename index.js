@@ -65,25 +65,11 @@ async function loadRepositories() {
   	}
 }
 const themeButton = document.querySelector(".theme-button");
-const bottomContainer = document.querySelector(".bottom");
-if (themeButton && bottomContainer) {
+if (themeButton) {
     themeButton.addEventListener("click", () => {
         const html = document.documentElement;
         html.dataset.theme = html.dataset.theme === "dark" ? "light" : "dark";
     });
-    const moving = document.createComment("theme-button");
-    themeButton.before(moving);
-    const desktop = window.matchMedia("(min-width: 64rem)");
-    const moveThemeButton = () => {
-        if (desktop.matches) {
-            bottomContainer.appendChild(themeButton);
-        } 
-		else {
-            moving.before(themeButton);
-        }
-    };
-    desktop.addEventListener("change", moveThemeButton);
-    moveThemeButton();
 }
 document.addEventListener("DOMContentLoaded", async () => {
 	const loading = document.getElementById("loadingAssets");
