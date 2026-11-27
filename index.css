@@ -65,7 +65,6 @@ html {
 		}
 		.bottom {
 			flex: 2;
-			min-width: 53.309375rem;
 			position: relative;
 
 			.repo-header {
