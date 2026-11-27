@@ -73,10 +73,10 @@ if (themeButton) {
 }
 document.addEventListener("DOMContentLoaded", async () => {
 	const loading = document.getElementById("loadingAssets");
-	document.querySelectorAll('[data-en][data-ja]').forEach(translatable => {
-		const English = /** @type {HTMLElement} */ (translatable);
-    	English.textContent = English.dataset.en;
-  	});
+	document.querySelectorAll('[data-ja]').forEach(translatable => {
+		const element = /** @type {HTMLElement} */ (translatable);
+		element.dataset.original = element.textContent;
+	});
 	await Promise.race([loadRepositories(), new Promise(resolve => setTimeout(resolve, 2000))]);
 	loading.style.opacity = "0";
 	setTimeout(() => {
@@ -104,16 +104,21 @@ document.addEventListener('DOMContentLoaded', () => {
   	});
 	/** @param {string} lang */
 	function setLanguage(lang) {
-    	document.documentElement.lang = lang;
-    	menuButtons.forEach(button => {
-      		button.toggleAttribute('data-active', button.dataset.lang === lang);
-    	});
-		document.querySelectorAll('[data-ja]').forEach(translatable => {
-			const English = /** @type {HTMLElement} */ (translatable);
-			English.dataset.en = English.textContent;
+		document.documentElement.lang = lang;
+		menuButtons.forEach(button => {
+			button.toggleAttribute('data-active', button.dataset.lang === lang);
 		});
-    	renderRepositories(cachedRepos);
-  	}
+		document.querySelectorAll('[data-ja]').forEach(translatable => {
+			const element = /** @type {HTMLElement} */ (translatable);
+			if (lang === "ja") {
+				element.textContent = element.dataset.ja;
+			} 
+			else {
+				element.textContent = element.dataset.original;
+			}
+		});
+		renderRepositories(cachedRepos);
+	}
 });
 const avatar = document.querySelector(".profile img");
 const modal = document.getElementById("imagePreview");
