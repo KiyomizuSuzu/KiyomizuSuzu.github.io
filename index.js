@@ -85,7 +85,7 @@ if (themeButton && bottomContainer) {
     desktop.addEventListener("change", moveThemeButton);
     moveThemeButton();
 }
-window.addEventListener("load", async () => {
+window.addEventListener("DOMContentLoaded", async () => {
 	const loading = document.getElementById("loadingAssets");
 	document.querySelectorAll('[data-en][data-ja]').forEach(translatable => {
 		const English = /** @type {HTMLElement} */ (translatable);
