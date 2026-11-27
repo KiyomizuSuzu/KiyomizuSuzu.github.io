@@ -230,7 +230,6 @@ Container for Top and Bottom
 .container {
 	display: flex;
 	flex-direction: column;
-	max-width: 34.4rem;
 	transition: filter .5s;
 	margin-block: 0.625rem;
 }
