@@ -57,15 +57,16 @@ html {
 			margin-top: 2rem;
 		}
 		.top {
-			flex: 1 1 0;
+			flex: 1;
 
 			.translate-dropdown {
 				left: 0;
 			}
 		}
 		.bottom {
-			flex: 2 1 0;
+			flex: 2;
 			position: relative;
+			min-width: 0;
 
 			.repo-header {
 				margin-bottom: 0.6rem;
