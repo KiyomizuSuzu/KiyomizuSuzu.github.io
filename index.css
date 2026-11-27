@@ -40,7 +40,7 @@ DEFAULT
 	100% { content: "\00a0\00a0\00a0"; }
 }
 html {
-	font-family: sans-serif;
+	font-family: "Inter", sans-serif;
 	@media (min-aspect-ratio: 21/9) {
 		font-size: min(1.875rem, 1.30208vw);
 	}
@@ -135,7 +135,6 @@ body {
   	justify-content: center;
   	margin-block: 0;
   	background-color: var(--background);
-	font-family: "Inter"; 
   	color: var(--title);
 
   	&.loadingBarrier {
